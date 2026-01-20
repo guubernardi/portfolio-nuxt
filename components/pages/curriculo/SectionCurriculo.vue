@@ -19,25 +19,14 @@
     </div>
 
     <div class="hud">
-      <!-- ✅ sem import do Botao: Nuxt auto-importa componentes da pasta /components -->
-      <Botao class="btn-baixar" type="button" texto="Baixar Curriculo" icone="curriculo" @click="baixarCurriculo">
-        <span class="btn-ico" aria-hidden="true">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none">
-            <path d="M12 3v10" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-            <path
-              d="M8 11l4 4 4-4"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-            <path d="M5 21h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-          </svg>
-        </span>
-        <span class="btn-txt">
-          {{ baixando ? 'Baixando...' : 'Baixar Curriculo' }}
-        </span>
-      </Botao>
+  
+      <ElementosBotao
+        class="btn-baixar"
+        type="button"
+        :texto="baixando ? 'Baixando...' : 'Baixar Curriculo'"
+        icone="curriculo"
+        @click="baixarCurriculo"
+      />
 
       <p class="dica">Arraste para girar • Scroll para zoom</p>
     </div>
@@ -114,8 +103,6 @@ function enquadrarModelo(obj: any, THREE: any, camera: any) {
 
   obj.position.sub(center2)
   obj.position.y -= 0.15
-
-  // ✅ começa “inclinado bonito”, mas travando Z depois no drag (reto)
   obj.rotation.set(0, 1, 1)
 
   const maxDim = Math.max(size2.x, size2.y, size2.z) || 1
@@ -139,7 +126,6 @@ async function initThree(host: HTMLElement) {
 
   try {
     const THREE = await import('three')
-    // ✅ sem .js: costuma resolver melhor tipos no TS
     const { GLTFLoader } = await import('three/examples/jsm/loaders/GLTFLoader')
 
     const scene = new THREE.Scene()
@@ -211,7 +197,6 @@ async function initThree(host: HTMLElement) {
     const minX = -0.55
     const maxX = 0.55
 
-    // ✅ Melhor capturar eventos no canvas mesmo
     const dom = renderer.domElement
     dom.style.touchAction = 'none'
     dom.style.userSelect = 'none'
@@ -416,6 +401,9 @@ onBeforeUnmount(() => {
 .btn-txt
   font-weight: 700
   font-size: 14px
+
+  &:hover
+    cursor: pointer
 
 .dica
   margin: 0
