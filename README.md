@@ -6,3 +6,5 @@ Meu portfólio pessoal com foco em apresentar projetos, habilidades e um resumo 
 - Seções: **Início**, **Skills**, **Sociais**, **Projetos** e **Sobre mim**
 - Layout responsivo (desktop e mobile)
 - Navegação com scroll suave entre seções
+
+Feito por Gustavo Bernardi.
