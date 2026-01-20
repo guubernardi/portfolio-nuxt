@@ -1,25 +1,8 @@
-# Base NUXTJS
+# Portfólio — Gustavo Bernardi
 
-## Instalação de Bibliotecas
+Meu portfólio pessoal com foco em apresentar projetos, habilidades e um resumo sobre mim.
 
-```
-pnpm install
-```
-
-### Executar Modo Desenvolvimento
-
-```
-pnpm run dev
-```
-
-### Executar Modo Produção
-
-```
-pnpm run generate
-```
-
-### Executar Build
-
-```
-pnpm run build
-```
+## ✨ O que tem aqui
+- Seções: **Início**, **Skills**, **Sociais**, **Projetos** e **Sobre mim**
+- Layout responsivo (desktop e mobile)
+- Navegação com scroll suave entre seções
