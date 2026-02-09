@@ -204,7 +204,49 @@
           </div>
   
           <div class="acao">
-            <a href="#">
+            <a href="https://www.citytoysbrinquedos.com/" target="_blank">
+              <button type="button">
+                <img src="/images/play.svg" alt="Play video" />
+                Veja no ar
+              </button>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="area-projeto js-projeto" id="citytoys">
+        <div class="imagem-desktop js-projeto-img">
+          <img
+            src="/images/strangerthings.png"
+            alt="Imagem Projeto City Toys"
+            width="700"
+            height="500"
+          />
+        </div>
+  
+        <div class="titulo-projeto js-projeto-txt" id="citytoys">
+          <h2>Stranger Things The Experience</h2>
+          <p class="descricao">Site Stranger Things The Experience refeito com foco em UI/UX e GSAP para animação</p>
+  
+          <div class="tecnologias">
+            <div class="tec">
+              <img src="/images/html-amarelo.svg" alt="Ícone HTML" />
+              <p>HTML</p>
+            </div>
+  
+            <div class="tec">
+              <img src="/images/css-amarelo.svg" alt="Ícone CSS" />
+              <p>CSS</p>
+            </div>
+  
+            <div class="tec">
+              <img src="/images/js-amarelo.svg" alt="Icone JavaScript" />
+              <p>JavaScript</p>
+            </div>
+          </div>
+  
+          <div class="acao">
+            <a href="https://guubernardi.github.io/stranger-things/" target="_blank">
               <button type="button">
                 <img src="/images/play.svg" alt="Play video" />
                 Veja no ar
@@ -470,8 +512,5 @@
       max-width: 360px
       justify-content: center
       padding: 12px 18px
-
-#citytoys
-  display: none
 </style>
   
