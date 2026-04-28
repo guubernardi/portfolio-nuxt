@@ -127,63 +127,64 @@
   
   <script setup lang="ts">
   import { ref, onMounted, onBeforeUnmount, nextTick } from 'vue'
+  import { gsap } from 'gsap'
   import Svgs from '../../global/svgs/Svgs.vue'
-  
+
   const secSkills = ref<HTMLElement | null>(null)
   const canvasCubo = ref<HTMLElement | null>(null)
-  
+
   let renderer: any = null
   let scene: any = null
   let camera: any = null
   let model: any = null
   let animationId: number | null = null
   let onResize: (() => void) | null = null
-  
+
   let io: IntersectionObserver | null = null
   let cuboIniciado = false
-  
+
   async function criar3dCubo() {
     if (!canvasCubo.value) return
-  
+
     const THREE = await import('three')
     const { GLTFLoader } = await import('three/examples/jsm/loaders/GLTFLoader.js')
-  
+
     const el = canvasCubo.value
     const width = el.clientWidth || 260
     const height = el.clientHeight || 260
-  
+
     scene = new THREE.Scene()
-  
+
     camera = new THREE.PerspectiveCamera(1, width / height, 0.1, 500)
     camera.position.set(0, 10, 2)
     camera.lookAt(0, -0.1, 0)
-  
+
     renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
     renderer.setSize(width, height)
     el.appendChild(renderer.domElement)
-  
+
     const loader = new GLTFLoader()
     loader.load('/images/3d/cubo.glb', (gltf: any) => {
       model = gltf.scene
-  
+
       const box = new THREE.Box3().setFromObject(model)
       const center = box.getCenter(new THREE.Vector3())
       model.position.set(-center.x, -center.y, -center.z)
-  
+
       scene.add(model)
       scene.add(new THREE.AmbientLight(0xffffff, 0.1))
-  
+
       const directionalLight = new THREE.DirectionalLight(0xffffff, 3)
       scene.add(directionalLight)
     })
-  
+
     const animate = () => {
       animationId = requestAnimationFrame(animate)
       if (model) model.rotation.z += 0.01
       renderer.render(scene, camera)
     }
     animate()
-  
+
     onResize = () => {
       if (!canvasCubo.value || !renderer || !camera) return
       const newWidth = canvasCubo.value.clientWidth || 260
@@ -192,85 +193,86 @@
       camera.updateProjectionMatrix()
       renderer.setSize(newWidth, newHeight)
     }
-  
+
     window.addEventListener('resize', onResize)
   }
-  
+
   async function iniciar3dSePreciso() {
     if (cuboIniciado) return
     cuboIniciado = true
     await criar3dCubo()
   }
-  
+
   function configurarAnimacoesScroll() {
     const root = secSkills.value
     if (!root) return
-  
+
     const els = Array.from(root.querySelectorAll<HTMLElement>('[data-anim]'))
-  
-    // ✅ stagger mais “cremoso”
-    els.forEach((el, i) => {
-      el.style.setProperty('--delay', `${i * 80}ms`)
-    })
-  
+
     const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches
     if (reduce) {
-      els.forEach((el) => el.classList.add('is-inview'))
       iniciar3dSePreciso()
       return
     }
-  
+
+    gsap.set(els, { opacity: 0, y: 18, force3D: true })
+
     if (!('IntersectionObserver' in window)) {
-      els.forEach((el) => el.classList.add('is-inview'))
+      gsap.set(els, { opacity: 1, y: 0 })
       iniciar3dSePreciso()
       return
     }
-  
+
     io = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return
-  
+        const visiveis = entries.filter((e) => e.isIntersecting)
+        if (!visiveis.length) return
+
+        visiveis.forEach((entry, i) => {
           const el = entry.target as HTMLElement
-          el.classList.add('is-inview')
           io?.unobserve(el)
-  
+
+          gsap.to(el, {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            delay: i * 0.055,
+            ease: 'power3.out',
+            force3D: true,
+          })
+
           if (el.dataset.anim === 'cubo') iniciar3dSePreciso()
         })
       },
-      {
-        threshold: 0.12,
-        // entra um pouco antes e dá sensação mais fluida
-        rootMargin: '0px 0px -8% 0px'
-      }
+      { threshold: 0.1, rootMargin: '0px 0px -6% 0px' }
     )
-  
+
     els.forEach((el) => io?.observe(el))
   }
-  
+
   function destruir3d() {
     if (animationId) cancelAnimationFrame(animationId)
     animationId = null
-  
+
     if (onResize) window.removeEventListener('resize', onResize)
     onResize = null
-  
+
     try {
       if (renderer?.domElement?.parentNode) renderer.domElement.parentNode.removeChild(renderer.domElement)
       renderer?.dispose?.()
     } catch (e) {}
-  
+
     renderer = null
     scene = null
     camera = null
     model = null
   }
-  
+
   onMounted(async () => {
     await nextTick()
     configurarAnimacoesScroll()
   })
-  
+
   onBeforeUnmount(() => {
     io?.disconnect()
     io = null
@@ -289,21 +291,6 @@
     overflow: hidden
     background: #131519
     padding-bottom: 140px
-  
-    [data-anim]
-      opacity: 0
-      transform: translate3d(0, 14px, 0) scale(.985)
-      filter: blur(4px)
-      transition-property: opacity, transform, filter
-      transition-duration: .75s, .75s, .75s
-      transition-timing-function: cubic-bezier(.16, 1, .3, 1)
-      transition-delay: var(--delay, 0ms)
-      will-change: transform, opacity, filter
-  
-    [data-anim].is-inview
-      opacity: 1
-      transform: translate3d(0, 0, 0) scale(1)
-      filter: blur(0)
   
     .divisor
       width: calc(100% + 50px)

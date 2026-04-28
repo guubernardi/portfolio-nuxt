@@ -16,3 +16,7 @@ yarn.lock
 
 # SHORTCUTS
 .DS_Store
+
+# IA
+CLAUDE.md
+.claude

@@ -1,10 +1,10 @@
 <template> 
-    <section class="projetos" aria-label="Seção de projetos">
-      <div class="titulo">
+    <section class="projetos" ref="secProjetos" aria-label="Seção de projetos">
+      <div class="titulo" data-anim>
         <h2>Projetos</h2>
       </div>
   
-      <div class="area-projeto js-projeto">
+      <div class="area-projeto js-projeto" data-anim>
         <div class="imagem-desktop js-projeto-img">
           <img
             src="/images/desktop-shiftfy.svg"
@@ -49,7 +49,7 @@
         </div>
       </div>
   
-      <div class="area-projeto js-projeto">
+      <div class="area-projeto js-projeto" data-anim>
         <div class="imagem-desktop js-projeto-img">
           <img
             src="/images/leans.svg"
@@ -91,7 +91,7 @@
         </div>
       </div>
 
-      <div class="area-projeto js-projeto">
+      <div class="area-projeto js-projeto" data-anim>
         <div class="imagem-desktop js-projeto-img">
           <img
             src="/images/ia-remove.svg"
@@ -133,7 +133,7 @@
         </div>
       </div>
 
-      <div class="area-projeto js-projeto">
+      <div class="area-projeto js-projeto" data-anim>
         <div class="imagem-desktop js-projeto-img">
           <img
             src="/images/primeflix.svg"
@@ -172,7 +172,7 @@
         </div>
       </div>
   
-      <div class="area-projeto js-projeto" id="citytoys">
+      <div class="area-projeto js-projeto" data-anim id="citytoys">
         <div class="imagem-desktop js-projeto-img">
           <img
             src="/images/city-toys.svg"
@@ -214,7 +214,7 @@
         </div>
       </div>
 
-      <div class="area-projeto js-projeto" id="citytoys">
+      <div class="area-projeto js-projeto" data-anim id="citytoys">
         <div class="imagem-desktop js-projeto-img">
           <img
             src="/images/strangerthings.png"
@@ -257,7 +257,62 @@
       </div>
     </section>
   </template>
-  
+
+<script setup lang="ts">
+import { ref, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import { gsap } from 'gsap'
+
+const secProjetos = ref<HTMLElement | null>(null)
+let io: IntersectionObserver | null = null
+
+function configurarAnimacoesScroll() {
+  const root = secProjetos.value
+  if (!root) return
+  const els = Array.from(root.querySelectorAll<HTMLElement>('[data-anim]'))
+  const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches
+  if (reduce) return
+
+  gsap.set(els, { opacity: 0, y: 18, force3D: true })
+
+  if (!('IntersectionObserver' in window)) {
+    gsap.set(els, { opacity: 1, y: 0 })
+    return
+  }
+
+  io = new IntersectionObserver(
+    (entries) => {
+      const visiveis = entries.filter((e) => e.isIntersecting)
+      if (!visiveis.length) return
+      visiveis.forEach((entry, i) => {
+        const el = entry.target as HTMLElement
+        io?.unobserve(el)
+        gsap.to(el, {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          delay: i * 0.08,
+          ease: 'power3.out',
+          force3D: true,
+        })
+      })
+    },
+    { threshold: 0.1, rootMargin: '0px 0px -6% 0px' }
+  )
+
+  els.forEach((el) => io?.observe(el))
+}
+
+onMounted(async () => {
+  await nextTick()
+  configurarAnimacoesScroll()
+})
+
+onBeforeUnmount(() => {
+  io?.disconnect()
+  io = null
+})
+</script>
+
 <style scoped lang="sass">
   .projetos
     background-color: #1C1F25

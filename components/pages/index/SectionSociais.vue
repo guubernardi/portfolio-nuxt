@@ -1,6 +1,6 @@
 <template>
-  <section class="social">
-    <div class="titulo">
+  <section class="social" ref="secSocial">
+    <div class="titulo" data-anim>
       <h2>Redes Sociais</h2>
     </div>
 
@@ -8,28 +8,28 @@
       <div class="conteudo">
         <div class="canvas" ref="canvasContainer" aria-hidden="true"></div>
 
-        <div class="item">
+        <div class="item" data-anim>
           <p>LinkedIn</p>
           <div class="icone">
             <a href="https://linkedin.com/in/gubernardi" target="_blank"><img src="/images/linkedin.svg" alt="Ícone LinkedIn" /></a>
           </div>
         </div>
 
-        <div class="item">
+        <div class="item" data-anim>
           <p>GitHub</p>
           <div class="icone">
             <a href="https://github.com/guubernardi" target="_blank"><img src="/images/github.svg" alt="Ícone GitHub" /></a>
           </div>
         </div>
 
-        <div class="item">
+        <div class="item" data-anim>
           <p>WhatsApp</p>
           <div class="icone">
             <a href="https://w.app/ln2fgx" target="_blank"><img src="/images/whatsapp.svg" alt="Ícone WhatsApp" /></a>
           </div>
         </div>
 
-        <div class="item item--email">
+        <div class="item item--email" data-anim>
           <p>Email</p>
           <div class="icone">
             <a href="mailto:gubernardi@hotmail.com?" target="_blank"><img src="/images/email.svg" alt="Ícone Email" /></a>
@@ -49,6 +49,7 @@ import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js'
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js'
 import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass.js'
+import { gsap } from 'gsap'
 
 const canvasContainer = ref(null)
 
@@ -56,6 +57,8 @@ let renderer, scene, camera, composer, tube
 let animationId = null
 let resizeObs = null
 let mq = null
+const secSocial = ref(null)
+let io = null
 
 function destroyLinhaBloom() {
   if (animationId) cancelAnimationFrame(animationId)
@@ -219,6 +222,52 @@ onBeforeUnmount(() => {
     } catch {}
   }
   destroyLinhaBloom()
+})
+
+function configurarAnimacoesScroll() {
+  const root = secSocial.value
+  if (!root) return
+  const els = Array.from(root.querySelectorAll('[data-anim]'))
+  const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches
+  if (reduce) return
+
+  gsap.set(els, { opacity: 0, y: 18, force3D: true })
+
+  if (!('IntersectionObserver' in window)) {
+    gsap.set(els, { opacity: 1, y: 0 })
+    return
+  }
+
+  io = new IntersectionObserver(
+    (entries) => {
+      const visiveis = entries.filter((e) => e.isIntersecting)
+      if (!visiveis.length) return
+      visiveis.forEach((entry, i) => {
+        io?.unobserve(entry.target)
+        gsap.to(entry.target, {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          delay: i * 0.055,
+          ease: 'power3.out',
+          force3D: true,
+        })
+      })
+    },
+    { threshold: 0.1, rootMargin: '0px 0px -6% 0px' }
+  )
+
+  els.forEach((el) => io?.observe(el))
+}
+
+onMounted(async () => {
+  await nextTick()
+  configurarAnimacoesScroll()
+})
+
+onBeforeUnmount(() => {
+  io?.disconnect()
+  io = null
 })
 </script>
 

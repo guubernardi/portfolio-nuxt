@@ -1,11 +1,11 @@
 <template>
-    <section id="eu" class="sobre">
+    <section id="eu" class="sobre" ref="secSobre">
       <div class="wrap">
         <div class="topo" aria-hidden="true">
           <Svgs nome="nuxtjs-divisor" />
         </div>
   
-        <div class="quadro">
+        <div class="quadro" data-anim>
           <div class="conteudo">
             <!-- ESQUERDA -->
             <div class="col-esq">
@@ -60,9 +60,12 @@
   <script setup>
   import * as THREE from 'three'
   import { GLTFLoader } from 'three/examples/jsm/Addons.js'
+  import { gsap } from 'gsap'
   
   const canvasGustavo = ref(null)
   const hover3d = ref(false)
+  const secSobre = ref(null)
+  let io = null
   
   const state = reactive({
     itens: [
@@ -204,6 +207,52 @@
   
   onMounted(() => {
     criar3d()
+  })
+
+  function configurarAnimacoesScroll() {
+    const root = secSobre.value
+    if (!root) return
+    const els = Array.from(root.querySelectorAll('[data-anim]'))
+    const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches
+    if (reduce) return
+
+    gsap.set(els, { opacity: 0, y: 18, force3D: true })
+
+    if (!('IntersectionObserver' in window)) {
+      gsap.set(els, { opacity: 1, y: 0 })
+      return
+    }
+
+    io = new IntersectionObserver(
+      (entries) => {
+        const visiveis = entries.filter((e) => e.isIntersecting)
+        if (!visiveis.length) return
+        visiveis.forEach((entry, i) => {
+          io?.unobserve(entry.target)
+          gsap.to(entry.target, {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            delay: i * 0.055,
+            ease: 'power3.out',
+            force3D: true,
+          })
+        })
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -6% 0px' }
+    )
+
+    els.forEach((el) => io?.observe(el))
+  }
+
+  onMounted(async () => {
+    await nextTick()
+    configurarAnimacoesScroll()
+  })
+
+  onBeforeUnmount(() => {
+    io?.disconnect()
+    io = null
   })
   </script>
   

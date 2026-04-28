@@ -102,7 +102,6 @@ function enquadrarModelo(obj: any, THREE: any, camera: any) {
   box2.getSize(size2)
 
   obj.position.sub(center2)
-  obj.position.y -= 0.15
   obj.rotation.set(0, 1, 1)
 
   const maxDim = Math.max(size2.x, size2.y, size2.z) || 1
@@ -416,4 +415,19 @@ onBeforeUnmount(() => {
   inset: 0
   pointer-events: none
   background: radial-gradient(500px 340px at 50% 30%, rgba(244,163,0,.10), transparent 60%), radial-gradient(900px 650px at 50% 110%, rgba(0,0,0,.60), transparent 55%)
+
+@media screen and (max-height: 820px) and (min-width: 1001px)
+  .canvas-host
+    inset: 96px 0 92px
+    height: auto
+
+  .hud
+    bottom: 18px
+    gap: 8px
+
+  .btn-baixar
+    padding: 10px 16px
+
+  .dica
+    font-size: 11px
 </style>
