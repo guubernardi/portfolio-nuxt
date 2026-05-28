@@ -1,14 +1,12 @@
 <template>
   <div id="tela">
-    <PreLoader nome="GUSTAVO BERNARDI" cargo="DESENVOLVEDOR WEB" />
-    <Nav />
+    
     <slot />
   </div>
 </template>
 
 <script setup>
 import Nav from '../components/global/nav/Nav.vue'
-import PreLoader from '../components/pages/index/PreLoader.vue'
 </script>
 
 <style lang="sass" scoped>

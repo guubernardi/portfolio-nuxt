@@ -1,571 +1,365 @@
-<template> 
-    <section class="projetos" ref="secProjetos" aria-label="Seção de projetos">
-      <div class="titulo" data-anim>
-        <h2>Projetos</h2>
-      </div>
-  
-      <div class="area-projeto js-projeto" data-anim>
-        <div class="imagem-desktop js-projeto-img">
-          <img
-            src="/images/desktop-shiftfy.svg"
-            alt="Imagem Projeto Shiftfy"
-            width="700"
-            height="500"
-          />
-        </div>
-  
-        <div class="titulo-projeto js-projeto-txt">
-          <h2>SHIFTFY</h2>
-          <p class="descricao">
-            Sistema interno da empresa que atualmente trabalho <br />
-            Essa versão é o MVP atualmente esta em desenvolvimento
-          </p>
-  
-          <div class="tecnologias">
-            <div class="tec">
-              <img src="/images/nuxt-dourado.svg" alt="Ícone NuxtJS" />
-              <p>NuxtJS</p>
-            </div>
-  
-            <div class="tec">
-              <img src="/images/vercel.svg" alt="Ícone Vercel" />
-              <p>Vercel</p>
-            </div>
-  
-            <div class="tec">
-              <img src="/images/sass-dourado.svg" alt="Ícone Sass" />
-              <p>Sass</p>
-            </div>
-          </div>
-  
-          <div class="acao">
-            <a href="https://youtu.be/obgeOnP8UVg" target="_blank">
-              <button type="button">
-                <img src="/images/play.svg" alt="Play video" />
-                Veja o video
-              </button>
-            </a>
-          </div>
-        </div>
-      </div>
-  
-      <div class="area-projeto js-projeto" data-anim>
-        <div class="imagem-desktop js-projeto-img">
-          <img
-            src="/images/leans.svg"
-            alt="Imagem Projeto Barbearia Leans"
-            width="700"
-            height="500"
-          />
-        </div>
-  
-        <div class="titulo-projeto js-projeto-txt">
-          <h2>Barbearia Leans</h2>
-          <p class="descricao">Landing Page para Barbearia Leans</p>
-  
-          <div class="tecnologias">
-            <div class="tec">
-              <img src="public/images/html-amarelo.svg" alt="Ícone HTML" />
-              <p>HTML</p>
-            </div>
-  
-            <div class="tec">
-              <img src="/images/css-amarelo.svg" alt="Ícone CSS" />
-              <p>CSS</p>
-            </div>
-  
-            <div class="tec">
-              <img src="/images/js-amarelo.svg" alt="Ícone Java Script" />
-              <p>JavaScript</p>
-            </div>
-          </div>
-  
-          <div class="acao">
-            <a href="https://guubernardi.github.io/landing_barbearia/" target="_blank">
-              <button type="button">
-                <img src="/images/play.svg" alt="Play video" />
-                Veja no ar
-              </button>
-            </a>
-          </div>
-        </div>
-      </div>
+<template>
+  <section class="projetos" ref="secaoRef" aria-label="Seção de projetos">
+    <div class="wrap">
+      <h2 class="projetos__titulo" ref="tituloRef">Projetos</h2>
 
-      <div class="area-projeto js-projeto" data-anim>
-        <div class="imagem-desktop js-projeto-img">
-          <img
-            src="/images/ia-remove.svg"
-            alt="Imagem Projeto Barbearia Leans"
-            width="700"
-            height="500"
-          />
-        </div>
-  
-        <div class="titulo-projeto js-projeto-txt">
-          <h2>IA Remove</h2>
-          <p class="descricao">Removedor de Fundos de Imagens usando a API da Remove.bg</p>
-  
-          <div class="tecnologias">
-            <div class="tec">
-              <img src="public/images/html-amarelo.svg" alt="Ícone HTML" />
-              <p>HTML</p>
-            </div>
-  
-            <div class="tec">
-              <img src="/images/css-amarelo.svg" alt="Ícone CSS" />
-              <p>CSS</p>
-            </div>
-  
-            <div class="tec">
-              <img src="/images/js-amarelo.svg" alt="Ícone Java Script" />
-              <p>JavaScript</p>
+      <ul class="projetos__lista" ref="listaRef">
+        <li
+          v-for="projeto in projetos"
+          :key="projeto.id"
+          class="card"
+        >
+          <div
+            class="card__imagem"
+            :style="projeto.imagem ? { backgroundImage: `url(${projeto.imagem})`, backgroundSize: 'cover', backgroundPosition: 'top center' } : {}"
+          >
+            <div class="card__mockup">
+              <div class="card__mockup-barra">
+                <span class="card__mockup-ponto card__mockup-ponto--vermelho"></span>
+                <span class="card__mockup-ponto card__mockup-ponto--amarelo"></span>
+                <span class="card__mockup-ponto card__mockup-ponto--verde"></span>
+                <span class="card__mockup-url">{{ projeto.link }}</span>
+              </div>
             </div>
           </div>
-  
-          <div class="acao">
-            <a href="https://guubernardi.github.io/ia-remove/" target="_blank">
-              <button type="button">
-                <img src="/images/play.svg" alt="Play video" />
-                Veja no Ar
-              </button>
-            </a>
-          </div>
-        </div>
-      </div>
 
-      <div class="area-projeto js-projeto" data-anim>
-        <div class="imagem-desktop js-projeto-img">
-          <img
-            src="/images/primeflix.svg"
-            alt="Imagem Projeto PrimeFlix"
-            width="700"
-            height="500"
-          />
-        </div>
-  
-        <div class="titulo-projeto js-projeto-txt">
-          <h2>PrimeFlix</h2>
-          <p class="descricao">
-            Projeto usando ReactJS com foco em requisição HTTP Utilizando a API The Movie Database
-          </p>
-  
-          <div class="tecnologias">
-            <div class="tec">
-              <img src="/images/react-amarelo.svg" alt="Ícone Reactjs" />
-              <p>ReactJS</p>
+          <div class="card__info">
+            <div class="card__cabecalho">
+              <h3 class="card__nome">{{ projeto.nome }}</h3>
+              <span class="card__categoria">| {{ projeto.categoria }}</span>
             </div>
-  
-            <div class="tec">
-              <img src="/images/localstorage.svg" alt="Icone LocalStorage" />
-              <p>LocalStorage</p>
-            </div>
-          </div>
-  
-          <div class="acao">
-            <a href="https://primeflix-wine.vercel.app/" target="_blank">
-              <button type="button">
-                <img src="/images/play.svg" alt="Play video" />
-                Veja no ar
-              </button>
-            </a>
-          </div>
-        </div>
-      </div>
-  
-      <div class="area-projeto js-projeto" data-anim id="citytoys">
-        <div class="imagem-desktop js-projeto-img">
-          <img
-            src="/images/city-toys.svg"
-            alt="Imagem Projeto City Toys"
-            width="700"
-            height="500"
-          />
-        </div>
-  
-        <div class="titulo-projeto js-projeto-txt" id="citytoys">
-          <h2>City Toys</h2>
-          <p class="descricao">Landing Page para City Toys</p>
-  
-          <div class="tecnologias">
-            <div class="tec">
-              <img src="/images/html-amarelo.svg" alt="Ícone HTML" />
-              <p>HTML</p>
-            </div>
-  
-            <div class="tec">
-              <img src="/images/css-amarelo.svg" alt="Ícone CSS" />
-              <p>CSS</p>
-            </div>
-  
-            <div class="tec">
-              <img src="/images/js-amarelo.svg" alt="Icone JavaScript" />
-              <p>JavaScript</p>
-            </div>
-          </div>
-  
-          <div class="acao">
-            <a href="https://www.citytoysbrinquedos.com/" target="_blank">
-              <button type="button">
-                <img src="/images/play.svg" alt="Play video" />
-                Veja no ar
-              </button>
-            </a>
-          </div>
-        </div>
-      </div>
 
-      <div class="area-projeto js-projeto" data-anim id="citytoys">
-        <div class="imagem-desktop js-projeto-img">
-          <img
-            src="/images/strangerthings.png"
-            alt="Imagem Projeto City Toys"
-            width="700"
-            height="500"
-          />
-        </div>
-  
-        <div class="titulo-projeto js-projeto-txt" id="citytoys">
-          <h2>Stranger Things The Experience</h2>
-          <p class="descricao">Site Stranger Things The Experience refeito com foco em UI/UX e GSAP para animação</p>
-  
-          <div class="tecnologias">
-            <div class="tec">
-              <img src="/images/html-amarelo.svg" alt="Ícone HTML" />
-              <p>HTML</p>
+            <p class="card__descricao">{{ projeto.descricao }}</p>
+
+            <div class="card__tecnologias">
+              <div class="card__tech" v-for="tech in projeto.tecnologias" :key="tech.nome">
+                <Svgs v-if="tech.svgNome" :nome="tech.svgNome" />
+                <img v-else :src="tech.icone" :alt="tech.nome" loading="lazy" :style="tech.estilo || {}" />
+                <span class="card__tech-label">{{ tech.nome }}</span>
+              </div>
             </div>
-  
-            <div class="tec">
-              <img src="/images/css-amarelo.svg" alt="Ícone CSS" />
-              <p>CSS</p>
-            </div>
-  
-            <div class="tec">
-              <img src="/images/js-amarelo.svg" alt="Icone JavaScript" />
-              <p>JavaScript</p>
-            </div>
-          </div>
-  
-          <div class="acao">
-            <a href="https://guubernardi.github.io/stranger-things/" target="_blank">
-              <button type="button">
-                <img src="/images/play.svg" alt="Play video" />
-                Veja no ar
-              </button>
+
+            <a :href="projeto.link" target="_blank" rel="noopener noreferrer" class="card__link-botao">
+              <BotaoAzul icone="codigo" texto="Ver projeto" />
             </a>
           </div>
-        </div>
-      </div>
-    </section>
-  </template>
+        </li>
+      </ul>
+    </div>
+  </section>
+</template>
 
-<script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount, nextTick } from 'vue'
+<script setup>
 import { gsap } from 'gsap'
+import BotaoAzul from '../../global/elementos/BotaoAzul.vue'
+import Svgs from '../../global/svgs/Svgs.vue'
 
-const secProjetos = ref<HTMLElement | null>(null)
-let io: IntersectionObserver | null = null
+const secaoRef = ref(null)
+const tituloRef = ref(null)
+const listaRef = ref(null)
 
-function configurarAnimacoesScroll() {
-  const root = secProjetos.value
-  if (!root) return
-  const els = Array.from(root.querySelectorAll<HTMLElement>('[data-anim]'))
-  const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches
-  if (reduce) return
+const projetos = ref([
+  {
+    id: 1,
+    nome: 'RIFA TIRO DE GUERRA',
+    categoria: 'SISTEMA',
+    descricao: 'Sistema de rifas online que fiz no meu ano de alistamento militar obrigatório com pagamento via PIX pelo Asaas e sorteio integrado à Loteria Federal.',
+    imagem: '/images/projetos/tiro-de-guerra.png',
+    tecnologias: [
+      { nome: 'NuxtJS',   svgNome: 'nuxtjs' },
+      { nome: 'NodeJS',   icone: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
+      { nome: 'Figma',    icone: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg' },
+      { nome: 'Supabase', icone: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg' },
+    ],
+    link: 'https://tg-azure.vercel.app',
+  },
+  {
+    id: 2,
+    nome: 'CITY TOYS',
+    categoria: 'LANDING PAGE',
+    descricao: 'Landing page desenvolvida para cliente real. Projeto focado em UI/UX com animações fluidas usando GSAP e design responsivo.',
+    imagem: '/images/projetos/citytoys.png',
+    tecnologias: [
+      { nome: 'Vue.js', icone: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg' },
+      { nome: 'SASS',   icone: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg' },
+      { nome: 'GSAP',   icone: 'https://cdn.simpleicons.org/greensock/88CE02' },
+    ],
+    link: 'https://www.citytoysbrinquedos.com/',
+  },
+  {
+    id: 6,
+    nome: 'TOYZ',
+    categoria: 'SISTEMA',
+    descricao: 'Plataforma completa de gerenciamento para locadoras de brinquedos, desenvolvida em parceria com um amigo via GitHub. Conta com controle de reservas, módulo financeiro, contratos digitais e sistema de assinatura recorrente.',
+    imagem: '/images/projetos/toyz.png',
+    tecnologias: [
+      { nome: 'NuxtJS',     svgNome: 'nuxtjs' },
+      { nome: 'NodeJS',     icone: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
+      { nome: 'TypeScript', icone: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg' },
+      { nome: 'Supabase',   icone: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg' },
+      { nome: 'GitHub',     icone: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg', estilo: { filter: 'invert(1)' } },
+    ],
+    link: 'https://www.apptoyz.com.br/',
+  },
+])
 
-  gsap.set(els, { opacity: 0, y: 18, force3D: true })
+onMounted(() => {
+  const titulo = tituloRef.value
+  const cards = listaRef.value?.querySelectorAll('.card') || []
 
-  if (!('IntersectionObserver' in window)) {
-    gsap.set(els, { opacity: 1, y: 0 })
-    return
-  }
+  gsap.set(titulo, { opacity: 0, y: 40 })
+  gsap.set(cards, { opacity: 0, y: 60 })
 
-  io = new IntersectionObserver(
-    (entries) => {
-      const visiveis = entries.filter((e) => e.isIntersecting)
-      if (!visiveis.length) return
-      visiveis.forEach((entry, i) => {
-        const el = entry.target as HTMLElement
-        io?.unobserve(el)
-        gsap.to(el, {
-          opacity: 1,
-          y: 0,
-          duration: 0.6,
-          delay: i * 0.08,
-          ease: 'power3.out',
-          force3D: true,
-        })
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (!entry.isIntersecting) return
+      observer.disconnect()
+
+      gsap.to(titulo, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' })
+      gsap.to(cards, {
+        opacity: 1,
+        y: 0,
+        duration: 0.7,
+        ease: 'power2.out',
+        stagger: 0.18,
+        delay: 0.2,
       })
     },
-    { threshold: 0.1, rootMargin: '0px 0px -6% 0px' }
+    { threshold: 0.08 }
   )
 
-  els.forEach((el) => io?.observe(el))
-}
-
-onMounted(async () => {
-  await nextTick()
-  configurarAnimacoesScroll()
-})
-
-onBeforeUnmount(() => {
-  io?.disconnect()
-  io = null
+  if (secaoRef.value) observer.observe(secaoRef.value)
 })
 </script>
 
 <style scoped lang="sass">
-  .projetos
-    background-color: #1C1F25
-    font-family: var(--light)
-    padding-bottom: 70px
-    --proj-pad-x: 90px
-  
-  .divisor
-    height: 20px
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@800&display=swap')
+
+.projetos
+  width: 100%
+  background: var(--cor-escuro-1)
+  padding: 100px 0
+  position: relative
+  margin-top: -2px
+
+  &::before
+    content: ''
+    position: absolute
+    top: 0
+    left: 0
     width: 100%
-    background: rgba(255, 177, 43, 0.22)
-  
-  .titulo
+    height: 160px
+    background: linear-gradient(to bottom, #000000 0%, #060a10 50%, transparent 100%)
+    pointer-events: none
+    z-index: 1
+
+  &__titulo
+    font-family: var(--semibold)
+    font-weight: 800
+    font-size: clamp(42px, 5vw, 72px)
+    color: var(--cor-branco)
+    text-align: center
+    margin: 0 0 64px
+    letter-spacing: -1px
+
+  &__lista
     display: flex
     flex-direction: column
-    align-items: center
-    justify-content: center
-    text-align: center
-    width: 100%
-    padding: 40px 80px
-    gap: 20px
-  
-    h2
-      font-family: var(--bold)
-      font-size: var(--f10)
-      line-height: 1
-      width: 100%
-      max-width: 650px
-      background: linear-gradient(0deg, #fddf5a, var(--cor-branco))
-      -webkit-background-clip: text
-      -webkit-text-fill-color: transparent
-      background-clip: text
-      -webkit-text-stroke: 1px #FFB12B
-      text-stroke: 1px #FFB12B
-  
-  .area-projeto
-    display: flex
-    justify-content: space-between
-    align-items: flex-start
-    padding: 0 var(--proj-pad-x)
-    margin-top: 50px
-    gap: 50px
+    gap: 48px
+    list-style: none
+    margin: 0
+    padding: 0
+
+.wrap
+  width: 100%
+  padding: 0 148px
+
+  @media (max-width: 1200px)
+    padding: 0 60px
+
+  @media (max-width: 900px)
+    padding: 0 30px
+
+  @media (max-width: 600px)
+    padding: 0 20px
+
+.card
+  display: grid
+  grid-template-columns: 1fr 1fr
+  border-radius: 44px
+  overflow: hidden
+  background: #0D0D1A
+  transition: box-shadow 0.3s ease
+
+  &:hover
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5)
+
+  &__imagem
     position: relative
-    padding-bottom: 60px
+    min-height: 430px
+    overflow: hidden
+    background-color: #0d1117
+
     &::after
       content: ''
       position: absolute
-      left: var(--proj-pad-x)
-      right: var(--proj-pad-x)
-      bottom: 0
-      height: 1px
-      background: rgba(255, 177, 43, 0.35)
-  
-    &:last-of-type::after
-      display: none
-  
-  .imagem-desktop
-    flex: 0 0 auto
+      inset: 0
+      background: rgba(0, 0, 0, 0.45)
+      z-index: 1
+
+  &__mockup
+    position: absolute
+    top: -1px
+    left: 0
+    width: 101%
+    z-index: 2
+    border-radius: 0 0 0px 10px
+    overflow: hidden
+    border: 1px solid rgba(255, 255, 255, 0.12)
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5)
+    background: transparent
+
+  &__mockup-barra
     display: flex
     align-items: center
+    gap: 6px
+    padding: 10px 14px
+    background: #1e1e2e
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08)
+
+  &__mockup-ponto
+    width: 10px
+    height: 10px
+    border-radius: 50%
+    flex-shrink: 0
+
+    &--vermelho
+      background: #ff5f57
+
+    &--amarelo
+      background: #febc2e
+
+    &--verde
+      background: #28c840
+
+  &__mockup-url
+    flex: 1
+    margin-left: 10px
+    background: rgba(255, 255, 255, 0.07)
+    border-radius: 4px
+    padding: 4px 10px
+    font-family: 'Fira Code', monospace
+    font-size: 11px
+    color: rgba(255, 255, 255, 0.35)
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis
+
+  &__info
+    padding: 44px 48px
+    display: flex
+    flex-direction: column
     justify-content: center
-  
+    gap: 20px
+
+  &__cabecalho
+    display: flex
+    align-items: baseline
+    gap: 10px
+    flex-wrap: wrap
+
+  &__nome
+    font-family: 'Syne', sans-serif
+    font-weight: 800
+    font-size: var(--f3)
+    color: var(--cor-branco)
+    margin: 0
+    letter-spacing: 1px
+    text-transform: uppercase
+
+  &__categoria
+    font-family: 'Syne', sans-serif
+    font-weight: 800
+    font-size: var(--f1)
+    letter-spacing: 2px
+    background: linear-gradient(90deg, #60a5fa, #a78bfa)
+    -webkit-background-clip: text
+    -webkit-text-fill-color: transparent
+    background-clip: text
+
+  &__descricao
+    font-family: var(--light)
+    font-size: var(--f1)
+    color: var(--cor-branco)
+    line-height: 1.65
+    margin: 0
+    margin-top: 16px
+
+  &__tecnologias
+    display: flex
+    gap: 22px
+    flex-wrap: wrap
+    margin-top: 16px
+
+  &__tech
+    display: flex
+    flex-direction: row
+    align-items: center
+    gap: 8px
+
     img
-      width: 700px
-      max-width: 100%
-      height: auto
+      width: 21px
+      height: 21px
+      object-fit: contain
       display: block
-  
-  .titulo-projeto
-    width: 800px
-    max-width: 100%
-    padding: 20px
-  
-    h2
-      font-family: var(--bold)
-      font-size: var(--f10)
-      line-height: 1
+      flex-shrink: 0
+
+    :deep(svg)
+      width: 21px
+      height: 21px
+      display: block
+      flex-shrink: 0
+
+  &__tech-label
+    font-family: var(--semibold)
+    font-size: var(--f1)
+    color: #fff
+
+  &__link-botao
+    align-self: center
+    text-decoration: none
+    margin-top: 16px
+
+@media (max-width: 900px)
+  .card
+    grid-template-columns: 1fr
+
+    &__imagem
+      min-height: 260px
+
+    &__info
+      padding: 32px 28px
+      gap: 16px
+
+@media (max-width: 600px)
+  .projetos
+    padding: 70px 0
+
+  .projetos__titulo
+    margin-bottom: 40px
+    font-size: 40px
+
+  .wrap
+    padding: 0 20px
+
+  .card
+    &__info
+      padding: 24px 20px
+      gap: 14px
+
+    &__nome
+      font-size: var(--f3)
+
+    &__link-botao
       width: 100%
-      max-width: 650px
-      background: linear-gradient(0deg, #fddf5a, var(--cor-branco))
-      -webkit-background-clip: text
-      -webkit-text-fill-color: transparent
-      background-clip: text
-      -webkit-text-stroke: 1px #FFB12B
-      text-stroke: 1px #FFB12B
-      display: flex
-      justify-content: center
-      margin-bottom: 14px
-      margin-left: 60px
-  
-    .descricao
-      font-family: var(--regular)
-      font-size: var(--f2)
-      padding: 10px
-      line-height: 1.5
-      color: #C2C7D2
-      text-align: center
-  
-    .tecnologias
-      margin-top: 30px
-      display: flex
-      flex-direction: row
-      gap: 32px
-      align-items: center
-      justify-content: center
-      flex-wrap: wrap
-  
-    .tec
-      display: flex
-      flex-direction: column
-      align-items: center
-      justify-content: center
-      gap: 8px
-      min-width: 90px
-  
-      img
-        width: 60px
-        height: 60px
-        object-fit: contain
-  
-      p
-        margin: 0
-        font-size: 15px
-        opacity: 0.9
-        color: white
-  
-    .acao
-      display: flex
-      justify-content: center
-      align-items: center
-      margin-top: 45px
-  
-      a
-        text-decoration: none
-  
-      button
-        display: flex
-        align-items: center
-        justify-content: center
-        gap: 10px
-        padding: 10px 50px 10px 10px
-        border-radius: 50px
-        background: linear-gradient(90deg, #3C3A37, #FFB12B)
-        color: white
-        transition: transform 0.2s ease
-        position: relative
-        border: none
-        cursor: pointer
-        box-shadow: 0 0 0 0 rgba(255, 177, 43, 0)
-  
-        img
-          width: 22px
-          height: 22px
-  
-        &:hover
-          animation: pulsar 1.6s ease-out infinite
-  
-        &:active
-          transform: scale(0.98)
-  
-        &:focus-visible
-          outline: 2px solid rgba(255, 177, 43, 0.9)
-          outline-offset: 3px
-  
-  @keyframes pulsar
-    0%
-      box-shadow: 0 0 0 0 rgba(255, 177, 43, 0.55)
-    70%
-      box-shadow: 0 0 0 18px rgba(255, 177, 43, 0)
-    100%
-      box-shadow: 0 0 0 0 rgba(255, 177, 43, 0)
-  
-  @media (max-width: 1200px)
-    .projetos
-      --proj-pad-x: 48px
-  
-    .area-projeto
-      gap: 36px
-  
-    .imagem-desktop img
-      width: 620px
-  
-  @media (max-width: 1000px)
-    .projetos
-      --proj-pad-x: 24px
-  
-    .titulo
-      padding: 32px 24px
-  
-    .area-projeto
-      flex-direction: column
-      align-items: center
-      justify-content: center
-      margin-top: 0
-      padding-top: 26px
-      padding-left: var(--proj-pad-x)
-      padding-right: var(--proj-pad-x)
-      gap: 26px
-      text-align: center
-      padding-bottom: 34px
-  
-      &::after
-        left: var(--proj-pad-x)
-        right: var(--proj-pad-x)
-  
-      &:first-of-type
-        margin-top: 26px
-  
-    .imagem-desktop
-      width: 100%
-  
-      img
-        width: 100%
-        max-width: 680px
-  
-    .titulo-projeto
-      width: 100%
-      padding: 12px 0
-  
-      h2
-        margin-left: 0
-        max-width: 100%
-        justify-content: center
-  
-      .descricao
-        padding: 0 6px
-  
-  @media (max-width: 600px)
-    .projetos
-      --proj-pad-x: 16px
-  
-    .titulo h2
-      font-size: 46px
-  
-    .area-projeto
-      padding-top: 26px
-      padding-left: var(--proj-pad-x)
-      padding-right: var(--proj-pad-x)
-  
-    .tecnologias
-      gap: 18px
-  
-    .tec
-      min-width: 78px
-  
-      img
-        width: 52px
-        height: 52px
-  
-    .acao button
-      width: 100%
-      max-width: 360px
-      justify-content: center
-      padding: 12px 18px
 </style>
-  

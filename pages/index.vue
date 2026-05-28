@@ -1,22 +1,17 @@
 <template>
   <div id="tela">
     <SectionHero/>
-    <SectionSkills/>
-    <SectionSociais/>
+    <SectionSobre/>
     <SectionProjetos/>
-    <SectionSobreMim/>
-    <Footer/>
+    <SectionFooter/>
   </div>
 </template>
 
 <script setup>
-import Footer from '../components/pages/index/Footer.vue';
 import SectionHero from '../components/pages/index/SectionHero.vue';
-import SectionProjetos from '../components/pages/index/SectionProjetos.vue';
-import SectionSkills from '../components/pages/index/SectionSkills.vue';
-import SectionSobreMim from '../components/pages/index/SectionSobreMim.vue';
-import SectionSociais from '../components/pages/index/SectionSociais.vue';
-
+import SectionSobre from '../components/pages/index/SectionSobre.vue'
+import SectionProjetos from '../components/pages/index/SectionProjetos.vue'
+import SectionFooter from '../components/pages/index/SectionFooter.vue'
 definePageMeta({
   layout: 'web'
 })
