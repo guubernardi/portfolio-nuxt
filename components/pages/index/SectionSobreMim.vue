@@ -32,8 +32,7 @@
                 <p>
                   Sou Gustavo Bernardi, estudante de Análise e Desenvolvimento de Sistemas (3º semestre).
                   Estou me especializando em Front-End, criando soluções web com foco em interfaces modernas,
-                  responsivas e bem estruturadas. <br /><br />
-                  Estou à procura do meu primeiro emprego na área de desenvolvimento.
+                  responsivas e bem estruturadas.
                 </p>
               </div>
             </div>
