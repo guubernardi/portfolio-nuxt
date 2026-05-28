@@ -255,7 +255,6 @@ onMounted(() => {
     overflow: hidden
     text-overflow: ellipsis
 
-
   &__info
     padding: 44px 48px
     display: flex

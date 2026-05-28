@@ -1,6 +1,8 @@
 <template>
   <nav :class="{ aberto: state.menu }">
-    <img src="/images/logo-linha.svg" class="logo" alt="logo" />
+    <a role="button" tabindex="0" class="logo-link" @click="scrollParaSection('.hero')">
+      <img src="/images/logo-linha.svg" class="logo" alt="logo" />
+    </a>
 
     <div class="opcoes">
       <a role="button" tabindex="0" @click="scrollParaSection('.hero')">Inicio</a>
@@ -83,6 +85,10 @@ nav
   backdrop-filter: blur(15px)
   z-index: 10
 
+  .logo-link
+    cursor: pointer
+    line-height: 0
+
   img.logo
     width: 240px
     height: auto
@@ -125,9 +131,11 @@ nav
     &.aberto
       height: 310px
 
+    .logo-link
+      margin: 5px 0 0 0
+
     img.logo
       width: 160px
-      margin: 5px 0 0 0
 
     .opcoes
       display: flex

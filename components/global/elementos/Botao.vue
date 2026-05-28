@@ -89,19 +89,23 @@ button
   padding: 10px 25px 10px 10px
   border-radius: 50px
   background: linear-gradient(90deg, #3C3A37, #FFB12B)
+  position: relative
 
-  &:hover
-    .icone
-      background-color: #3C3A37
+  &::before
+    content: ''
+    position: absolute
+    inset: 0
+    border-radius: inherit
+    background: linear-gradient(90deg, #4a4845, #ffbe47)
+    opacity: 0
+    transition: opacity 0.3s
 
-    span
-      background-color: var(--cor-dourado-escuro-2)
-      color: var(--cor-dourado)
+  &:hover::before
+    opacity: 1
 
-    :deep(svg)
-      fill: #FFB12B
-      width: 30px
-      height: 30px
+  > *
+    position: relative
+    z-index: 1
 
   .icone
     display: flex
