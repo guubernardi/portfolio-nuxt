@@ -1,48 +1,50 @@
 <template>
   <section class="header">
-    <nav class="nav" :class="{ 'nav--rolado': rolado }">
-      <div class="logo">
-        <Svgs nome="logo" />
-      </div>
-
-      <div class="opcoes">
-        <div class="sociais">
-          <Svgs nome="whatsapp" />
-          <Svgs nome="linkedin-branco" />
-          <Svgs nome="github-branco" />
+    <Teleport to="body">
+      <nav class="nav" :class="{ 'nav--rolado': rolado }">
+        <div class="logo" @click="scrollPara('.header')" role="button" tabindex="0" aria-label="Ir para o início">
+          <Svgs nome="logo" />
         </div>
 
-        <div class="menu">
-          <span class="links">Inicio</span>
-          <span class="links">Projetos</span>
-          <span class="links">Sobre mim</span>
-        </div>
-      </div>
+        <div class="opcoes">
+          <div class="sociais">
+            <a href="https://wa.me/5511977912709" target="_blank" aria-label="WhatsApp"><Svgs nome="whatsapp" /></a>
+            <a href="https://linkedin.com/in/gubernardi" target="_blank" aria-label="LinkedIn"><Svgs nome="linkedin-branco" /></a>
+            <a href="https://github.com/guubernardi" target="_blank" aria-label="GitHub"><Svgs nome="github-branco" /></a>
+          </div>
 
-      <button class="hamburger" :class="{ 'hamburger--aberto': menuAberto }" @click="toggleMenu" aria-label="Abrir menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-    </nav>
-
-    <Transition name="fade-menu">
-      <div v-if="menuAberto" class="menu-mobile" @click.self="fecharMenu">
-        <div class="menu-mobile__conteudo">
-          <nav class="menu-mobile__nav">
-            <span class="menu-mobile__link" @click="fecharMenu">Início</span>
-            <span class="menu-mobile__link" @click="fecharMenu">Projetos</span>
-            <span class="menu-mobile__link" @click="fecharMenu">Sobre mim</span>
-          </nav>
-
-          <div class="menu-mobile__sociais">
-            <Svgs nome="whatsapp" />
-            <Svgs nome="linkedin-branco" />
-            <Svgs nome="github-branco" />
+          <div class="menu">
+            <span class="links" @click="scrollPara('.header')">Inicio</span>
+            <span class="links" @click="scrollPara('.projetos')">Projetos</span>
+            <span class="links" @click="scrollPara('.sobre')">Sobre mim</span>
           </div>
         </div>
-      </div>
-    </Transition>
+
+        <button class="hamburger" :class="{ 'hamburger--aberto': menuAberto }" @click="toggleMenu" aria-label="Abrir menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </nav>
+
+      <Transition name="fade-menu">
+        <div v-if="menuAberto" class="menu-mobile" @click.self="fecharMenu">
+          <div class="menu-mobile__conteudo">
+            <nav class="menu-mobile__nav">
+              <span class="menu-mobile__link" @click="scrollPara('.header')">Início</span>
+              <span class="menu-mobile__link" @click="scrollPara('.projetos')">Projetos</span>
+              <span class="menu-mobile__link" @click="scrollPara('.sobre')">Sobre mim</span>
+            </nav>
+
+            <div class="menu-mobile__sociais">
+              <a href="https://wa.me/5511977912709" target="_blank" aria-label="WhatsApp"><Svgs nome="whatsapp" /></a>
+              <a href="https://linkedin.com/in/gubernardi" target="_blank" aria-label="LinkedIn"><Svgs nome="linkedin-branco" /></a>
+              <a href="https://github.com/guubernardi" target="_blank" aria-label="GitHub"><Svgs nome="github-branco" /></a>
+            </div>
+          </div>
+        </div>
+      </Transition>
+    </Teleport>
 
     <div class="header__transicao"></div>
 
@@ -76,16 +78,18 @@
 
 <script setup>
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Svgs from '../../global/svgs/Svgs.vue'
 import BotaoAzul from '../../global/elementos/BotaoAzul.vue'
+import { useScrollTo } from '~/composables/useScrollTo'
+
+const { scrollTo: gsapScrollTo } = useScrollTo()
 
 const rolado = ref(false)
 const menuAberto = ref(false)
 const typedCount = ref(0)
 
-function aoRolar() {
-  rolado.value = window.scrollY > 80
-}
+let scrollTriggerInstance = null
 
 function toggleMenu() {
   menuAberto.value = !menuAberto.value
@@ -97,12 +101,21 @@ function fecharMenu() {
   document.body.style.overflow = ''
 }
 
+function scrollPara(seletor) {
+  fecharMenu()
+  gsapScrollTo(seletor)
+}
+
 function aoTeclar(e) {
   if (e.key === 'Escape') fecharMenu()
 }
 
 onMounted(() => {
-  window.addEventListener('scroll', aoRolar, { passive: true })
+  scrollTriggerInstance = ScrollTrigger.create({
+    start: 80,
+    onEnter: () => { rolado.value = true },
+    onLeaveBack: () => { rolado.value = false },
+  })
   window.addEventListener('keydown', aoTeclar)
 
   const intervalo = setInterval(() => {
@@ -115,7 +128,7 @@ onMounted(() => {
 })
 
 onBeforeUnmount(() => {
-  window.removeEventListener('scroll', aoRolar)
+  scrollTriggerInstance?.kill()
   window.removeEventListener('keydown', aoTeclar)
   document.body.style.overflow = ''
 })
@@ -196,6 +209,7 @@ $orange: #d19a66
   left: 0
   right: 0
   z-index: 100
+  color: white
   display: flex
   justify-content: space-between
   align-items: center
@@ -247,6 +261,7 @@ $orange: #d19a66
       align-items: center
       gap: 34px
       .links
+        font-family: var(--light)
         font-size: 16px
         font-weight: 300
         cursor: pointer

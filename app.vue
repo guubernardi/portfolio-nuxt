@@ -10,6 +10,7 @@
 <script setup lang="ts">
 import { onMounted, watch } from 'vue'
 import { useHead, useRoute } from '#imports'
+import PreLoader from '~/components/global/PreLoader.vue'
 
 const SITE_URL = 'https://gustavobernardi.com'
 const OG_IMAGE = '/favicons/share.png' 

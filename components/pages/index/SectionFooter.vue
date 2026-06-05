@@ -11,15 +11,15 @@
         </div>
 
         <nav class="footer__nav">
-          <span class="footer__link">Início</span>
-          <span class="footer__link">Projetos</span>
-          <span class="footer__link">Sobre mim</span>
+          <span class="footer__link" @click="scrollPara('.header')">Início</span>
+          <span class="footer__link" @click="scrollPara('.projetos')">Projetos</span>
+          <span class="footer__link" @click="scrollPara('.sobre')">Sobre mim</span>
         </nav>
 
         <div class="footer__sociais">
-          <Svgs nome="whatsapp" />
-          <Svgs nome="linkedin-branco" />
-          <Svgs nome="github-branco" />
+          <a href="https://wa.me/5511977912709" target="_blank" aria-label="WhatsApp"><Svgs nome="whatsapp" /></a>
+          <a href="https://linkedin.com/in/gubernardi" target="_blank" aria-label="LinkedIn"><Svgs nome="linkedin-branco" /></a>
+          <a href="https://github.com/guubernardi" target="_blank" aria-label="GitHub"><Svgs nome="github-branco" /></a>
         </div>
       </div>
 
@@ -35,8 +35,14 @@
 
 <script setup>
 import Svgs from '../../global/svgs/Svgs.vue'
+import { useScrollTo } from '~/composables/useScrollTo'
 
 const ano = new Date().getFullYear()
+const { scrollTo } = useScrollTo()
+
+function scrollPara(seletor) {
+  scrollTo(seletor)
+}
 </script>
 
 <style scoped lang="sass">
@@ -121,15 +127,18 @@ const ano = new Date().getFullYear()
     align-items: center
     gap: 24px
 
-    :deep(svg)
-      width: 20px
-      height: 20px
-      cursor: pointer
+    a
+      display: flex
+      align-items: center
       opacity: 0.55
       transition: opacity 0.2s ease
 
       &:hover
         opacity: 1
+
+    :deep(svg)
+      width: 20px
+      height: 20px
 
   &__divider
     width: 100%

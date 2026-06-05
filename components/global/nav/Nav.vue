@@ -12,6 +12,21 @@
       <a role="button" tabindex="0" @click="scrollParaSection('.sobre')">Sobre mim</a>
     </div>
 
+    <div class="sociais">
+      <a href="https://linkedin.com/in/gubernardi" target="_blank" aria-label="LinkedIn">
+        <img src="/images/linkedin.svg" alt="LinkedIn" />
+      </a>
+      <a href="https://github.com/guubernardi" target="_blank" aria-label="GitHub">
+        <img src="/images/github.svg" alt="GitHub" />
+      </a>
+      <a href="https://wa.me/5511977912709" target="_blank" aria-label="WhatsApp">
+        <img src="/images/whatsapp.svg" alt="WhatsApp" />
+      </a>
+      <a href="mailto:gubernardi@hotmail.com?" target="_blank" aria-label="Email">
+        <img src="/images/email.svg" alt="Email" />
+      </a>
+    </div>
+
     <button class="menu" type="button" @click="state.menu = !state.menu" :class="{ aberto: state.menu }">
       <span class="um"></span>
       <span class="dois"></span>
@@ -22,47 +37,26 @@
 <script setup>
   import { reactive, nextTick } from 'vue'
   import { useRoute, useRouter } from 'vue-router'
-  
+  import { useScrollTo } from '~/composables/useScrollTo'
+
   const router = useRouter()
   const route = useRoute()
-  
+  const { scrollTo } = useScrollTo()
+
   const state = reactive({
     menu: false
   })
-  
-  function acharElemento(seletor, hash) {
-    const porId = hash ? document.querySelector(hash) : null
-    if (porId) return porId
-  
-    const porClasse = seletor ? document.querySelector(seletor) : null
-    if (porClasse) return porClasse
-  
-    if (hash) {
-      const cls = '.' + hash.replace('#', '')
-      return document.querySelector(cls)
-    }
-  
-    return null
-  }
-  
-  function scrollAgora(seletor, hash) {
-    const el = acharElemento(seletor, hash)
-    if (!el) return
-  
-    el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    state.menu = false
-  }
-  
+
   async function scrollParaSection(seletor) {
-    const hash = seletor?.startsWith('.') ? `#${seletor.slice(1)}` : seletor
-  
     if (route.path === '/') {
       await nextTick()
-      scrollAgora(seletor, hash)
+      scrollTo(seletor)
+      state.menu = false
       return
     }
 
     state.menu = false
+    const hash = seletor?.startsWith('.') ? `#${seletor.slice(1)}` : seletor
     await router.push({ path: '/', hash })
   }
 </script>  
@@ -115,6 +109,29 @@ nav
       &:hover
         color: #FFB12B
 
+  .sociais
+    display: flex
+    align-items: center
+    gap: 16px
+    padding: 0 0 0 30px
+    border-left: 1px solid var(--cor-escuro-5)
+
+    a
+      display: flex
+      align-items: center
+      justify-content: center
+      opacity: 0.75
+      transition: opacity 0.3s, transform 0.3s
+
+      &:hover
+        opacity: 1
+        transform: scale(1.15)
+
+    img
+      width: 22px
+      height: 22px
+      object-fit: contain
+
 @media screen and (max-width: 1000px)
   nav
     align-items: flex-start
@@ -129,7 +146,7 @@ nav
     transition: all 0.3s
 
     &.aberto
-      height: 310px
+      height: 380px
 
     .logo-link
       margin: 5px 0 0 0
@@ -153,6 +170,19 @@ nav
       &::last-child
         border-right: none
         padding: 15px 0
+
+    .sociais
+      display: flex
+      position: absolute
+      top: 330px
+      left: 30px
+      padding: 0
+      border-left: none
+      gap: 20px
+
+      img
+        width: 26px
+        height: 26px
 
     button.menu
       display: flex

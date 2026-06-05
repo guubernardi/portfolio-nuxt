@@ -25,7 +25,7 @@
         <div class="item" data-anim>
           <p>WhatsApp</p>
           <div class="icone">
-            <a href="https://w.app/ln2fgx" target="_blank"><img src="/images/whatsapp.svg" alt="Ícone WhatsApp" /></a>
+            <a href="https://wa.me/5511977912709" target="_blank"><img src="/images/whatsapp.svg" alt="Ícone WhatsApp" /></a>
           </div>
         </div>
 
