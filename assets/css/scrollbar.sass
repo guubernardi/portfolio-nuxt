@@ -1,19 +1,20 @@
+// barra no azul do site; o cinza anterior era herança da versão clara
 html,
 body
-  scrollbar-color: var(--cor-escuro-5) var(--cor-preto)
+  scrollbar-color: #3a5ba8 #01060f
   scrollbar-width: thin
 
 ::-webkit-scrollbar
-  width: 4px
-  height: 4px
+  width: 6px
+  height: 6px
 
 ::-webkit-scrollbar-track
-  background: var(--cor-preto)
+  background: #01060f
 
 ::-webkit-scrollbar-thumb
-  background: var(--cor-escuro-5)
+  background: #3a5ba8
   border-radius: 10px
   transition: background 0.3s
 
   &:hover
-    background: var(--cor-cinza)
+    background: #8aa6f0

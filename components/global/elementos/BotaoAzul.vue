@@ -29,12 +29,14 @@ defineEmits<{ (e: 'click', ev: MouseEvent): void }>()
   font-family: var(--light)
   font-size: 16px
   cursor: pointer
-  background: linear-gradient(90deg, var(--cor-azul-medio) 0%, var(--cor-azul-escuro-2) 50%, var(--cor-azul-forte) 100%)
-  background-size: 200% 100%
-  background-position: left center
-  transition: background-position 0.5s ease
+  // degradê suave e uniforme (indigo -> azul), numa direção só; hover só desliza pro azul
+  background: linear-gradient(120deg, var(--cor-azul-forte) 0%, var(--cor-azul-claro) 100%)
+  background-size: 150% 100%
+  background-position: 0% center
+  box-shadow: 0 8px 24px rgba(25, 15, 163, 0.4)
+  transition: background-position 0.5s ease, box-shadow 0.3s ease
   &:hover
-    background-position: right center
+    background-position: 100% center
 
   :deep(svg)
     width: 18px

@@ -1,365 +1,443 @@
 <template>
-  <section class="projetos" ref="secaoRef" aria-label="Seção de projetos">
-    <div class="wrap">
-      <h2 class="projetos__titulo" ref="tituloRef">Projetos</h2>
-
-      <ul class="projetos__lista" ref="listaRef">
-        <li
-          v-for="projeto in projetos"
-          :key="projeto.id"
-          class="card"
-        >
-          <div
-            class="card__imagem"
-            :style="projeto.imagem ? { backgroundImage: `url(${projeto.imagem})`, backgroundSize: 'cover', backgroundPosition: 'top center' } : {}"
-          >
-            <div class="card__mockup">
-              <div class="card__mockup-barra">
-                <span class="card__mockup-ponto card__mockup-ponto--vermelho"></span>
-                <span class="card__mockup-ponto card__mockup-ponto--amarelo"></span>
-                <span class="card__mockup-ponto card__mockup-ponto--verde"></span>
-                <span class="card__mockup-url">{{ projeto.link }}</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="card__info">
-            <div class="card__cabecalho">
-              <h3 class="card__nome">{{ projeto.nome }}</h3>
-              <span class="card__categoria">| {{ projeto.categoria }}</span>
-            </div>
-
-            <p class="card__descricao">{{ projeto.descricao }}</p>
-
-            <div class="card__tecnologias">
-              <div class="card__tech" v-for="tech in projeto.tecnologias" :key="tech.nome">
-                <Svgs v-if="tech.svgNome" :nome="tech.svgNome" />
-                <img v-else :src="tech.icone" :alt="tech.nome" loading="lazy" :style="tech.estilo || {}" />
-                <span class="card__tech-label">{{ tech.nome }}</span>
-              </div>
-            </div>
-
-            <a :href="projeto.link" target="_blank" rel="noopener noreferrer" class="card__link-botao">
-              <BotaoAzul icone="codigo" texto="Ver projeto" />
-            </a>
-          </div>
-        </li>
-      </ul>
+  <section ref="secaoRef" class="projetos" aria-label="Cases">
+    <div class="projetos__cabecalho">
+      <span ref="rotuloRef" class="projetos__rotulo">
+        <b>03</b>
+        Projetos
+      </span>
+      <h2 ref="tituloRef" class="projetos__titulo">
+        Projetos que já estão<br />
+        <span class="projetos__titulo--leve">no ar.</span>
+      </h2>
     </div>
+
+    <ul ref="listaRef" class="projetos__grade">
+      <li
+        v-for="(projeto, i) in projetos"
+        :key="projeto.id"
+        class="case"
+        :class="{ 'case--destaque': i === 0 }"
+      >
+        <a class="case__area" :href="projeto.link" target="_blank" rel="noopener">
+          <span class="case__indice">{{ String(i + 1).padStart(2, '0') }}</span>
+
+          <div class="case__midia">
+            <img
+              :src="projeto.imagem"
+              :alt="`Projeto ${projeto.nome}`"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+
+          <div class="case__base">
+            <span v-if="i === 0" class="case__selo">Projeto em destaque</span>
+
+            <div class="case__topo">
+              <h3 class="case__nome">{{ projeto.nome }}</h3>
+              <span class="case__tag">{{ projeto.categoria }}</span>
+            </div>
+
+            <div class="case__rodape">
+              <p class="case__setor">{{ projeto.setor }}</p>
+              <span v-if="i !== 0" class="case__seta" aria-hidden="true">
+                <SvgIcone nome="seta-direita" />
+              </span>
+            </div>
+
+            <span v-if="i === 0" class="case__cta">
+              Ver projeto
+              <SvgIcone nome="seta-direita" />
+            </span>
+          </div>
+        </a>
+      </li>
+    </ul>
   </section>
 </template>
 
 <script setup>
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { gsap } from 'gsap'
-import BotaoAzul from '../../global/elementos/BotaoAzul.vue'
-import Svgs from '../../global/svgs/Svgs.vue'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 const secaoRef = ref(null)
+const rotuloRef = ref(null)
 const tituloRef = ref(null)
 const listaRef = ref(null)
 
-const projetos = ref([
+let contexto = null
+
+const projetos = [
   {
-    id: 1,
-    nome: 'RIFA TIRO DE GUERRA',
-    categoria: 'SISTEMA',
-    descricao: 'Sistema de rifas online que fiz no meu ano de alistamento militar obrigatório com pagamento via PIX pelo Asaas e sorteio integrado à Loteria Federal.',
+    id: 'jamilly',
+    nome: 'Jamilly Ferreira',
+    categoria: 'Landing page',
+    setor: 'Psicologia clínica',
+    imagem: '/images/projetos/site-jamilly.png',
+    link: 'https://jamilly-ferreira.vercel.app/',
+  },
+  {
+    id: 'conectados',
+    nome: 'Conectados',
+    categoria: 'Landing page',
+    setor: 'Conferência de jovens',
+    imagem: '/images/projetos/conectados.png',
+    link: 'https://conectados-sigma.vercel.app/',
+  },
+  {
+    id: 'tiro-de-guerra',
+    nome: 'Rifa Tiro de Guerra',
+    categoria: 'Sistema',
+    setor: 'Rifas online com PIX',
     imagem: '/images/projetos/tiro-de-guerra.png',
-    tecnologias: [
-      { nome: 'NuxtJS',   svgNome: 'nuxtjs' },
-      { nome: 'NodeJS',   icone: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
-      { nome: 'Figma',    icone: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg' },
-      { nome: 'Supabase', icone: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg' },
-    ],
     link: 'https://tg-azure.vercel.app',
   },
+
   {
-    id: 2,
-    nome: 'CITY TOYS',
-    categoria: 'LANDING PAGE',
-    descricao: 'Landing page desenvolvida para cliente real. Projeto focado em UI/UX com animações fluidas usando GSAP e design responsivo.',
+    id: 'citytoys',
+    nome: 'City Toys',
+    categoria: 'Site institucional',
+    setor: 'Brinquedos infláveis',
     imagem: '/images/projetos/citytoys.png',
-    tecnologias: [
-      { nome: 'Vue.js', icone: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg' },
-      { nome: 'SASS',   icone: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg' },
-      { nome: 'GSAP',   icone: 'https://cdn.simpleicons.org/greensock/88CE02' },
-    ],
     link: 'https://www.citytoysbrinquedos.com/',
   },
+
   {
-    id: 6,
-    nome: 'TOYZ',
-    categoria: 'SISTEMA',
-    descricao: 'Plataforma completa de gerenciamento para locadoras de brinquedos, desenvolvida em parceria com um amigo via GitHub. Conta com controle de reservas, módulo financeiro, contratos digitais e sistema de assinatura recorrente.',
+    id: 'toyz',
+    nome: 'Toyz',
+    categoria: 'Sistema',
+    setor: 'Locação de brinquedos',
     imagem: '/images/projetos/toyz.png',
-    tecnologias: [
-      { nome: 'NuxtJS',     svgNome: 'nuxtjs' },
-      { nome: 'NodeJS',     icone: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
-      { nome: 'TypeScript', icone: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg' },
-      { nome: 'Supabase',   icone: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg' },
-      { nome: 'GitHub',     icone: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg', estilo: { filter: 'invert(1)' } },
-    ],
-    link: 'https://www.apptoyz.com.br/',
+    link: 'https://apptoyz.com.br/',
   },
-])
+]
 
 onMounted(() => {
-  const titulo = tituloRef.value
-  const cards = listaRef.value?.querySelectorAll('.card') || []
+  contexto = gsap.context(() => {
+    const mm = gsap.matchMedia()
 
-  gsap.set(titulo, { opacity: 0, y: 40 })
-  gsap.set(cards, { opacity: 0, y: 60 })
+    mm.add('(prefers-reduced-motion: no-preference)', () => {
+      const cards = listaRef.value?.querySelectorAll('.case') ?? []
 
-  const observer = new IntersectionObserver(
-    ([entry]) => {
-      if (!entry.isIntersecting) return
-      observer.disconnect()
-
-      gsap.to(titulo, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' })
-      gsap.to(cards, {
-        opacity: 1,
-        y: 0,
-        duration: 0.7,
-        ease: 'power2.out',
-        stagger: 0.18,
-        delay: 0.2,
+      gsap.from([rotuloRef.value, tituloRef.value], {
+        autoAlpha: 0,
+        y: 28,
+        duration: 0.8,
+        stagger: 0.12,
+        ease: 'power3.out',
+        scrollTrigger: { trigger: secaoRef.value, start: 'top 78%' },
       })
-    },
-    { threshold: 0.08 }
-  )
 
-  if (secaoRef.value) observer.observe(secaoRef.value)
+      gsap.from(cards, {
+        autoAlpha: 0,
+        y: 46,
+        duration: 0.85,
+        stagger: 0.14,
+        ease: 'power3.out',
+        scrollTrigger: { trigger: listaRef.value, start: 'top 82%' },
+      })
+    })
+  }, secaoRef.value)
+})
+
+onBeforeUnmount(() => {
+  contexto?.revert()
+  ScrollTrigger.getAll().forEach((t) => {
+    if (secaoRef.value?.contains(t.trigger)) t.kill()
+  })
 })
 </script>
 
 <style scoped lang="sass">
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@800&display=swap')
-
 .projetos
-  width: 100%
-  background: var(--cor-escuro-1)
-  padding: 100px 0
   position: relative
-  margin-top: -2px
+  width: 100%
+  // 1px de sobreposição na seção anterior: as cores batem na emenda, então some
+  margin-top: -1px
+  padding: 130px 60px 140px
+  // nasce na cor em que o .hero__transicao termina e desce pro mesmo azul-profundo
+  // do hero, fechando em preto na emenda com o footer
+  // preto logo abaixo da curva do divisor, abrindo pro azul do hero conforme desce
+  background: linear-gradient(to bottom, #010912 0%, #020a18 18%, #020d20 38%, #04122c 62%, #061c3e 100%)
 
+  // brilho azul concentrado embaixo, reforçando o lado que abre
   &::before
     content: ''
     position: absolute
-    top: 0
-    left: 0
-    width: 100%
-    height: 160px
-    background: linear-gradient(to bottom, #000000 0%, #060a10 50%, transparent 100%)
+    inset: 0
+    z-index: 0
     pointer-events: none
-    z-index: 1
-
-  &__titulo
-    font-family: var(--semibold)
-    font-weight: 800
-    font-size: clamp(42px, 5vw, 72px)
-    color: var(--cor-branco)
-    text-align: center
-    margin: 0 0 64px
-    letter-spacing: -1px
-
-  &__lista
-    display: flex
-    flex-direction: column
-    gap: 48px
-    list-style: none
-    margin: 0
-    padding: 0
-
-.wrap
-  width: 100%
-  padding: 0 148px
-
-  @media (max-width: 1200px)
-    padding: 0 60px
-
-  @media (max-width: 900px)
-    padding: 0 30px
-
-  @media (max-width: 600px)
-    padding: 0 20px
-
-.card
-  display: grid
-  grid-template-columns: 1fr 1fr
-  border-radius: 44px
-  overflow: hidden
-  background: #0D0D1A
-  transition: box-shadow 0.3s ease
-
-  &:hover
-    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5)
-
-  &__imagem
-    position: relative
-    min-height: 430px
-    overflow: hidden
-    background-color: #0d1117
-
-    &::after
-      content: ''
-      position: absolute
-      inset: 0
-      background: rgba(0, 0, 0, 0.45)
-      z-index: 1
-
-  &__mockup
-    position: absolute
-    top: -1px
-    left: 0
-    width: 101%
-    z-index: 2
-    border-radius: 0 0 0px 10px
-    overflow: hidden
-    border: 1px solid rgba(255, 255, 255, 0.12)
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5)
-    background: transparent
-
-  &__mockup-barra
-    display: flex
-    align-items: center
-    gap: 6px
-    padding: 10px 14px
-    background: #1e1e2e
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08)
-
-  &__mockup-ponto
-    width: 10px
-    height: 10px
-    border-radius: 50%
-    flex-shrink: 0
-
-    &--vermelho
-      background: #ff5f57
-
-    &--amarelo
-      background: #febc2e
-
-    &--verde
-      background: #28c840
-
-  &__mockup-url
-    flex: 1
-    margin-left: 10px
-    background: rgba(255, 255, 255, 0.07)
-    border-radius: 4px
-    padding: 4px 10px
-    font-family: 'Fira Code', monospace
-    font-size: 11px
-    color: rgba(255, 255, 255, 0.35)
-    white-space: nowrap
-    overflow: hidden
-    text-overflow: ellipsis
-
-  &__info
-    padding: 44px 48px
-    display: flex
-    flex-direction: column
-    justify-content: center
-    gap: 20px
+    // o brilho morre antes da borda: em 105% ele clareava a última linha da seção
+    // e criava degrau contra a seção seguinte, que começa na cor declarada
+    background: radial-gradient(ellipse 90% 38% at 50% 88%, rgba(30, 70, 160, 0.28) 0%, rgba(20, 45, 110, 0.09) 42%, transparent 68%)
 
   &__cabecalho
-    display: flex
-    align-items: baseline
-    gap: 10px
-    flex-wrap: wrap
+    position: relative
+    z-index: 1
+    max-width: 720px
+    margin: 0 auto 64px
+    // centralizado como as outras seções: era a única alinhada à esquerda
+    text-align: center
 
-  &__nome
-    font-family: 'Syne', sans-serif
-    font-weight: 800
-    font-size: var(--f3)
-    color: var(--cor-branco)
-    margin: 0
-    letter-spacing: 1px
-    text-transform: uppercase
-
-  &__categoria
-    font-family: 'Syne', sans-serif
-    font-weight: 800
-    font-size: var(--f1)
-    letter-spacing: 2px
-    background: linear-gradient(90deg, #60a5fa, #a78bfa)
-    -webkit-background-clip: text
-    -webkit-text-fill-color: transparent
-    background-clip: text
-
-  &__descricao
-    font-family: var(--light)
-    font-size: var(--f1)
-    color: var(--cor-branco)
-    line-height: 1.65
-    margin: 0
-    margin-top: 16px
-
-  &__tecnologias
-    display: flex
-    gap: 22px
-    flex-wrap: wrap
-    margin-top: 16px
-
-  &__tech
-    display: flex
-    flex-direction: row
+  // mesmo rótulo numerado de Serviços e Contato: com um em pílula e dois em texto,
+  // a numeração da página ficava quebrada
+  &__rotulo
+    display: inline-flex
     align-items: center
-    gap: 8px
+    gap: 10px
+    margin-bottom: 18px
+    font-family: var(--light)
+    font-size: 12px
+    letter-spacing: 2.4px
+    text-transform: uppercase
+    color: rgba(255, 255, 255, 0.45)
 
-    img
-      width: 21px
-      height: 21px
-      object-fit: contain
-      display: block
-      flex-shrink: 0
+    b
+      font-family: var(--semibold)
+      font-style: italic
+      color: rgba(255, 255, 255, 0.75)
+
+  &__titulo
+    margin: 0
+    font-family: var(--semibold)
+    font-size: clamp(32px, 4.2vw, 58px)
+    line-height: 1.1
+    letter-spacing: -0.02em
+    color: var(--cor-branco)
+
+    &--leve
+      font-family: var(--light)
+      color: #8aa6f0
+
+  &__grade
+    position: relative
+    z-index: 1
+    display: grid
+    // 2 colunas com o primeiro ocupando a linha inteira: 1 + 2 + 2 fecha os 5
+    // projetos sem sobrar célula vazia
+    grid-template-columns: repeat(2, 1fr)
+    gap: 28px
+    max-width: 1600px
+    margin: 0 auto
+    padding: 0
+    list-style: none
+
+.case
+  // o destaque ocupa a linha toda e vira horizontal: imagem grande de um lado,
+  // informação do outro, em vez de simplesmente esticar o card padrão
+  &--destaque
+    grid-column: 1 / -1
+
+    .case__area
+      display: grid
+      // imagem dominante e coluna de texto estreita: com ela larga demais o
+      // conteúdo fica solto e sobra vazio, que era o problema
+      grid-template-columns: minmax(0, 1.75fr) minmax(0, 1fr)
+      align-items: center
+      gap: 40px
+      padding: 14px
+
+    // conteúdo ancorado no topo do próprio bloco, não espalhado na altura toda
+    .case__base
+      display: flex
+      flex-direction: column
+      align-items: flex-start
+      padding: 0 40px 0 8px
+      gap: 0
+
+    .case__topo
+      margin-bottom: 14px
+
+    .case__nome
+      font-size: clamp(26px, 2.3vw, 34px)
+
+    // sem space-between: o setor gruda no nome em vez de ir pra outra ponta
+    .case__rodape
+      justify-content: flex-start
+
+    .case__setor
+      font-size: 16px
+
+  &__selo
+    display: inline-block
+    margin-bottom: 18px
+    padding: 6px 13px
+    border: 1px solid rgba(125, 155, 255, 0.28)
+    border-radius: 100px
+    background: rgba(30, 46, 115, 0.4)
+    font-family: var(--semibold)
+    font-size: 10.5px
+    letter-spacing: 1.4px
+    text-transform: uppercase
+    color: #8aa6f0
+
+  // no card grande a seta solta num círculo fica perdida; um botão com rótulo
+  // ocupa o espaço e diz o que acontece no clique
+  &__cta
+    display: inline-flex
+    align-items: center
+    gap: 11px
+    margin-top: 30px
+    padding: 14px 26px
+    border: 1px solid rgba(255, 255, 255, 0.16)
+    border-radius: 12px
+    background: rgba(255, 255, 255, 0.04)
+    font-family: var(--semibold)
+    font-size: 14px
+    line-height: 1
+    color: var(--cor-branco)
+    transition: background 0.4s ease, border-color 0.4s ease
 
     :deep(svg)
-      width: 21px
-      height: 21px
       display: block
-      flex-shrink: 0
+      width: 14px
+      height: 14px
+      transition: transform 0.4s ease
 
-  &__tech-label
-    font-family: var(--semibold)
-    font-size: var(--f1)
-    color: #fff
-
-  &__link-botao
-    align-self: center
+  &__area
+    display: flex
+    flex-direction: column
+    height: 100%
+    padding: 14px 14px 26px
+    border: 1px solid rgba(255, 255, 255, 0.07)
+    border-radius: 18px
+    background: rgba(255, 255, 255, 0.022)
     text-decoration: none
-    margin-top: 16px
+    position: relative
+    transition: background 0.4s ease, border-color 0.4s ease
 
-@media (max-width: 900px)
-  .card
-    grid-template-columns: 1fr
+    &:hover
+      background: rgba(125, 155, 255, 0.05)
+      border-color: rgba(125, 155, 255, 0.2)
 
-    &__imagem
-      min-height: 260px
+      .case__midia img
+        transform: scale(1.03)
 
-    &__info
-      padding: 32px 28px
-      gap: 16px
+      .case__seta
+        background: var(--cor-azul-forte)
+        border-color: var(--cor-azul-forte)
 
-@media (max-width: 600px)
-  .projetos
-    padding: 70px 0
+      .case__cta
+        background: rgba(125, 155, 255, 0.12)
+        border-color: rgba(125, 155, 255, 0.3)
 
-  .projetos__titulo
-    margin-bottom: 40px
-    font-size: 40px
+        :deep(svg)
+          transform: translateX(4px)
 
-  .wrap
-    padding: 0 20px
+  &__indice
+    position: absolute
+    top: 30px
+    left: 30px
+    z-index: 2
+    font-family: var(--light)
+    font-size: 13px
+    color: rgba(255, 255, 255, 0.4)
 
-  .card
-    &__info
-      padding: 24px 20px
-      gap: 14px
+  &__midia
+    overflow: hidden
+    border-radius: 12px
+    background: #08090c
+    aspect-ratio: 16 / 10
 
-    &__nome
-      font-size: var(--f3)
-
-    &__link-botao
+    img
+      display: block
       width: 100%
+      height: 100%
+      object-fit: cover
+      transition: transform 0.6s ease
+
+  &__base
+    display: flex
+    flex-direction: column
+    gap: 18px
+    padding: 26px 16px 0
+
+  &__topo
+    display: flex
+    align-items: center
+    flex-wrap: wrap
+    gap: 14px
+
+  &__nome
+    margin: 0
+    font-family: var(--light)
+    font-size: clamp(21px, 1.9vw, 27px)
+    letter-spacing: -0.01em
+    color: var(--cor-branco)
+
+  &__tag
+    padding: 6px 14px
+    border: 1px solid rgba(255, 255, 255, 0.16)
+    border-radius: 100px
+    font-family: var(--semibold)
+    font-size: 11px
+    letter-spacing: 1.2px
+    text-transform: uppercase
+    color: rgba(255, 255, 255, 0.7)
+
+  &__rodape
+    display: flex
+    align-items: center
+    justify-content: space-between
+    gap: 20px
+
+  &__setor
+    margin: 0
+    font-family: var(--light)
+    font-size: 15px
+    color: rgba(255, 255, 255, 0.5)
+
+  &__seta
+    display: flex
+    align-items: center
+    justify-content: center
+    flex-shrink: 0
+    width: 42px
+    height: 42px
+    border: 1px solid rgba(255, 255, 255, 0.16)
+    border-radius: 50%
+    color: var(--cor-branco)
+    transition: background 0.4s ease, border-color 0.4s ease
+
+    :deep(svg)
+      width: 16px
+      height: 16px
+
+@media (max-width: 1250px)
+  .projetos
+    padding: 100px 32px 110px
+
+    &__grade
+      grid-template-columns: repeat(2, 1fr)
+      gap: 20px
+
+@media (max-width: 820px)
+  .projetos
+    padding: 80px 20px 90px
+
+    &__cabecalho
+      margin-bottom: 44px
+
+    &__grade
+      grid-template-columns: 1fr
+
+  // sem largura pra duas colunas, o destaque volta a ser um card comum empilhado
+  .case--destaque .case__area
+    display: flex
+    flex-direction: column
+    gap: 0
+    padding: 14px 14px 26px
+
+  .case--destaque .case__base
+    padding: 22px 10px 0
+    gap: 18px
+
+  .case
+    &__indice
+      top: 26px
+      left: 26px
+
+    &__base
+      padding: 22px 10px 0
 </style>

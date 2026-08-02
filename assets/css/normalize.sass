@@ -13,13 +13,15 @@ html
   line-height: 1.15
   -webkit-text-size-adjust: 100%
   -webkit-tap-highlight-color: transparent
-  background-color: var(--cor-branco)
+  // preto: com fundo branco, qualquer fresta de sub-pixel entre seções escuras
+  // vira uma linha clara piscando durante o scroll
+  background-color: var(--cor-preto)
   scroll-behavior: smooth
 
 body
   margin: 0
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
-  background-color: var(--cor-branco)
+  background-color: var(--cor-preto)
   scroll-behavior: smooth
 
 #tela
@@ -38,9 +40,14 @@ body.bloquear,
 body.bloqueado
   overflow: hidden !important
 
+// seleção no azul do site: com fundo preto (o antigo) ela sumia contra as seções escuras
 ::selection
-  color: var(--cor-branco)
-  background-color: var(--cor-preto)
+  color: #01060f
+  background-color: #8aa6f0
+
+::-moz-selection
+  color: #01060f
+  background-color: #8aa6f0
 
 a,
 img,

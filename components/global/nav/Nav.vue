@@ -66,8 +66,8 @@ nav
   display: flex
   align-items: center
   justify-content: space-between
-  width: calc(100% - 60px)
-  max-width: 1520px
+  width: calc(100% - 120px)
+  max-width: 1720px
   position: fixed
   top: 20px
   left: 50%

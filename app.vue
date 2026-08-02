@@ -1,6 +1,7 @@
 <template>
-  <!-- Preloader aparece só no primeiro load (fica montado no app todo) -->
-  <PreLoader nome="GUSTAVO BERNARDI" cargo="DESENVOLVEDOR WEB" />
+  <!-- Preloader desativado: custava ~2,6s antes da entrada do hero começar, e o
+       próprio hero já é a revelação da página. O componente segue em
+       components/global/PreLoader.vue caso queira voltar. -->
 
   <NuxtLayout>
     <NuxtPage />
@@ -10,7 +11,6 @@
 <script setup lang="ts">
 import { onMounted, watch } from 'vue'
 import { useHead, useRoute } from '#imports'
-import PreLoader from '~/components/global/PreLoader.vue'
 
 const SITE_URL = 'https://gustavobernardi.com'
 const OG_IMAGE = '/favicons/share.png' 
@@ -54,9 +54,11 @@ useHead({
   ],
 
   link: [
-    { rel: 'icon', type: 'image/jpeg', href: '/images/logo.png' },
-
-    { rel: 'apple-touch-icon', href: '/favicons/apple-touch-icon.png' }
+    { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+    { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicons/favicon-32x32.png' },
+    { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicons/favicon-16x16.png' },
+    { rel: 'apple-touch-icon', sizes: '180x180', href: '/favicons/apple-touch-icon.png' },
+    { rel: 'manifest', href: '/site.webmanifest' }
   ]
 })
 

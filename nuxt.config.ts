@@ -10,8 +10,10 @@ export default defineNuxtConfig({
   },
   experimental: {
     payloadExtraction: false,
-    inlineSSRStyles: false,
     viewTransition: true
+  },
+  features: {
+    inlineStyles: true
   },
   modules: ['@pinia/nuxt', '@nuxt/image'],
   image: {

@@ -30,6 +30,8 @@ defineProps({
   cargo: String,
 })
 
+const { $emitter } = useNuxtApp()
+
 const el = ref(null)
 const conteudo = ref(null)
 const svgRef = ref(null)
@@ -61,6 +63,9 @@ onMounted(() => {
         onComplete() {
           el.value.style.display = 'none'
           document.body.style.overflow = ''
+          // libera as animações de entrada das seções (ex.: hero)
+          window.__preloaderFinalizado = true
+          $emitter.emit('preloader:fim')
         },
       })
     },
