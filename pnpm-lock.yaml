@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@edusites/icons':
+        specifier: ^1.5.2
+        version: 1.5.2(vue@3.5.13(typescript@5.8.3))
       '@nuxt/image':
         specifier: ^1.11.0
         version: 1.11.0(db0@0.3.2)(ioredis@5.6.1)(magicast@0.3.5)
@@ -271,6 +274,15 @@ packages:
   '@dependents/detective-less@5.0.1':
     resolution: {integrity: sha512-Y6+WUMsTFWE5jb20IFP4YGa5IrGY/+a/FbOSjDF/wz9gepU2hwCYSXRHP/vPwBvwcY3SVMASt4yXxbXNXigmZQ==}
     engines: {node: '>=18'}
+
+  '@edusites/icons@1.5.2':
+    resolution: {integrity: sha512-9lDRjyrNziCBvyrA32fp7s8fUAcpdXA29vCPlVc0lu2GFbIdYfPtJZoyaYfLQv5ZwblYQLGyxWnNGrSLuuO56A==}
+    engines: {node: '>=16.0.0'}
+    peerDependencies:
+      vue: '>=3.0.0'
+    peerDependenciesMeta:
+      vue:
+        optional: true
 
   '@emnapi/core@1.4.3':
     resolution: {integrity: sha512-4m62DuCE07lw01soJwPiBGC0nAww0Q+RY70VZ+n49yDIO13yyinhbWCeNnaob0lakDtWQzSdtNWzJeOJt2ma+g==}
@@ -4744,6 +4756,10 @@ snapshots:
     dependencies:
       gonzales-pe: 4.3.0
       node-source-walk: 7.0.1
+
+  '@edusites/icons@1.5.2(vue@3.5.13(typescript@5.8.3))':
+    optionalDependencies:
+      vue: 3.5.13(typescript@5.8.3)
 
   '@emnapi/core@1.4.3':
     dependencies:
