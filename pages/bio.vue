@@ -70,21 +70,13 @@ const links = [
     externo: true,
     primario: true,
   },
-  // planeta vem da lib (svgs: false): o do Svgs.vue tem cor fixa no path e
-  // destoava dos outros três, que são versões brancas
-  { rotulo: 'Conhecer o site', url: '/', icone: 'planeta', svgs: false, externo: false },
+  // 'mundo' e não 'planeta': planeta não existe na lib, existe só no Svgs.vue,
+  // e ele tem cor fixa no path. 'mundo' é preenchido, igual ao do WhatsApp
   {
-    rotulo: 'LinkedIn',
-    url: 'https://linkedin.com/in/gubernardi',
-    icone: 'linkedin-branco',
-    svgs: true,
-    externo: true,
-  },
-  {
-    rotulo: 'GitHub',
-    url: 'https://github.com/guubernardi',
-    icone: 'github-branco',
-    svgs: true,
+    rotulo: 'Conhecer o site',
+    url: 'https://gustavobernardi.com',
+    icone: 'mundo',
+    svgs: false,
     externo: true,
   },
 ]
