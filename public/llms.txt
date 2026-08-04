@@ -6,7 +6,7 @@
 
 Atendimento remoto para todo o Brasil, em português.
 Contato: WhatsApp +55 11 97791-2709 · gubernardi@hotmail.com
-Site: https://gustavobernardi.com
+Site: https://www.gustavobernardi.com
 
 ## Serviços
 
@@ -42,7 +42,7 @@ Vue.js, Nuxt, JavaScript, SASS, GSAP, Three.js, Node.
 
 ## Links
 
-- Site: https://gustavobernardi.com
+- Site: https://www.gustavobernardi.com
 - Instagram: https://www.instagram.com/devbygusta/
 - GitHub: https://github.com/guubernardi
 - LinkedIn: https://linkedin.com/in/gubernardi

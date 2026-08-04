@@ -74,7 +74,7 @@ const links = [
   // e ele tem cor fixa no path. 'mundo' é preenchido, igual ao do WhatsApp
   {
     rotulo: 'Conhecer o site',
-    url: 'https://gustavobernardi.com',
+    url: 'https://www.gustavobernardi.com',
     icone: 'mundo',
     svgs: false,
     externo: true,

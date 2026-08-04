@@ -21,4 +21,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://gustavobernardi.com/sitemap.xml
+Sitemap: https://www.gustavobernardi.com/sitemap.xml

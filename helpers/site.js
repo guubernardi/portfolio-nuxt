@@ -1,7 +1,10 @@
 // Fonte única dos dados que o SEO usa. Antes o domínio estava escrito na mão em
 // app.vue, no sitemap e no robots — e dois deles ainda apontavam pra dominio.com.
 
-export const SITE_URL = 'https://gustavobernardi.com'
+// com www: é o domínio que a Vercel serve de fato. O apex redireciona para cá,
+// então apontar a canônica para gustavobernardi.com faria toda página apontar
+// para uma URL que só redireciona.
+export const SITE_URL = 'https://www.gustavobernardi.com'
 
 export const SITE_NOME = 'Gustavo Bernardi'
 export const SITE_CARGO = 'Estúdio de desenvolvimento web'
