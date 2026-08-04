@@ -1,4 +1,24 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://dominio.com/sitemap.xml
+# páginas fora da busca de propósito (também marcadas com noindex no HTML)
+Disallow: /bio
+Disallow: /curriculo
+
+# rastreadores de IA liberados: hoje é assim que o site vira resposta citada
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://gustavobernardi.com/sitemap.xml

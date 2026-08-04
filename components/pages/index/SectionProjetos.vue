@@ -22,10 +22,15 @@
           <span class="case__indice">{{ String(i + 1).padStart(2, '0') }}</span>
 
           <div class="case__midia">
+            <!-- width/height reais reservam a caixa antes do download e evitam o
+                 pulo de layout que o Google mede como CLS -->
             <img
               :src="projeto.imagem"
-              :alt="`Projeto ${projeto.nome}`"
-              loading="lazy"
+              :alt="`${projeto.nome} — ${projeto.categoria} para ${projeto.setor}`"
+              :width="projeto.largura"
+              :height="projeto.altura"
+              :loading="i === 0 ? 'eager' : 'lazy'"
+              :fetchpriority="i === 0 ? 'high' : 'auto'"
               decoding="async"
             />
           </div>
@@ -60,6 +65,7 @@
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { SITE_URL, ID_ORGANIZACAO } from '~/helpers/site'
 
 const secaoRef = ref(null)
 const rotuloRef = ref(null)
@@ -68,13 +74,17 @@ const listaRef = ref(null)
 
 let contexto = null
 
+// .webp e não .png: os cinco prints somavam 8 MB, o que sozinho derrubava o LCP
+// da página. Em webp a 1200px de largura o conjunto caiu para 300 KB.
 const projetos = [
   {
     id: 'jamilly',
     nome: 'Jamilly Ferreira',
     categoria: 'Landing page',
     setor: 'Psicologia clínica',
-    imagem: '/images/projetos/site-jamilly.png',
+    imagem: '/images/projetos/site-jamilly.webp',
+    largura: 1200,
+    altura: 675,
     link: 'https://jamilly-ferreira.vercel.app/',
   },
   {
@@ -82,7 +92,9 @@ const projetos = [
     nome: 'Conectados',
     categoria: 'Landing page',
     setor: 'Conferência de jovens',
-    imagem: '/images/projetos/conectados.png',
+    imagem: '/images/projetos/conectados.webp',
+    largura: 1200,
+    altura: 675,
     link: 'https://conectados-sigma.vercel.app/',
   },
   {
@@ -90,7 +102,9 @@ const projetos = [
     nome: 'Rifa Tiro de Guerra',
     categoria: 'Sistema',
     setor: 'Rifas online com PIX',
-    imagem: '/images/projetos/tiro-de-guerra.png',
+    imagem: '/images/projetos/tiro-de-guerra.webp',
+    largura: 1200,
+    altura: 675,
     link: 'https://tg-azure.vercel.app',
   },
 
@@ -99,7 +113,9 @@ const projetos = [
     nome: 'City Toys',
     categoria: 'Site institucional',
     setor: 'Brinquedos infláveis',
-    imagem: '/images/projetos/citytoys.png',
+    imagem: '/images/projetos/citytoys.webp',
+    largura: 1200,
+    altura: 800,
     link: 'https://www.citytoysbrinquedos.com/',
   },
 
@@ -108,10 +124,41 @@ const projetos = [
     nome: 'Toyz',
     categoria: 'Sistema',
     setor: 'Locação de brinquedos',
-    imagem: '/images/projetos/toyz.png',
+    imagem: '/images/projetos/toyz.webp',
+    largura: 1200,
+    altura: 675,
     link: 'https://apptoyz.com.br/',
   },
 ]
+
+// Prova de trabalho em formato legível por máquina: é o que o Google e as IAs
+// usam para responder "ele já entregou o quê?" sem depender de ler o print.
+useHead({
+  script: [
+    {
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'ItemList',
+        '@id': `${SITE_URL}/#projetos`,
+        name: 'Projetos publicados',
+        numberOfItems: projetos.length,
+        itemListElement: projetos.map((projeto, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          item: {
+            '@type': 'WebSite',
+            name: projeto.nome,
+            url: projeto.link,
+            description: `${projeto.categoria} — ${projeto.setor}`,
+            image: SITE_URL + projeto.imagem,
+            creator: { '@id': ID_ORGANIZACAO },
+          },
+        })),
+      }),
+    },
+  ],
+})
 
 onMounted(() => {
   contexto = gsap.context(() => {

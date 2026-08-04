@@ -1,0 +1,48 @@
+# Gustavo Bernardi — Estúdio de desenvolvimento web
+
+> Desenvolvimento web sob medida para empresas e profissionais no Brasil: sites
+> institucionais, landing pages, e-commerces e sistemas. Todo projeto é escrito
+> do zero, sem template pronto, do protótipo ao deploy.
+
+Atendimento remoto para todo o Brasil, em português.
+Contato: WhatsApp +55 11 97791-2709 · gubernardi@hotmail.com
+Site: https://gustavobernardi.com
+
+## Serviços
+
+- **Landing pages** — uma página, um objetivo: converter visitante em cliente.
+- **Sites institucionais** — a identidade da empresa, sem cara de modelo pronto.
+- **Sistemas sob medida** — feitos para o processo do cliente, incluindo painéis e áreas administrativas.
+- **E-commerce** — loja que carrega rápido e fecha venda.
+- **Integrações e pagamentos** — PIX, assinaturas, gateways e APIs de terceiros.
+- **UI/UX e interface** — protótipo aprovado antes de virar código.
+
+## Como o trabalho funciona
+
+1. Conversa inicial para entender o objetivo do site e o que o visitante deve fazer nele.
+2. Protótipo do layout, aprovado antes de qualquer linha de código — ajustes nessa fase são rápidos e fazem parte do processo.
+3. Desenvolvimento com código próprio, com foco em performance real.
+4. Publicação e acompanhamento no período seguinte ao lançamento.
+
+Hospedagem e domínio são configurados pelo estúdio, mas as contas ficam no nome
+do cliente, que é o dono dos acessos. Sites existentes podem ser refeitos
+mantendo o mesmo endereço e o histórico de busca já conquistado.
+
+## Projetos publicados
+
+- City Toys — https://www.citytoysbrinquedos.com/
+- Toyz — https://apptoyz.com.br/
+- Jamilly Ferreira — https://jamilly-ferreira.vercel.app/
+- Conectados — https://conectados-sigma.vercel.app/
+- Rifa Tiro de Guerra — https://tg-azure.vercel.app
+
+## Stack
+
+Vue.js, Nuxt, JavaScript, SASS, GSAP, Three.js, Node.
+
+## Links
+
+- Site: https://gustavobernardi.com
+- Instagram: https://www.instagram.com/devbygusta/
+- GitHub: https://github.com/guubernardi
+- LinkedIn: https://linkedin.com/in/gubernardi

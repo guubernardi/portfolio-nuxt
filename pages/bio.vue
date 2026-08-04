@@ -81,8 +81,9 @@ const links = [
   },
 ]
 
+// sem a marca no título: o titleTemplate do app.vue já a acrescenta
 useHead({
-  title: 'Gustavo Bernardi | Estúdio de desenvolvimento web',
+  title: 'Estúdio de desenvolvimento web',
   meta: [
     { name: 'description', content: 'Sites, e-commerces e sistemas sob medida.' },
     // fora da busca de propósito: é página de bio, não deve competir com o site

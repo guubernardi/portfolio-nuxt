@@ -24,16 +24,76 @@ import SectionFaq from '../components/pages/index/SectionFaq.vue'
 import SectionContato from '../components/pages/index/SectionContato.vue'
 import SectionFooter from '../components/pages/index/SectionFooter.vue'
 import DivisorCurva from '../components/global/elementos/DivisorCurva.vue'
+import {
+  SITE_URL,
+  SITE_NOME,
+  OG_IMAGE,
+  SERVICOS,
+  ID_ORGANIZACAO,
+  ID_SITE
+} from '~/helpers/site'
+
 definePageMeta({
   layout: 'web'
 })
 
+// title curto de propósito: o titleTemplate do app.vue já acrescenta a marca, e
+// o conjunto precisa caber nos ~60 caracteres que o Google mostra
+const TITULO = 'Criação de Sites, E-commerce e Sistemas'
+
+const DESCRICAO =
+  'Criação de sites, e-commerces e sistemas sob medida, escritos do zero e sem template. Do protótipo ao deploy, com prazo combinado. Peça seu orçamento.'
+
 useHead({
-  title: 'Gustavo Bernardi - Agencia de desenvolvimento web',
+  title: TITULO,
   meta: [
-    { name: 'description', content: 'Agencia de desenvolvimento web' },
-    { property: 'og:title', content: 'Agencia de desenvolvimento web' },
-    { property: 'og:description', content: 'Agencia de desenvolvimento web' }
+    { name: 'description', content: DESCRICAO },
+    { property: 'og:title', content: `${TITULO} | ${SITE_NOME}` },
+    { property: 'og:description', content: DESCRICAO },
+    { name: 'twitter:title', content: `${TITULO} | ${SITE_NOME}` },
+    { name: 'twitter:description', content: DESCRICAO }
+  ],
+
+  // O catálogo transforma as seis caixinhas da SectionServicos em oferta legível
+  // por máquina. É o que responde "ele faz e-commerce?" sem depender do texto.
+  script: [
+    {
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@graph': [
+          {
+            '@type': 'WebPage',
+            '@id': `${SITE_URL}/#pagina`,
+            url: `${SITE_URL}/`,
+            name: `${TITULO} | ${SITE_NOME}`,
+            description: DESCRICAO,
+            inLanguage: 'pt-BR',
+            isPartOf: { '@id': ID_SITE },
+            about: { '@id': ID_ORGANIZACAO },
+            primaryImageOfPage: { '@type': 'ImageObject', url: OG_IMAGE }
+          },
+          {
+            '@type': 'OfferCatalog',
+            '@id': `${SITE_URL}/#servicos`,
+            name: 'Serviços de desenvolvimento web',
+            provider: { '@id': ID_ORGANIZACAO },
+            itemListElement: SERVICOS.map((servico, i) => ({
+              '@type': 'Offer',
+              position: i + 1,
+              itemOffered: {
+                '@type': 'Service',
+                name: servico.nome,
+                description: servico.descricao,
+                serviceType: servico.nome,
+                provider: { '@id': ID_ORGANIZACAO },
+                areaServed: { '@type': 'Country', name: 'Brasil' }
+              }
+            }))
+          }
+        ]
+      })
+    }
   ]
 })
 </script>
