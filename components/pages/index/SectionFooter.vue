@@ -70,7 +70,7 @@ import { useScrollTo } from '~/composables/useScrollTo'
 const ano = new Date().getFullYear()
 const { scrollTo } = useScrollTo()
 
-const linkWhatsapp = 'https://wa.me/5511977912709?text=' +
+const linkWhatsapp = 'https://wa.me/5511966206588?text=' +
   encodeURIComponent('Olá! Vim pelo site e gostaria de um orçamento para um projeto.')
 
 const links = [

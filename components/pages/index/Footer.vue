@@ -37,7 +37,7 @@
           </div>
   
           <div class="footer__icons" aria-label="Redes sociais">
-            <a class="social" href="https://wa.me/5511977912709" target="_blank" rel="noreferrer" aria-label="WhatsApp">
+            <a class="social" href="https://wa.me/5511966206588" target="_blank" rel="noreferrer" aria-label="WhatsApp">
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path
                   d="M20.5 11.9c0 4.7-3.9 8.6-8.6 8.6-1.5 0-2.9-.4-4.2-1.1l-4.2 1.2 1.3-4.1c-.8-1.4-1.3-3-1.3-4.6C3.5 7.2 7.4 3.3 12 3.3c4.6 0 8.5 3.9 8.5 8.6Z"

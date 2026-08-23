@@ -28,7 +28,7 @@ import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-const linkWhatsapp = 'https://wa.me/5511977912709?text=' +
+const linkWhatsapp = 'https://wa.me/5511966206588?text=' +
   encodeURIComponent('Olá! Vim pelo site e gostaria de um orçamento para um projeto.')
 
 const secaoRef = ref(null)

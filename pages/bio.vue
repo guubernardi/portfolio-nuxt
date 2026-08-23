@@ -58,7 +58,7 @@ definePageMeta({ layout: false })
 
 const ano = new Date().getFullYear()
 
-const linkWhatsapp = 'https://wa.me/5511977912709?text=' +
+const linkWhatsapp = 'https://wa.me/5511966206588?text=' +
   encodeURIComponent('Olá! Vim pelo Instagram e gostaria de um orçamento para um projeto.')
 
 const links = [

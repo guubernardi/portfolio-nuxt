@@ -85,7 +85,7 @@ const projetos = [
     imagem: '/images/projetos/site-jamilly.webp',
     largura: 1200,
     altura: 675,
-    link: 'https://jamilly-ferreira.vercel.app/',
+    link: 'https://www.jamillyferreirapsicologa.com.br/',
   },
   {
     id: 'conectados',

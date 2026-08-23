@@ -19,7 +19,7 @@
       <a href="https://github.com/guubernardi" target="_blank" aria-label="GitHub">
         <img src="/images/github.svg" alt="GitHub" />
       </a>
-      <a href="https://wa.me/5511977912709" target="_blank" aria-label="WhatsApp">
+      <a href="https://wa.me/5511966206588" target="_blank" aria-label="WhatsApp">
         <img src="/images/whatsapp.svg" alt="WhatsApp" />
       </a>
       <a href="mailto:gubernardi@hotmail.com?" target="_blank" aria-label="Email">

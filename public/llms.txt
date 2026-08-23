@@ -5,7 +5,7 @@
 > do zero, sem template pronto, do protótipo ao deploy.
 
 Atendimento remoto para todo o Brasil, em português.
-Contato: WhatsApp +55 11 97791-2709 · gubernardi@hotmail.com
+Contato: WhatsApp +55 11 96620-6588 · gubernardi@hotmail.com
 Site: https://www.gustavobernardi.com
 
 ## Serviços
@@ -32,7 +32,7 @@ mantendo o mesmo endereço e o histórico de busca já conquistado.
 
 - City Toys — https://www.citytoysbrinquedos.com/
 - Toyz — https://apptoyz.com.br/
-- Jamilly Ferreira — https://jamilly-ferreira.vercel.app/
+- Jamilly Ferreira — https://www.jamillyferreirapsicologa.com.br/
 - Conectados — https://conectados-sigma.vercel.app/
 - Rifa Tiro de Guerra — https://tg-azure.vercel.app
 

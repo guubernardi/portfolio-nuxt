@@ -5,8 +5,7 @@
   "scripts": {
     "dev": "nuxt dev --host",
     "build": "nuxt build",
-    "preview": "nuxt preview",
-    "postinstall": "patch-package"
+    "preview": "nuxt preview"
   },
   "dependencies": {
     "@edusites/icons": "^1.5.2",
@@ -22,7 +21,11 @@
     "vue-router": "^4.5.0"
   },
   "devDependencies": {
-    "nuxt": "^3.17.5",
-    "patch-package": "^8.0.1"
+    "nuxt": "^3.17.5"
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "@edusites/icons@1.5.2": "patches/@edusites__icons@1.5.2.patch"
+    }
   }
 }

@@ -16,7 +16,7 @@ export const OG_IMAGE_ALTURA = 630
 export const OG_IMAGE_ALT =
   'Gustavo Bernardi — sites, e-commerces e sistemas sob medida'
 
-export const TELEFONE = '+5511977912709'
+export const TELEFONE = '+5511966206588'
 export const EMAIL = 'gubernardi@hotmail.com'
 
 export const PERFIS = [

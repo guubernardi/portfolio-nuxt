@@ -1,0 +1,17 @@
+diff --git a/src/resolvedor.js b/src/resolvedor.js
+index cee5890..91a8f6c 100644
+--- a/src/resolvedor.js
++++ b/src/resolvedor.js
+@@ -58,9 +58,9 @@ function carregarMonoAsync() {
+ // Top-level await no servidor não penaliza o cliente: o import é dinâmico, então
+ // o Vite mantém `icones.js` fora do bundle do cliente (só o servidor o carrega).
+ if (ehServidor()) {
+-  try {
+-    await carregarMonoAsync()
+-  } catch { /* segue com fallback async */ }
++  carregarMonoAsync().catch(() => {
++    // segue com fallback async
++  })
+ }
+ 
+ function chaveGlob(nome) {

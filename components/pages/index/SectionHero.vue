@@ -113,7 +113,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Svgs from '../../global/svgs/Svgs.vue'
 import { useScrollTo } from '~/composables/useScrollTo'
 
-const linkWhatsapp = 'https://wa.me/5511977912709?text=' +
+const linkWhatsapp = 'https://wa.me/5511966206588?text=' +
   encodeURIComponent('Olá! Vim pelo site e gostaria de um orçamento para um projeto.')
 
 // fonte única pro menu desktop e pro mobile: antes eram duas listas duplicadas na mão
@@ -193,46 +193,37 @@ function aoTeclar(e) {
   if (e.key === 'Escape') fecharMenu()
 }
 
-// elementos animados na entrada, na ordem em que aparecem
+// Só a luz fica no GSAP. Nav, selo, título, texto e botões saíram para CSS:
+// enquanto estavam aqui, o conteúdo do hero só aparecia depois de o bundle
+// baixar e hidratar, e era isso que punha o LCP do celular em 15s.
 function alvos() {
   return {
     feixes: [feixeEsqRef.value, feixeDirRef.value].filter(Boolean),
     estrelas: estrelasRef.value,
-    nav: [navLogoRef.value, navMenuRef.value, navCtaRef.value].filter(Boolean),
-    linhas: tituloRef.value?.querySelectorAll('.titulo__texto') ?? [],
-    selo: seloRef.value,
-    texto: textoRef.value,
-    acoes: acoesRef.value,
   }
 }
 
 // estado inicial aplicado já na montagem, pra nada piscar antes da timeline rodar
 function prepararEntrada() {
-  const { feixes, estrelas, nav, linhas, selo, texto, acoes } = alvos()
+  const { feixes, estrelas } = alvos()
   gsap.set(feixes, { autoAlpha: 0, scaleX: 0.55 })
   gsap.set(estrelas, { autoAlpha: 0 })
-  gsap.set(nav, { autoAlpha: 0, y: -18 })
-  gsap.set(linhas, { yPercent: 115 })
-  gsap.set([selo, texto, acoes], { autoAlpha: 0, y: 22 })
 }
 
 function iniciarEntrada() {
   if (animou) return
   animou = true
 
-  const { feixes, estrelas, nav, linhas, selo, texto, acoes } = alvos()
+  const { feixes, estrelas } = alvos()
 
   // respirar() só entra no fim: rodando junto, ele e a timeline disputam a mesma opacity
   const tl = gsap.timeline({ defaults: { ease: 'power3.out' }, onComplete: respirar })
 
-  // a luz abre primeiro: os feixes se esticam e o campo de estrelas acende
+  // a luz abre primeiro: os feixes se esticam e o campo de estrelas acende.
+  // O resto da coreografia roda em CSS, nos mesmos tempos (ver bloco de entrada
+  // no <style>): se mexer nos delays de um lado, acertar o outro junto.
   tl.to(feixes, { autoAlpha: 1, scaleX: 1, duration: 1.8, stagger: 0.18, ease: 'power3.inOut' })
     .to(estrelas, { autoAlpha: 1, duration: 1.6 }, 0.2)
-    .to(nav, { autoAlpha: 1, y: 0, duration: 0.6, stagger: 0.08 }, 0.35)
-    .to(selo, { autoAlpha: 1, y: 0, duration: 0.6 }, 0.5)
-    .to(linhas, { yPercent: 0, duration: 0.95, stagger: 0.09, ease: 'power4.out' }, 0.62)
-    .to(texto, { autoAlpha: 1, y: 0, duration: 0.7 }, '-=0.5')
-    .to(acoes, { autoAlpha: 1, y: 0, duration: 0.7 }, '-=0.55')
 }
 
 // deriva lenta e contínua: sem isso a luz parece um png parado
@@ -287,12 +278,11 @@ onMounted(() => {
       return () => window.removeEventListener('pointermove', aoMoverMouse)
     })
 
-    // sem animação de entrada: tudo já visível
+    // sem animação de entrada: tudo já visível. O conteúdo em CSS não precisa
+    // de tratamento aqui — ele só é escondido dentro de no-preference.
     mm.add('(prefers-reduced-motion: reduce)', () => {
-      const { feixes, estrelas, nav, linhas, selo, texto, acoes } = alvos()
+      const { feixes, estrelas } = alvos()
       gsap.set([...feixes, estrelas], { autoAlpha: 1, scaleX: 1 })
-      gsap.set([...nav, selo, texto, acoes], { autoAlpha: 1, y: 0 })
-      gsap.set(linhas, { yPercent: 0 })
     })
   })
 
@@ -786,4 +776,74 @@ onBeforeUnmount(() => {
 
   .acao
     width: 100%
+
+// ===== entrada do conteúdo, em CSS =====
+// Esta coreografia era uma timeline GSAP disparada no onMounted. O efeito era o
+// mesmo, mas o hero ficava invisível até o bundle baixar e hidratar: no celular
+// o LCP batia 15s, com 83% do tempo classificado como "render delay". Em CSS a
+// entrada começa junto com o parse do estilo, que é inline, sem esperar JS.
+// Os tempos abaixo são os mesmos da timeline antiga.
+@media (prefers-reduced-motion: no-preference)
+  .nav__logo,
+  .nav__menu,
+  .nav__cta
+    opacity: 0
+    animation: heroDesce 0.6s cubic-bezier(0.33, 1, 0.68, 1) both
+
+  .nav__logo
+    animation-delay: 0.35s
+
+  .nav__menu
+    animation-delay: 0.43s
+
+  .nav__cta
+    animation-delay: 0.51s
+
+  .selo
+    opacity: 0
+    animation: heroSobe 0.6s cubic-bezier(0.33, 1, 0.68, 1) 0.5s both
+
+  // a máscara é o .titulo__linha, que já tem overflow hidden
+  .titulo__texto
+    transform: translateY(115%)
+    animation: heroLinha 0.95s cubic-bezier(0.25, 1, 0.5, 1) both
+
+  .titulo__linha:nth-child(1) .titulo__texto
+    animation-delay: 0.62s
+
+  .titulo__linha:nth-child(2) .titulo__texto
+    animation-delay: 0.71s
+
+  .titulo__linha:nth-child(3) .titulo__texto
+    animation-delay: 0.8s
+
+  .hero__texto
+    opacity: 0
+    animation: heroSobe 0.7s cubic-bezier(0.33, 1, 0.68, 1) 1.25s both
+
+  .hero__acoes
+    opacity: 0
+    animation: heroSobe 0.7s cubic-bezier(0.33, 1, 0.68, 1) 1.4s both
+
+@keyframes heroSobe
+  from
+    opacity: 0
+    transform: translateY(22px)
+  to
+    opacity: 1
+    transform: translateY(0)
+
+@keyframes heroDesce
+  from
+    opacity: 0
+    transform: translateY(-18px)
+  to
+    opacity: 1
+    transform: translateY(0)
+
+@keyframes heroLinha
+  from
+    transform: translateY(115%)
+  to
+    transform: translateY(0)
 </style>
