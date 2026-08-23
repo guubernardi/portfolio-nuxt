@@ -803,19 +803,11 @@ onBeforeUnmount(() => {
     opacity: 0
     animation: heroSobe 0.6s cubic-bezier(0.33, 1, 0.68, 1) 0.5s both
 
-  // a máscara é o .titulo__linha, que já tem overflow hidden
-  .titulo__texto
-    transform: translateY(115%)
-    animation: heroLinha 0.95s cubic-bezier(0.25, 1, 0.5, 1) both
-
-  .titulo__linha:nth-child(1) .titulo__texto
-    animation-delay: 0.62s
-
-  .titulo__linha:nth-child(2) .titulo__texto
-    animation-delay: 0.71s
-
-  .titulo__linha:nth-child(3) .titulo__texto
-    animation-delay: 0.8s
+  // O título NÃO entra aqui de propósito. O Chrome não aceita como candidato a
+  // LCP um elemento clipado ou transparente no primeiro paint, e não reavalia
+  // quando a animação o revela. Com todo o hero escondido, a página ficava sem
+  // LCP nenhum (NO_LCP no PageSpeed). O título é o maior bloco de texto: ele
+  // precisa estar pintado desde o primeiro frame para a métrica existir.
 
   .hero__texto
     opacity: 0
