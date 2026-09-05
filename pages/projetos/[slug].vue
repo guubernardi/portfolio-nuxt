@@ -196,6 +196,7 @@
 <script setup>
 import { computed } from 'vue'
 import Svgs from '~/components/global/svgs/Svgs.vue'
+import { servicoDoSetor } from '~/helpers/servicos'
 import { PROJETOS, projetoPorSlug, destinoDoProjeto } from '~/helpers/projetos'
 import { SITE_URL, SITE_NOME, ID_ORGANIZACAO, ID_SITE, urlCanonica } from '~/helpers/site'
 
@@ -217,9 +218,11 @@ const artigo = projeto.categoria.toLowerCase().includes('sistema') ? 'o sistema'
 
 // quando existe pagina de servico para o nicho deste case, o fecho leva para
 // ela em vez de devolver para a listagem
-const SERVICOS_POR_NICHO = [{ teste: /psicolog/i, url: '/site-para-psicologo' }]
-const paginaDoServico =
-  SERVICOS_POR_NICHO.find((s) => s.teste.test(projeto.setor))?.url || null
+// o caminho de volta para a página do nicho. Quem chegou no case por busca de
+// projeto encontra aqui a página de quem vende o serviço, e é esse vai e volta
+// que junta as páginas num grupo sobre o mesmo assunto em vez de páginas soltas
+const servicoDoNicho = servicoDoSetor(projeto.setor)
+const paginaDoServico = servicoDoNicho ? `/${servicoDoNicho.slug}` : null
 
 const ano = new Date().getFullYear()
 const outros = PROJETOS.filter((p) => p.id !== projeto.id).slice(0, 3)

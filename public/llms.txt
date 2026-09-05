@@ -30,7 +30,14 @@ mantendo o mesmo endereço e o histórico de busca já conquistado.
 
 ## Páginas por tipo de projeto
 
+Cada uma explica o serviço para um segmento, com as dúvidas do cliente final
+respondidas e exemplos publicados.
+
 - Site para psicólogo — https://www.gustavobernardi.com/site-para-psicologo
+- Site para contador e escritório de contabilidade — https://www.gustavobernardi.com/site-para-contador
+- Site para pet shop e banho e tosa — https://www.gustavobernardi.com/site-para-petshop
+- Landing page para evento e conferência — https://www.gustavobernardi.com/landing-page-para-evento
+- Site para locadora de brinquedos e infláveis — https://www.gustavobernardi.com/site-para-locadora-de-brinquedos
 
 ## Projetos publicados
 
