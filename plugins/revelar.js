@@ -4,8 +4,15 @@
 // lista em seguida, porque a revelação acontece uma vez e não se desfaz.
 //
 // O par disto é a classe .revelar no assets/css/animations.sass, que já vem no
-// HTML do servidor. É ela que guarda o estado inicial; aqui só se acrescenta a
-// classe que libera.
+// HTML do servidor. É ela que guarda o estado inicial; aqui só se marca quem já
+// entrou.
+//
+// A marca é um data-attribute e NÃO uma classe, de propósito. Elemento que tem
+// :class reativo além da classe estática, como o <li> do FAQ, é re-renderizado
+// quando o Vue mexe nesse binding, e o patch de classe reescreve o atributo
+// inteiro a partir do que o Vue conhece. Uma classe posta aqui por fora seria
+// apagada nesse momento, e o item sumiria no primeiro clique. O Vue não toca em
+// atributos que não estão no vnode, então data-revelado sobrevive.
 export default defineNuxtPlugin((nuxtApp) => {
   let observador = null
 
@@ -16,7 +23,7 @@ export default defineNuxtPlugin((nuxtApp) => {
       (entradas) => {
         for (const entrada of entradas) {
           if (!entrada.isIntersecting) continue
-          entrada.target.classList.add('revelado')
+          entrada.target.dataset.revelado = 'sim'
           observador.unobserve(entrada.target)
         }
       },

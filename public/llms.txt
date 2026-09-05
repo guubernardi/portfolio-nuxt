@@ -10,12 +10,20 @@ Site: https://www.gustavobernardi.com
 
 ## Serviços
 
+Índice em https://www.gustavobernardi.com/servicos
+
 - **Landing pages** — uma página, um objetivo: converter visitante em cliente.
+  https://www.gustavobernardi.com/criacao-de-landing-page
 - **Sites institucionais** — a identidade da empresa, sem cara de modelo pronto.
+  https://www.gustavobernardi.com/criacao-de-site-institucional
 - **Sistemas sob medida** — feitos para o processo do cliente, incluindo painéis e áreas administrativas.
-- **E-commerce** — loja que carrega rápido e fecha venda.
+  https://www.gustavobernardi.com/desenvolvimento-de-sistema-web
+- **Loja virtual e e-commerce** — catálogo, frete e checkout montados em volta da venda.
+  https://www.gustavobernardi.com/criacao-de-loja-virtual
 - **Integrações e pagamentos** — PIX, assinaturas, gateways e APIs de terceiros.
-- **UI/UX e interface** — protótipo aprovado antes de virar código.
+  https://www.gustavobernardi.com/integracoes-e-pagamentos
+- **UI/UX e design de interface** — layout aprovado antes de virar código.
+  https://www.gustavobernardi.com/design-de-interface
 
 ## Como o trabalho funciona
 

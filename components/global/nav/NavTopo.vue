@@ -6,16 +6,18 @@
       </a>
 
       <div class="nav__menu">
-        <a
+        <component
+          :is="link.rota ? NuxtLink : 'a'"
           v-for="link in links"
           :key="link.id"
           class="nav__link"
-          :href="`/#${link.id}`"
-          @click="aoClicar($event, link.id)"
+          :class="{ 'nav__link--ativo': estaAtivo(link) }"
+          v-bind="link.rota ? { to: link.rota } : { href: `/#${link.ancora}` }"
+          @click="aoClicar($event, link)"
         >
           <SvgIcone :nome="link.icone" />
           {{ link.rotulo }}
-        </a>
+        </component>
       </div>
 
       <a class="nav__cta" :href="linkWhatsapp" target="_blank" rel="noopener">
@@ -38,16 +40,18 @@
       <div v-if="menuAberto" class="menu-mobile" @click.self="fecharMenu">
         <div class="menu-mobile__conteudo">
           <nav class="menu-mobile__nav">
-            <a
+            <component
+              :is="link.rota ? NuxtLink : 'a'"
               v-for="link in links"
               :key="link.id"
               class="menu-mobile__link"
-              :href="`/#${link.id}`"
-              @click="aoClicar($event, link.id)"
+              :class="{ 'menu-mobile__link--ativo': estaAtivo(link) }"
+              v-bind="link.rota ? { to: link.rota } : { href: `/#${link.ancora}` }"
+              @click="aoClicar($event, link)"
             >
               <SvgIcone :nome="link.icone" />
               {{ link.rotulo }}
-            </a>
+            </component>
           </nav>
 
           <a
@@ -78,14 +82,18 @@
 
 <script setup>
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
+import { NuxtLink } from '#components'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Svgs from '~/components/global/svgs/Svgs.vue'
 import { useScrollTo } from '~/composables/useScrollTo'
 import { TELEFONE } from '~/helpers/site'
+import { SERVICOS } from '~/helpers/servicos'
 
-// na home os itens rolam a página; em qualquer outra rota viram link para
-// /#secao, senão o menu apontaria para seções que não existem ali
+// Serviços e Projetos são páginas de verdade; Início e Contato continuam
+// seções da home. Os dois primeiros nasceram como âncora quando essas páginas
+// não existiam, e ficar rolando para uma amostra da home escondia o conteúdo
+// completo de quem clicava no menu
 const route = useRoute()
 const naHome = computed(() => route.path === '/')
 
@@ -94,11 +102,26 @@ const linkWhatsapp =
   encodeURIComponent('Olá! Vim pelo site e gostaria de um orçamento para um projeto.')
 
 const links = [
-  { id: 'inicio', rotulo: 'Início', icone: 'casa' },
-  { id: 'servicos', rotulo: 'Serviços', icone: 'engrenagem' },
-  { id: 'projetos', rotulo: 'Projetos', icone: 'projetos' },
-  { id: 'contato', rotulo: 'Contatos', icone: 'telefone' },
+  { id: 'inicio', rotulo: 'Início', icone: 'casa', ancora: 'inicio' },
+  { id: 'servicos', rotulo: 'Serviços', icone: 'engrenagem', rota: '/servicos' },
+  { id: 'projetos', rotulo: 'Projetos', icone: 'projetos', rota: '/projetos' },
+  { id: 'contato', rotulo: 'Contatos', icone: 'telefone', ancora: 'contato' },
 ]
+
+// Serviços fica aceso nas onze páginas de serviço, não só na /servicos: quem
+// está lendo /site-para-psicologo continua dentro dessa parte do site
+const rotasDeServico = new Set(SERVICOS.map((s) => `/${s.slug}`))
+
+function estaAtivo(link) {
+  if (link.rota === '/servicos') {
+    return route.path === '/servicos' || rotasDeServico.has(route.path)
+  }
+  // /projetos acende também nos cases, que são filhos dela
+  if (link.rota) {
+    return route.path === link.rota || route.path.startsWith(`${link.rota}/`)
+  }
+  return link.ancora === 'inicio' && naHome.value
+}
 
 const { scrollTo: gsapScrollTo } = useScrollTo()
 
@@ -106,13 +129,14 @@ const rolado = ref(false)
 const menuAberto = ref(false)
 let scrollTriggerInstance = null
 
-// sempre <a href="/#secao">: fora da home o navegador navega normal, e na home
-// interceptamos para rolar suave em vez de dar salto
-function aoClicar(evento, id) {
+// item de página navega normal, pelo NuxtLink. Item de âncora vira <a href="/#secao">:
+// fora da home o navegador navega, e na home interceptamos para rolar suave
+function aoClicar(evento, link) {
   fecharMenu()
+  if (link.rota) return
   if (!naHome.value) return
   evento.preventDefault()
-  gsapScrollTo(`#${id}`)
+  gsapScrollTo(`#${link.ancora}`)
 }
 
 function toggleMenu() {
@@ -223,6 +247,19 @@ onBeforeUnmount(() => {
       :deep(svg)
         opacity: 1
 
+    // a página atual fica acesa, com borda para o estado se ler mesmo em quem
+    // não distingue bem a diferença de fundo
+    &--ativo
+      border: 1px solid rgba(140, 165, 255, 0.34)
+      background: rgba(125, 155, 255, 0.16)
+      font-family: var(--semibold)
+      color: var(--cor-branco)
+      // compensa a borda para o item não empurrar os vizinhos
+      padding: 10px 17px
+
+      :deep(svg)
+        opacity: 1
+
   &__cta
     grid-column: 3
     justify-self: end
@@ -317,6 +354,12 @@ onBeforeUnmount(() => {
 
     &:hover
       opacity: 0.5
+
+    &--ativo
+      color: #8aa6f0
+
+      :deep(svg)
+        opacity: 1
 
   &__cta
     padding: 16px 34px

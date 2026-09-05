@@ -14,7 +14,8 @@ export const SERVICOS = [
   // ---------------------------------------------------------------- psicólogo
   {
     slug: 'site-para-psicologo',
-    filtroSetor: /psicolog/i,
+    eixo: 'nicho',
+    filtro: (p) => /psicolog/i.test(p.setor),
 
     titulo: 'Site para psicólogo',
     chamada: 'que marca a primeira sessão.',
@@ -124,7 +125,8 @@ export const SERVICOS = [
   // ----------------------------------------------------------------- contador
   {
     slug: 'site-para-contador',
-    filtroSetor: /contábil|contabil|contador/i,
+    eixo: 'nicho',
+    filtro: (p) => /contábil|contabil|contador/i.test(p.setor),
 
     titulo: 'Site para contador',
     chamada: 'que traz cliente sem depender de indicação.',
@@ -234,7 +236,8 @@ export const SERVICOS = [
   // ----------------------------------------------------------------- pet shop
   {
     slug: 'site-para-petshop',
-    filtroSetor: /pet\s?shop|banho e tosa/i,
+    eixo: 'nicho',
+    filtro: (p) => /pet\s?shop|banho e tosa/i.test(p.setor),
 
     titulo: 'Site para pet shop',
     chamada: 'que enche a agenda de banho e tosa.',
@@ -344,7 +347,8 @@ export const SERVICOS = [
   // ------------------------------------------------------------------- evento
   {
     slug: 'landing-page-para-evento',
-    filtroSetor: /evento|confer/i,
+    eixo: 'nicho',
+    filtro: (p) => /evento|confer/i.test(p.setor),
 
     titulo: 'Landing page para evento',
     chamada: 'que vende ingresso antes de esgotar.',
@@ -454,7 +458,8 @@ export const SERVICOS = [
   // --------------------------------------------------- locadora de brinquedos
   {
     slug: 'site-para-locadora-de-brinquedos',
-    filtroSetor: /brinquedo|inflá|infla/i,
+    eixo: 'nicho',
+    filtro: (p) => /brinquedo|inflá|infla/i.test(p.setor),
 
     titulo: 'Site para locadora de brinquedos',
     chamada: 'que fecha festa pelo WhatsApp.',
@@ -560,6 +565,687 @@ export const SERVICOS = [
         'Manda uma mensagem contando o que você aluga e para que região. Sem formulário longo e sem compromisso.',
     },
   },
+  // ================================================================ por tipo
+  {
+    slug: 'criacao-de-landing-page',
+    eixo: 'tipo',
+    ordem: 1,
+    icone: 'foguete',
+    nomeCurto: 'Landing pages',
+    resumoCurto: 'Uma página, um objetivo: virar cliente.',
+    filtro: (p) => p.categoria === 'Landing page',
+
+    titulo: 'Criação de landing page',
+    chamada: 'que existe para uma coisa só.',
+    resumo:
+      'Uma página com um único objetivo e nada que atrapalhe ele. Escrita do zero, na ordem em que a dúvida aparece na cabeça de quem lê.',
+    acaoExemplos: 'Ver quatro páginas no ar',
+    mensagemWhatsapp: 'Olá! Gostaria de um orçamento para uma landing page.',
+
+    tituloSeo: 'Criação de landing page',
+    descricaoSeo:
+      'Criação de landing page escrita do zero, com um objetivo por página e contato direto no WhatsApp. Veja quatro páginas publicadas e o que cada uma resolveu.',
+    servicoSeo: 'Criação de landing page',
+    publicoSeo: 'Profissionais e empresas que precisam converter visitante em cliente',
+
+    problema: {
+      titulo: 'Landing page não é site pequeno.',
+      chamada: 'É uma decisão de cada vez.',
+      texto:
+        'A diferença não está no tamanho, está no foco. Site institucional apresenta uma empresa inteira e aceita que a pessoa passeie. Landing page existe para uma ação, e cada bloco que não empurra para ela é um convite a sair. É por isso que encher uma landing de menu, blog e história da empresa costuma derrubar justamente o número que ela deveria subir.',
+      duvidas: [
+        'Uma página só resolve mesmo?',
+        'Preciso de menu e várias seções?',
+        'Como sei se ela está funcionando?',
+        'Dá para usar em anúncio pago?',
+        'Quanto texto é texto demais?',
+        'E se eu quiser mudar a oferta depois?',
+      ],
+    },
+
+    entregasTitulo: { titulo: 'Uma página construída', chamada: 'em volta de uma ação.' },
+    entregas: [
+      {
+        titulo: 'Um objetivo escolhido antes de desenhar',
+        texto:
+          'Agendar, orçar, comprar ou inscrever: um só. Página que tenta fazer três coisas normalmente não faz nenhuma, e essa decisão vem antes de qualquer layout.',
+      },
+      {
+        titulo: 'Texto na ordem da dúvida, não do organograma',
+        texto:
+          'A leitura segue as perguntas que travam a decisão, uma de cada vez. Credencial e história entram onde pesam, que quase nunca é no começo.',
+      },
+      {
+        titulo: 'Contato direto, sem formulário longo',
+        texto:
+          'O botão abre WhatsApp ou checkout já com o contexto. Cada campo a mais num formulário é gente que desiste no meio.',
+      },
+      {
+        titulo: 'Rápida o bastante para sobreviver ao clique',
+        texto:
+          'Landing page vive de tráfego de rede social e anúncio, quase tudo no celular. Página lenta perde a visita antes de mostrar a primeira linha.',
+      },
+      {
+        titulo: 'Preparada para receber anúncio',
+        texto:
+          'Estrutura limpa para medir o que acontece e para o pixel de campanha funcionar. Sem isso você paga por clique sem saber o que ele virou.',
+      },
+      {
+        titulo: 'No seu nome, com você dono dos acessos',
+        texto:
+          'Domínio e hospedagem ficam na sua conta. Se um dia quiser levar a página para outro lugar, você leva.',
+      },
+    ],
+
+    exemplosTitulo: { titulo: 'Quatro landing pages', chamada: 'publicadas.' },
+
+    perguntas: [
+      {
+        pergunta: 'Qual a diferença para um site institucional?',
+        resposta:
+          'Landing page tem uma ação e nada que dispute com ela. Site institucional apresenta a empresa inteira e aceita que a pessoa navegue. Quando o objetivo é uma decisão só, a página curta costuma render mais.',
+      },
+      {
+        pergunta: 'Uma página só não é pouco?',
+        resposta:
+          'Depende do que você vende. Para serviço com uma oferta clara, uma página bem escrita costuma resolver melhor do que cinco páginas rasas. Se o negócio tem várias frentes, aí faz sentido crescer.',
+      },
+      {
+        pergunta: 'Dá para usar em anúncio do Instagram e do Google?',
+        resposta:
+          'Dá, e a página é montada pensando nisso: carregamento rápido no celular e estrutura pronta para receber o pixel da campanha e medir o que o clique virou.',
+      },
+      {
+        pergunta: 'Preciso ter os textos prontos?',
+        resposta:
+          'Não. Dá para começar do que você já usa para se apresentar e do que responde por mensagem todo dia, que costuma ser o melhor material bruto que existe.',
+      },
+      {
+        pergunta: 'Consigo mudar a oferta depois?',
+        resposta:
+          'Consegue. Preço, condição e chamada são as partes que mais mudam, e a página é montada esperando que mudem.',
+      },
+      {
+        pergunta: 'E depois que entra no ar?',
+        resposta:
+          'Acompanho o período seguinte ao lançamento para ajustar o que aparecer no uso real. Domínio e hospedagem ficam configurados na sua conta.',
+      },
+    ],
+
+    fecho: {
+      titulo: 'Vamos montar',
+      chamada: 'a sua?',
+      texto: 'Manda uma mensagem contando o que a página precisa fazer acontecer. Sem compromisso.',
+    },
+  },
+  {
+    slug: 'criacao-de-site-institucional',
+    eixo: 'tipo',
+    ordem: 2,
+    icone: 'predio',
+    nomeCurto: 'Sites institucionais',
+    resumoCurto: 'A cara da sua empresa, sem parecer modelo pronto.',
+    filtro: (p) => p.categoria === 'Site institucional',
+
+    titulo: 'Criação de site institucional',
+    chamada: 'que não parece modelo pronto.',
+    resumo:
+      'O site que responde quem é a empresa, o que ela faz e por que confiar. Escrito e desenhado do zero, sem tema comprado e sem construtor.',
+    acaoExemplos: 'Ver dois sites no ar',
+    mensagemWhatsapp: 'Olá! Gostaria de um orçamento para um site institucional.',
+
+    tituloSeo: 'Criação de site institucional para empresas',
+    descricaoSeo:
+      'Criação de site institucional escrito e desenhado do zero, sem template. Serviços, provas e contato organizados para quem está decidindo com quem fechar.',
+    servicoSeo: 'Criação de site institucional',
+    publicoSeo: 'Empresas e prestadores de serviço',
+
+    problema: {
+      titulo: 'Template entrega um site.',
+      chamada: 'Não entrega um argumento.',
+      texto:
+        'Modelo pronto resolve a parte fácil, que é ter algo no ar. A parte difícil é dizer por que fechar com você e não com o concorrente, e nenhum tema comprado sabe isso. O resultado é aquele site correto e esquecível, com missão, visão, valores e uma foto de aperto de mão, que a pessoa fecha sem ter aprendido nada sobre a empresa.',
+      duvidas: [
+        'O que essa empresa faz, exatamente?',
+        'Ela atende o meu tamanho de negócio?',
+        'Já fez isso para alguém como eu?',
+        'Quem vai cuidar do meu projeto?',
+        'Como funciona e quanto custa?',
+        'Como falo com alguém agora?',
+      ],
+    },
+
+    entregasTitulo: { titulo: 'Um site que argumenta', chamada: 'em vez de se apresentar.' },
+    entregas: [
+      {
+        titulo: 'Serviços explicados pelo problema que resolvem',
+        texto:
+          'Cada frente descrita pela dor que ela tira do cliente, não pelo nome interno que ela tem na empresa. É o que faz a pessoa se reconhecer e seguir lendo.',
+      },
+      {
+        titulo: 'Prova no lugar de adjetivo',
+        texto:
+          'Cliente atendido, número real, projeto entregue. Dizer que é referência no mercado não convence ninguém; mostrar o que foi feito convence.',
+      },
+      {
+        titulo: 'Estrutura pensada para crescer',
+        texto:
+          'O site nasce sabendo onde entram as páginas seguintes, de segmento ou de serviço, em vez de virar um bloco fechado que precisa ser refeito para receber conteúdo.',
+      },
+      {
+        titulo: 'Contato em todo ponto de decisão',
+        texto:
+          'O caminho para falar com você aparece onde a pessoa se convence, não só no rodapé. Convencimento tem prazo de validade curto.',
+      },
+      {
+        titulo: 'Encontrável no Google e pelas IAs',
+        texto:
+          'A página descreve para os buscadores o que a empresa faz, para quem e onde atende. É o que permite ao Google e ao ChatGPT citarem a informação certa em vez de adivinharem.',
+      },
+      {
+        titulo: 'No nome da empresa, com você dono dos acessos',
+        texto:
+          'Domínio e hospedagem ficam na conta da empresa. Se um dia quiser trocar de fornecedor, o site vai junto.',
+      },
+    ],
+
+    exemplosTitulo: { titulo: 'Dois sites institucionais', chamada: 'funcionando agora.' },
+
+    perguntas: [
+      {
+        pergunta: 'Qual a diferença para uma landing page?',
+        resposta:
+          'Site institucional apresenta a empresa inteira e aceita que a pessoa navegue entre serviços e provas. Landing page tem uma ação só. Quando o negócio tem várias frentes, o institucional sustenta melhor.',
+      },
+      {
+        pergunta: 'Por que não usar WordPress ou um construtor?',
+        resposta:
+          'Porque tema pronto carrega um monte de código que o seu site não usa, e isso aparece na velocidade e na busca. Escrever do zero rende página mais leve e sem plugin para manter atualizado.',
+      },
+      {
+        pergunta: 'Quantas páginas o site precisa ter?',
+        resposta:
+          'As que tiverem conteúdo próprio para sustentar. Página criada só para engordar o menu não ajuda ninguém e ainda divide a atenção do Google entre endereços fracos.',
+      },
+      {
+        pergunta: 'Já tenho site. Dá para refazer?',
+        resposta:
+          'Dá, mantendo o mesmo endereço e o histórico que ele já tem no Google. Refazer no mesmo domínio preserva o que foi conquistado até aqui.',
+      },
+      {
+        pergunta: 'Consigo atualizar o conteúdo sozinho?',
+        resposta:
+          'Dá para deixar as partes que mudam com frequência num painel que você edita. Vale decidir isso no começo, porque muda como o site é construído.',
+      },
+      {
+        pergunta: 'E depois que entra no ar?',
+        resposta:
+          'Acompanho o período seguinte ao lançamento para ajustar o que aparecer no uso real. Domínio e hospedagem ficam configurados na conta da empresa.',
+      },
+    ],
+
+    fecho: {
+      titulo: 'Vamos montar',
+      chamada: 'o da sua empresa?',
+      texto: 'Manda uma mensagem contando o que a empresa faz e para quem. Sem compromisso.',
+    },
+  },
+  {
+    slug: 'desenvolvimento-de-sistema-web',
+    eixo: 'tipo',
+    ordem: 3,
+    icone: 'engrenagem',
+    nomeCurto: 'Sistemas sob medida',
+    resumoCurto: 'Feito pro seu processo, não pro processo genérico.',
+    filtro: (p) => p.categoria === 'Sistema',
+
+    titulo: 'Desenvolvimento de sistema web',
+    chamada: 'feito para o seu processo.',
+    resumo:
+      'Painel sob medida para o jeito que a sua operação já funciona, em vez de obrigar a equipe a se encaixar num software genérico.',
+    acaoExemplos: 'Ver um sistema no ar',
+    mensagemWhatsapp: 'Olá! Preciso de um sistema sob medida e gostaria de um orçamento.',
+
+    tituloSeo: 'Desenvolvimento de sistema web sob medida',
+    descricaoSeo:
+      'Desenvolvimento de sistema web sob medida: painel, cadastro, agenda e relatório desenhados para o processo da sua operação. Veja um sistema em uso.',
+    servicoSeo: 'Desenvolvimento de sistema web sob medida',
+    publicoSeo: 'Empresas com processo próprio que planilha já não sustenta',
+
+    problema: {
+      titulo: 'A planilha aguenta',
+      chamada: 'até o dia em que não aguenta.',
+      texto:
+        'Todo processo começa cabendo numa planilha e num grupo de WhatsApp. O problema aparece quando duas pessoas editam a mesma linha, quando alguém aceita um pedido que já estava reservado, ou quando descobrir quanto se faturou no mês vira uma tarde de trabalho. Nesse ponto a escolha costuma ser entre um software genérico que obriga a mudar o processo e um sistema feito para o processo que já existe.',
+      duvidas: [
+        'Vou ter que mudar meu jeito de trabalhar?',
+        'Minha equipe vai conseguir usar?',
+        'E os dados que já estão na planilha?',
+        'Quanto tempo até funcionar de verdade?',
+        'Dá para começar pequeno?',
+        'Quem mexe nisso se você sumir?',
+      ],
+    },
+
+    entregasTitulo: { titulo: 'Um sistema que cabe', chamada: 'na operação de hoje.' },
+    entregas: [
+      {
+        titulo: 'O processo mapeado antes de qualquer tela',
+        texto:
+          'Primeiro entender como o trabalho acontece hoje, inclusive as gambiarras que funcionam. Sistema que ignora o processo real vira sistema que a equipe contorna.',
+      },
+      {
+        titulo: 'Começo pelo que dói mais',
+        texto:
+          'A primeira entrega resolve o gargalo que mais custa dinheiro ou tempo, não o módulo mais fácil de programar. É o que faz o sistema se pagar antes de ficar pronto.',
+      },
+      {
+        titulo: 'Telas que a equipe entende sem treinamento',
+        texto:
+          'Quem vai usar não escolheu usar. Se a tela precisa de manual, ela vai ser evitada, e o dado volta para a planilha paralela.',
+      },
+      {
+        titulo: 'Níveis de acesso desde o começo',
+        texto:
+          'Quem vê o quê, quem pode apagar, quem aprova. Deixar isso para depois é como decidir onde ficam as paredes com a casa levantada.',
+      },
+      {
+        titulo: 'Relatório que responde a pergunta do dono',
+        texto:
+          'Quanto entrou, o que está em aberto, o que travou. Relatório existe para virar decisão, não para encher tela de gráfico.',
+      },
+      {
+        titulo: 'Código seu, sem depender de mim',
+        texto:
+          'O código fica no seu repositório, escrito de forma que outro desenvolvedor consiga continuar. Sistema é compromisso longo e não pode virar refém de uma pessoa.',
+      },
+    ],
+
+    exemplosTitulo: { titulo: 'Um sistema', chamada: 'em uso todo dia.' },
+
+    perguntas: [
+      {
+        pergunta: 'Por que não usar um software pronto?',
+        resposta:
+          'Se existe um pronto que serve, use, sai mais barato. Sob medida compensa quando o seu processo é a vantagem competitiva, ou quando o pronto obrigaria a equipe a trabalhar de um jeito pior do que já trabalha.',
+      },
+      {
+        pergunta: 'Dá para começar pequeno e crescer?',
+        resposta:
+          'É como recomendo fazer. A primeira versão resolve o gargalo principal e entra em uso; o resto entra depois, guiado pelo que a equipe sentir falta usando de verdade.',
+      },
+      {
+        pergunta: 'E os dados que já estão na planilha?',
+        resposta:
+          'Entram na migração inicial. Vale reservar tempo para isso porque planilha antiga costuma ter duplicidade e campo preenchido de três jeitos diferentes, e limpar isso é parte do trabalho.',
+      },
+      {
+        pergunta: 'Quanto tempo leva?',
+        resposta:
+          'Bem mais que um site, e o prazo é combinado por etapa. O que costuma demorar não é programar e sim decidir as regras: o que acontece quando dois pedidos disputam a mesma data, quem pode cancelar, o que conta como concluído.',
+      },
+      {
+        pergunta: 'Preciso de um app ou o navegador resolve?',
+        resposta:
+          'Na maioria dos casos o navegador resolve, inclusive no celular, e sai bem mais barato de manter. App faz sentido quando precisa funcionar sem internet ou usar recurso do aparelho.',
+      },
+      {
+        pergunta: 'E se eu precisar trocar de desenvolvedor?',
+        resposta:
+          'O código fica no seu repositório desde o primeiro dia, com a estrutura documentada. Você não fica preso a mim, e isso é proteção sua, não gentileza minha.',
+      },
+    ],
+
+    fecho: {
+      titulo: 'Vamos mapear',
+      chamada: 'o seu processo?',
+      texto:
+        'Manda uma mensagem contando onde a operação trava hoje. Sem compromisso, e às vezes a resposta é que você não precisa de sistema ainda.',
+    },
+  },
+  {
+    slug: 'criacao-de-loja-virtual',
+    eixo: 'tipo',
+    ordem: 4,
+    icone: 'carrinho-compras',
+    nomeCurto: 'E-commerce',
+    resumoCurto: 'Loja que carrega rápido e fecha venda.',
+    // nenhuma loja publicada no portfólio até agora, então a seção de exemplos
+    // some sozinha. Quando entrar um case de e-commerce, basta trocar este
+    // filtro por p.categoria === 'E-commerce' e a prova aparece aqui
+    filtro: () => false,
+
+    titulo: 'Criação de loja virtual',
+    chamada: 'que não perde a venda no meio.',
+    resumo:
+      'Loja em Shopify com o tema trabalhado no código, montada em volta do caminho até o pagamento e funcionando no celular, que é onde a compra acontece.',
+    acaoExemplos: '',
+    mensagemWhatsapp: 'Olá! Gostaria de um orçamento para uma loja virtual.',
+
+    tituloSeo: 'Criação de loja virtual em Shopify',
+    descricaoSeo:
+      'Criação de loja virtual em Shopify com tema personalizado no código: catálogo, frete e checkout montados em volta da venda, leves o bastante para converter no celular.',
+    servicoSeo: 'Criação de loja virtual em Shopify',
+    publicoSeo: 'Comércios e marcas que vendem produto',
+
+    problema: {
+      titulo: 'Loja não perde venda na vitrine.',
+      chamada: 'Perde no caminho até o pagamento.',
+      texto:
+        'A pessoa achou o produto, gostou do preço e mesmo assim não comprou. O que derruba costuma estar depois disso: frete que só aparece no último passo, cadastro obrigatório antes de ver o valor final, imagem que demora a carregar no 4G e forma de pagamento que ela não usa. Cada um desses degraus é gente saindo com o carrinho cheio.',
+      duvidas: [
+        'Quanto vai custar o frete até mim?',
+        'Em quanto tempo chega?',
+        'Posso pagar no PIX ou parcelar?',
+        'É seguro comprar aqui?',
+        'E se eu precisar trocar?',
+        'Tem o tamanho e a cor que eu quero?',
+      ],
+    },
+
+    entregasTitulo: { titulo: 'Uma loja montada', chamada: 'em volta do checkout.' },
+    entregas: [
+      {
+        titulo: 'Frete e pagamento sem surpresa no fim',
+        texto:
+          'O valor de entrega aparece cedo, junto do produto, e o checkout aceita PIX e cartão. Descobrir o frete no último passo é a causa mais comum de carrinho abandonado.',
+      },
+      {
+        titulo: 'Catálogo que aguenta o seu sortimento',
+        texto:
+          'Variação de tamanho, cor e grade organizadas para o cliente achar sem se perder, e para você cadastrar sem sofrer.',
+      },
+      {
+        titulo: 'Rápida no celular, que é onde se compra',
+        texto:
+          'Imagem tratada e página leve para carregar em rede móvel. Loja lenta perde a venda antes de mostrar o produto.',
+      },
+      {
+        titulo: 'Tema personalizado no código, não montado em bloco',
+        texto:
+          'A vitrine é trabalhada direto no tema, e não escolhida numa lista. É o que faz a loja não sair com a mesma cara de todas as outras da plataforma.',
+      },
+      {
+        titulo: 'Painel do Shopify para você tocar sozinho',
+        texto:
+          'Produto, preço, estoque e pedido no seu controle, sem depender do desenvolvedor. Loja em que cada alteração vira chamado não sobrevive à primeira Black Friday.',
+      },
+      {
+        titulo: 'No seu nome, com você dono dos acessos',
+        texto:
+          'Domínio, hospedagem e contas de pagamento no nome da empresa. Loja mexe com dinheiro, e esse acesso não pode estar com terceiro.',
+      },
+    ],
+
+    exemplosTitulo: { titulo: '', chamada: '' },
+
+    perguntas: [
+      {
+        pergunta: 'Dá para começar vendendo pelo WhatsApp?',
+        resposta:
+          'Dá, e para quem está começando costuma ser o caminho mais rápido: catálogo no site e o pedido saindo pela conversa, sem checkout. Quando o volume de pedido passa do ponto em que dá para responder um a um, aí o carrinho se paga.',
+      },
+      {
+        pergunta: 'Por que Shopify e não outra plataforma?',
+        resposta:
+          'Porque nela eu consigo mexer no código do tema em vez de só arrastar bloco pronto. Isso é o que separa uma loja com a sua cara de uma loja que parece a do concorrente, e ainda deixa o pagamento, o frete e a segurança por conta de quem faz isso em escala.',
+      },
+      {
+        pergunta: 'Preciso de quantos produtos para valer a pena?',
+        resposta:
+          'Não é o número, é o giro. Loja com cinco produtos que vendem todo dia justifica; loja com trezentos que ninguém procura só cria trabalho de cadastro. Vale começar pelo que já tem saída.',
+      },
+      {
+        pergunta: 'Como funciona o pagamento?',
+        resposta:
+          'Por gateway, com o dinheiro caindo direto na sua conta. As contas ficam no nome da empresa desde o começo, porque acesso a dinheiro não se compartilha.',
+      },
+      {
+        pergunta: 'E o estoque, integra com o que eu já uso?',
+        resposta:
+          'Depende do que você usa. Sistema com API pública normalmente integra; sistema fechado às vezes obriga a escolher um lado como fonte da verdade. É uma das primeiras coisas a checar.',
+      },
+      {
+        pergunta: 'Quanto tempo leva?',
+        resposta:
+          'Mais que um site institucional, porque loja tem produto, frete, pagamento e as regras de exceção. O que costuma demorar é preparar o catálogo, que é trabalho seu e vale começar antes.',
+      },
+    ],
+
+    fecho: {
+      titulo: 'Vamos conversar',
+      chamada: 'sobre a sua loja?',
+      texto:
+        'Manda uma mensagem contando o que você vende e como vende hoje. Sem formulário longo e sem compromisso.',
+    },
+  },
+  {
+    slug: 'integracoes-e-pagamentos',
+    eixo: 'tipo',
+    ordem: 5,
+    icone: 'integracoes',
+    nomeCurto: 'Integrações e pagamentos',
+    resumoCurto: 'PIX, assinatura e API conversando direito.',
+    // a prova aqui é o sistema, onde integração de verdade aparece
+    filtro: (p) => p.categoria === 'Sistema',
+
+    titulo: 'Integrações e pagamentos',
+    chamada: 'ligando o que hoje é copiar e colar.',
+    resumo:
+      'PIX, assinatura, gateway e API de terceiro conversando com o seu sistema, para o dado deixar de andar na mão de alguém.',
+    acaoExemplos: 'Ver um sistema no ar',
+    mensagemWhatsapp: 'Olá! Preciso integrar pagamento ou sistemas e gostaria de um orçamento.',
+
+    tituloSeo: 'Integração de pagamento e de API',
+    descricaoSeo:
+      'Integração de PIX, assinatura, gateway de pagamento e API entre sistemas, com tratamento de erro e retentativa. Trabalho sob medida, escrito do zero.',
+    servicoSeo: 'Integração de pagamento e de sistemas',
+    publicoSeo: 'Empresas com sistemas que precisam trocar dados entre si',
+
+    problema: {
+      titulo: 'Integração é fácil de fazer',
+      chamada: 'e difícil de fazer direito.',
+      texto:
+        'Conectar dois sistemas no dia bom é questão de horas. O trabalho de verdade é o dia ruim: a cobrança que caiu duas vezes, o retorno que chegou fora de ordem, o serviço do outro lado que ficou dez minutos fora do ar. Integração que só foi testada no caminho feliz costuma quebrar em silêncio, e quando alguém percebe, o estrago já entrou no fechamento do mês.',
+      duvidas: [
+        'E se o pagamento cair e o sistema não registrar?',
+        'Dá para cobrar assinatura todo mês sozinho?',
+        'Meu sistema antigo aceita integração?',
+        'Como eu descubro que deu erro?',
+        'Isso para de funcionar quando eles mudarem a API?',
+        'Quanto tempo leva para ligar os dois?',
+      ],
+    },
+
+    entregasTitulo: { titulo: 'Uma ligação que aguenta', chamada: 'o dia em que dá errado.' },
+    entregas: [
+      {
+        titulo: 'PIX, cartão e assinatura recorrente',
+        texto:
+          'Cobrança avulsa ou mensal com o retorno do gateway tratado, incluindo o pagamento que confirma depois e o que não confirma nunca.',
+      },
+      {
+        titulo: 'Retorno confirmado, não presumido',
+        texto:
+          'O sistema só considera pago o que o gateway confirmou, com verificação de assinatura. Confiar no que volta pelo navegador é como aceitar cheque sem olhar.',
+      },
+      {
+        titulo: 'Repetição sem cobrar duas vezes',
+        texto:
+          'Quando o mesmo aviso chega duas vezes, e chega, o efeito acontece uma só. É a diferença entre uma integração e um problema com o cliente.',
+      },
+      {
+        titulo: 'Retentativa quando o outro lado cai',
+        texto:
+          'Serviço de terceiro sai do ar, e a integração precisa esperar e tentar de novo em vez de perder a informação e seguir como se nada fosse.',
+      },
+      {
+        titulo: 'Erro que avisa alguém',
+        texto:
+          'Falha registrada e comunicada, não engolida. Integração silenciosa é a que você descobre quebrada no fechamento do mês.',
+      },
+      {
+        titulo: 'Chaves e acessos no nome da empresa',
+        texto:
+          'Conta do gateway e credenciais no seu nome, guardadas fora do código. Dinheiro e chave de acesso não ficam com fornecedor.',
+      },
+    ],
+
+    exemplosTitulo: { titulo: 'Um sistema', chamada: 'com essa engrenagem por dentro.' },
+
+    perguntas: [
+      {
+        pergunta: 'Quais gateways de pagamento você integra?',
+        resposta:
+          'Os que têm documentação e API pública, que hoje é praticamente todo mundo relevante no Brasil. A escolha costuma ser sua, pela taxa e pelo prazo de repasse, e eu ligo no que você escolher.',
+      },
+      {
+        pergunta: 'Dá para cobrar assinatura mensal automaticamente?',
+        resposta:
+          'Dá. O gateway cuida da cobrança recorrente e o sistema reage ao que ele responde: liberar acesso quando paga, avisar quando falha e suspender quando não paga mesmo. A parte trabalhosa é justamente essa segunda metade.',
+      },
+      {
+        pergunta: 'Meu sistema atual é antigo. Dá para integrar?',
+        resposta:
+          'Se ele expõe alguma API ou banco acessível, dá. Se é totalmente fechado, às vezes o caminho é uma ponte intermediária, e isso muda o tamanho do trabalho. É a primeira coisa a checar antes de prometer prazo.',
+      },
+      {
+        pergunta: 'E quando eles mudarem a API do lado deles?',
+        resposta:
+          'Acontece, e por isso a integração fica isolada num ponto só do código. Quando o fornecedor muda, se ajusta ali, sem mexer no resto do sistema.',
+      },
+      {
+        pergunta: 'Como eu sei que está tudo funcionando?',
+        resposta:
+          'Pelo registro do que passou e pelo aviso quando algo falha. Integração boa é a que grita quando quebra, não a que fica quieta.',
+      },
+      {
+        pergunta: 'Isso é um projeto separado ou parte de um sistema?',
+        resposta:
+          'Pode ser os dois. Entra dentro de um sistema que estou fazendo, ou como trabalho isolado ligando coisas que você já tem.',
+      },
+    ],
+
+    fecho: {
+      titulo: 'Vamos ligar',
+      chamada: 'o que hoje é manual?',
+      texto: 'Manda uma mensagem contando quais sistemas precisam conversar. Sem compromisso.',
+    },
+  },
+  {
+    slug: 'design-de-interface',
+    eixo: 'tipo',
+    ordem: 6,
+    icone: 'design',
+    nomeCurto: 'UI/UX e interface',
+    resumoCurto: 'Bonito de ver e óbvio de usar.',
+    // todo projeto do portfólio passou por layout aprovado antes do código, então
+    // a prova aqui é a lista inteira
+    filtro: (p) => Boolean(p.slug),
+
+    titulo: 'Design de interface',
+    chamada: 'aprovado antes de virar código.',
+    resumo:
+      'O layout inteiro desenhado e aprovado antes da primeira linha de código, porque mudar um desenho custa minutos e mudar um site pronto custa dias.',
+    acaoExemplos: 'Ver os projetos no ar',
+    mensagemWhatsapp: 'Olá! Gostaria de um orçamento para design de interface.',
+
+    tituloSeo: 'Design de interface: UI e UX',
+    descricaoSeo:
+      'Design de interface para site e sistema: layout completo aprovado antes do código, pensado para o celular primeiro e para quem vai usar todo dia.',
+    servicoSeo: 'Design de interface e experiência do usuário',
+    publicoSeo: 'Empresas e profissionais que precisam de site ou sistema',
+
+    problema: {
+      titulo: 'Mudar um desenho custa minutos.',
+      chamada: 'Mudar um site pronto custa dias.',
+      texto:
+        'O jeito caro de descobrir que uma tela não funciona é descobrir com ela já programada. É quando arrastar um botão vira meio dia de trabalho, e quando o cliente deixa de pedir ajustes que deveria pedir, para não atrasar a entrega. Por isso o layout inteiro vem primeiro: nessa fase, discordar é barato e mudar de ideia é esperado.',
+      duvidas: [
+        'Vou ver como fica antes de aprovar?',
+        'Posso pedir mudança sem virar retrabalho?',
+        'Funciona bem no celular?',
+        'Minha identidade visual vai ser respeitada?',
+        'E se eu não tiver identidade nenhuma?',
+        'Quem usa todo dia vai achar fácil?',
+      ],
+    },
+
+    entregasTitulo: { titulo: 'O projeto inteiro visível', chamada: 'antes de existir.' },
+    entregas: [
+      {
+        titulo: 'Layout completo antes do código',
+        texto:
+          'Todas as telas desenhadas e aprovadas por você. Nessa fase ajuste é conversa; depois de programado, é obra.',
+      },
+      {
+        titulo: 'Celular como ponto de partida',
+        texto:
+          'A maior parte das visitas chega pelo telefone. Desenhar primeiro no menor tamanho evita a tela que só funciona bem no monitor de quem a desenhou.',
+      },
+      {
+        titulo: 'Hierarquia guiando o olho',
+        texto:
+          'O que importa aparece primeiro, com tamanho e contraste fazendo esse trabalho. Tudo em destaque é o mesmo que nada em destaque.',
+      },
+      {
+        titulo: 'Sua identidade respeitada, ou construída',
+        texto:
+          'Se você já tem marca, cor e tipografia, o desenho parte delas. Se não tem, a gente define o mínimo para o projeto não sair com cara de genérico.',
+      },
+      {
+        titulo: 'Contraste e tamanho que dá para ler',
+        texto:
+          'Texto legível, área de toque que o dedo acerta e contraste suficiente. Acessibilidade aqui não é caridade, é gente conseguindo comprar.',
+      },
+      {
+        titulo: 'Estados que a interface real precisa',
+        texto:
+          'Carregando, vazio, erro e sucesso. Tela desenhada só no estado bonito vira improviso na hora de programar.',
+      },
+    ],
+
+    exemplosTitulo: { titulo: 'Todo projeto passou', chamada: 'por essa etapa.' },
+
+    perguntas: [
+      {
+        pergunta: 'Design vem separado ou junto com o site?',
+        resposta:
+          'Normalmente junto, porque é a mesma entrega: o layout aprovado é a primeira etapa do projeto. Também faço só o desenho, para quem já tem quem programe.',
+      },
+      {
+        pergunta: 'Quantas rodadas de ajuste eu tenho?',
+        resposta:
+          'As necessárias para você aprovar de verdade, e é justamente por isso que essa fase vem antes do código. Ajuste aqui é barato; o combinado sobre escopo fica no contrato.',
+      },
+      {
+        pergunta: 'Não tenho logo nem identidade visual. Isso trava?',
+        resposta:
+          'Não trava. Dá para definir o mínimo, cor, tipografia e tom, junto com o projeto. Marca completa é outro trabalho, mas o site não precisa esperar por ela.',
+      },
+      {
+        pergunta: 'Você usa Figma? Eu recebo os arquivos?',
+        resposta:
+          'Uso, e você recebe. O arquivo é seu, e serve para qualquer outro profissional continuar o trabalho depois.',
+      },
+      {
+        pergunta: 'UI e UX são a mesma coisa?',
+        resposta:
+          'Não. UX é decidir o caminho que a pessoa percorre e o que ela precisa em cada passo; UI é como isso aparece na tela. Projeto pequeno resolve os dois na mesma etapa, mas as decisões são de naturezas diferentes.',
+      },
+      {
+        pergunta: 'Vale redesenhar um sistema que já existe?',
+        resposta:
+          'Vale quando a equipe contorna a ferramenta, quando todo mundo novo precisa de treinamento ou quando o erro se repete sempre no mesmo lugar. Isso é problema de interface, não de gente desatenta.',
+      },
+    ],
+
+    fecho: {
+      titulo: 'Vamos desenhar',
+      chamada: 'antes de construir?',
+      texto: 'Manda uma mensagem contando o que precisa ser feito. Sem compromisso.',
+    },
+  },
 ]
 
 // as quatro etapas são as mesmas em todo projeto, então moram fora dos nichos
@@ -574,8 +1260,15 @@ export function servicoPorSlug(slug) {
   return SERVICOS.find((s) => s.slug === slug) || null
 }
 
-// usado pelas páginas de case para achar o serviço do nicho do projeto e oferecer
-// o caminho de volta. O primeiro que casar com o setor vence
+// as páginas por tipo de projeto alimentam a /servicos e o menu
+export const SERVICOS_POR_TIPO = SERVICOS.filter((s) => s.eixo === 'tipo')
+export const SERVICOS_POR_NICHO = SERVICOS.filter((s) => s.eixo === 'nicho')
+
+// usado pelas páginas de case para oferecer o caminho de volta. Só considera as
+// páginas por nicho: o case já vive dentro de uma categoria, então mandar quem
+// leu o case da Jamilly para /criacao-de-landing-page seria mandá-lo de volta
+// para onde ele já está. O que agrega é o segmento
 export function servicoDoSetor(setor = '') {
-  return SERVICOS.find((s) => s.filtroSetor.test(setor)) || null
+  const projeto = { setor }
+  return SERVICOS_POR_NICHO.find((s) => s.filtro(projeto)) || null
 }

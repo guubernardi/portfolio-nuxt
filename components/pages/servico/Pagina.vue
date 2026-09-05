@@ -240,7 +240,7 @@ const linkWhatsapp =
 // a prova sai do próprio portfólio: se entrar outro projeto do nicho, ele
 // aparece aqui sozinho, sem precisar editar esta página
 const exemplos = computed(() =>
-  PROJETOS.filter((p) => p.slug && servico.filtroSetor.test(p.setor))
+  PROJETOS.filter((p) => p.slug && servico.filtro(p))
 )
 
 const aberta = ref(0)

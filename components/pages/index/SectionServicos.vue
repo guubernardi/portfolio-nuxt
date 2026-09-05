@@ -26,6 +26,11 @@
         <p class="servico__texto">{{ servico.texto }}</p>
       </li>
     </ul>
+
+    <NuxtLink to="/servicos" class="servicos__todos">
+      Ver como cada serviço funciona
+      <SvgIcone nome="seta-direita" />
+    </NuxtLink>
   </section>
 </template>
 
@@ -160,6 +165,39 @@ onBeforeUnmount(() => {
     font-family: var(--light)
     font-size: 16px
     color: rgba(138, 166, 240, 0.72)
+
+  // mesmo botao da secao de projetos: a home mostra a amostra, a pagina cheia
+  // fica a um clique
+  &__todos
+    position: relative
+    z-index: 1
+    display: flex
+    align-items: center
+    justify-content: center
+    gap: 10px
+    width: fit-content
+    margin: 44px auto 0 auto
+    padding: 15px 30px
+    border: 1px solid rgba(140, 165, 255, 0.24)
+    border-radius: 12px
+    background: rgba(30, 46, 115, 0.38)
+    font-family: var(--semibold)
+    font-size: 15px
+    color: var(--cor-branco)
+    text-decoration: none
+    transition: background 0.4s ease, border-color 0.4s ease
+
+    :deep(svg)
+      width: 14px
+      height: 14px
+      transition: transform 0.4s ease
+
+    &:hover
+      background: rgba(125, 155, 255, 0.16)
+      border-color: rgba(140, 165, 255, 0.34)
+
+      :deep(svg)
+        transform: translateX(4px)
 
   &__grade
     display: grid
