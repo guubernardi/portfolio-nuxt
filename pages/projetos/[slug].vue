@@ -150,7 +150,10 @@
           Chamar no WhatsApp
           <SvgIcone nome="whatsapp" />
         </a>
-        <NuxtLink to="/projetos" class="acao acao--secundaria">Ver todos os projetos</NuxtLink>
+        <NuxtLink v-if="paginaDoServico" :to="paginaDoServico" class="acao acao--secundaria">
+          Quero um site assim
+        </NuxtLink>
+        <NuxtLink v-else to="/projetos" class="acao acao--secundaria">Ver todos os projetos</NuxtLink>
       </div>
     </section>
 
@@ -211,6 +214,12 @@ if (!projeto) {
 
 // sistema nao e pagina: os titulos das secoes acompanham o tipo do projeto
 const artigo = projeto.categoria.toLowerCase().includes('sistema') ? 'o sistema' : 'a página'
+
+// quando existe pagina de servico para o nicho deste case, o fecho leva para
+// ela em vez de devolver para a listagem
+const SERVICOS_POR_NICHO = [{ teste: /psicolog/i, url: '/site-para-psicologo' }]
+const paginaDoServico =
+  SERVICOS_POR_NICHO.find((s) => s.teste.test(projeto.setor))?.url || null
 
 const ano = new Date().getFullYear()
 const outros = PROJETOS.filter((p) => p.id !== projeto.id).slice(0, 3)

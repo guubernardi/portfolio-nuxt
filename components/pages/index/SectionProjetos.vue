@@ -12,14 +12,7 @@
     </div>
 
     <ul ref="listaRef" class="projetos__grade">
-      <li
-        v-for="(projeto, i) in projetos"
-        :key="projeto.id"
-        class="case"
-        :class="{ 'case--destaque': ehLargo(i) }"
-      >
-        <!-- quem tem case abre a página interna; quem ainda não tem vai direto
-             para o site publicado, em nova aba como antes -->
+      <li v-for="(projeto, i) in projetosDestaque" :key="projeto.id" class="case">
         <NuxtLink
           class="case__area"
           :to="destinoDoProjeto(projeto)"
@@ -36,28 +29,20 @@
               :alt="`${projeto.nome} — ${projeto.categoria} para ${projeto.setor}`"
               :width="projeto.largura"
               :height="projeto.altura"
-              :loading="i === 0 ? 'eager' : 'lazy'"
-              :fetchpriority="i === 0 ? 'high' : 'auto'"
+              :loading="i < 2 ? 'eager' : 'lazy'"
               decoding="async"
             />
           </div>
 
           <div class="case__base">
-            <span v-if="i === 0" class="case__selo">Projeto em destaque</span>
-
             <div class="case__topo">
               <h3 class="case__nome">{{ projeto.nome }}</h3>
               <span class="case__tag">{{ projeto.categoria }}</span>
             </div>
 
-            <div class="case__rodape">
-              <p class="case__setor">{{ projeto.setor }}</p>
-              <span v-if="i !== 0" class="case__seta" aria-hidden="true">
-                <SvgIcone nome="seta-direita" />
-              </span>
-            </div>
+            <p class="case__setor">{{ projeto.setor }}</p>
 
-            <span v-if="i === 0" class="case__cta">
+            <span class="case__cta">
               {{ projeto.slug ? 'Ver o case' : 'Ver projeto' }}
               <SvgIcone nome="seta-direita" />
             </span>
@@ -67,7 +52,7 @@
     </ul>
 
     <NuxtLink to="/projetos" class="projetos__todos">
-      Ver todos os projetos
+      Ver todos os {{ projetos.length }} projetos
       <SvgIcone nome="seta-direita" />
     </NuxtLink>
   </section>
@@ -80,12 +65,10 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { SITE_URL, ID_ORGANIZACAO } from '~/helpers/site'
 import { PROJETOS as projetos, destinoDoProjeto } from '~/helpers/projetos'
 
-// o primeiro card ocupa a linha inteira. Quando o total e par, o ultimo ficaria
-// sozinho na ponta, entao ele tambem estica e a grade fecha sem celula vazia
-function ehLargo(i) {
-  if (i === 0) return true
-  return projetos.length % 2 === 0 && i === projetos.length - 1
-}
+// amostra escolhida a mao: um de cada tipo de cliente, e nao os primeiros da
+// lista. A lista inteira mora em /projetos
+const DESTAQUES = ['jamilly-ferreira', 'conecta-contabil', 'city-toys', 'patas-felizes']
+const projetosDestaque = DESTAQUES.map((slug) => projetos.find((p) => p.slug === slug)).filter(Boolean)
 
 const secaoRef = ref(null)
 const rotuloRef = ref(null)
@@ -105,8 +88,8 @@ useHead({
         '@type': 'ItemList',
         '@id': `${SITE_URL}/#projetos`,
         name: 'Projetos publicados',
-        numberOfItems: projetos.length,
-        itemListElement: projetos.map((projeto, i) => ({
+        numberOfItems: projetosDestaque.length,
+        itemListElement: projetosDestaque.map((projeto, i) => ({
           '@type': 'ListItem',
           position: i + 1,
           item: {
@@ -265,77 +248,6 @@ onBeforeUnmount(() => {
     list-style: none
 
 .case
-  // o destaque ocupa a linha toda e vira horizontal: imagem grande de um lado,
-  // informação do outro, em vez de simplesmente esticar o card padrão
-  &--destaque
-    grid-column: 1 / -1
-
-    .case__area
-      display: grid
-      // imagem dominante e coluna de texto estreita: com ela larga demais o
-      // conteúdo fica solto e sobra vazio, que era o problema
-      grid-template-columns: minmax(0, 1.75fr) minmax(0, 1fr)
-      align-items: center
-      gap: 40px
-      padding: 14px
-
-    // conteúdo ancorado no topo do próprio bloco, não espalhado na altura toda
-    .case__base
-      display: flex
-      flex-direction: column
-      align-items: flex-start
-      padding: 0 40px 0 8px
-      gap: 0
-
-    .case__topo
-      margin-bottom: 14px
-
-    .case__nome
-      font-size: clamp(26px, 2.3vw, 34px)
-
-    // sem space-between: o setor gruda no nome em vez de ir pra outra ponta
-    .case__rodape
-      justify-content: flex-start
-
-    .case__setor
-      font-size: 16px
-
-  &__selo
-    display: inline-block
-    margin-bottom: 18px
-    padding: 6px 13px
-    border: 1px solid rgba(125, 155, 255, 0.28)
-    border-radius: 100px
-    background: rgba(30, 46, 115, 0.4)
-    font-family: var(--semibold)
-    font-size: 10.5px
-    letter-spacing: 1.4px
-    text-transform: uppercase
-    color: #8aa6f0
-
-  // no card grande a seta solta num círculo fica perdida; um botão com rótulo
-  // ocupa o espaço e diz o que acontece no clique
-  &__cta
-    display: inline-flex
-    align-items: center
-    gap: 11px
-    margin-top: 30px
-    padding: 14px 26px
-    border: 1px solid rgba(255, 255, 255, 0.16)
-    border-radius: 12px
-    background: rgba(255, 255, 255, 0.04)
-    font-family: var(--semibold)
-    font-size: 14px
-    line-height: 1
-    color: var(--cor-branco)
-    transition: background 0.4s ease, border-color 0.4s ease
-
-    :deep(svg)
-      display: block
-      width: 14px
-      height: 14px
-      transition: transform 0.4s ease
-
   &__area
     display: flex
     flex-direction: column
@@ -354,10 +266,6 @@ onBeforeUnmount(() => {
 
       .case__midia img
         transform: scale(1.03)
-
-      .case__seta
-        background: var(--cor-azul-forte)
-        border-color: var(--cor-azul-forte)
 
       .case__cta
         background: rgba(125, 155, 255, 0.12)
@@ -417,33 +325,34 @@ onBeforeUnmount(() => {
     text-transform: uppercase
     color: rgba(255, 255, 255, 0.7)
 
-  &__rodape
-    display: flex
-    align-items: center
-    justify-content: space-between
-    gap: 20px
-
   &__setor
     margin: 0
     font-family: var(--light)
     font-size: 15px
     color: rgba(255, 255, 255, 0.5)
 
-  &__seta
-    display: flex
+  // o estilo do botao vivia no bloco do card destaque e saiu junto com ele;
+  // aqui ele volta dimensionado para o card padrao
+  &__cta
+    display: inline-flex
     align-items: center
-    justify-content: center
-    flex-shrink: 0
-    width: 42px
-    height: 42px
-    border: 1px solid rgba(255, 255, 255, 0.16)
-    border-radius: 50%
+    align-self: flex-start
+    gap: 10px
+    margin-top: 6px
+    padding: 12px 22px
+    border: 1px solid rgba(255, 255, 255, 0.14)
+    border-radius: 12px
+    background: rgba(255, 255, 255, 0.03)
+    font-family: var(--semibold)
+    font-size: 14px
+    line-height: 1
     color: var(--cor-branco)
     transition: background 0.4s ease, border-color 0.4s ease
 
     :deep(svg)
-      width: 16px
-      height: 16px
+      width: 13px
+      height: 13px
+      transition: transform 0.4s ease
 
 @media (max-width: 1250px)
   .projetos
@@ -462,17 +371,6 @@ onBeforeUnmount(() => {
 
     &__grade
       grid-template-columns: 1fr
-
-  // sem largura pra duas colunas, o destaque volta a ser um card comum empilhado
-  .case--destaque .case__area
-    display: flex
-    flex-direction: column
-    gap: 0
-    padding: 14px 14px 26px
-
-  .case--destaque .case__base
-    padding: 22px 10px 0
-    gap: 18px
 
   .case
     &__indice

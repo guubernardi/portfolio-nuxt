@@ -40,6 +40,12 @@ const DESCRICAO =
 useHead({
   htmlAttrs: { lang: 'pt-BR' },
 
+  // .revelar esconde o conteúdo esperando o observer do plugins/revelar.js. Sem
+  // JS esse observer nunca roda, então aqui as seções voltam a ficar de pé
+  noscript: [
+    { children: '<style>.revelar{opacity:1!important;transform:none!important}</style>' },
+  ],
+
   // páginas passam só o próprio assunto; a marca entra aqui uma vez só
   titleTemplate: (titulo) =>
     titulo ? `${titulo} | ${SITE_NOME}` : `${SITE_NOME} | ${SITE_CARGO}`,

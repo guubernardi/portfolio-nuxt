@@ -19,3 +19,24 @@
   100%
     opacity: 0
     visibility: hidden
+
+// Revelação no scroll, par do plugins/revelar.js. A classe já vem no HTML do
+// servidor: assim não existe o quadro em que o conteúdo aparece inteiro para só
+// depois o JS escondê-lo. O atraso entra por --atraso, escrito pela diretiva.
+.revelar
+  opacity: 0
+  transform: translateY(24px)
+  transition: opacity 0.6s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1)
+  transition-delay: var(--atraso, 0ms)
+
+  &.revelado
+    opacity: 1
+    transform: none
+
+// como o estado inicial mora no HTML, quem pediu menos movimento precisa de uma
+// saída no próprio CSS, senão a página some para essas pessoas
+@media (prefers-reduced-motion: reduce)
+  .revelar
+    opacity: 1
+    transform: none
+    transition: none

@@ -8,63 +8,57 @@
     <NavTopo />
 
     <section class="abertura">
-      <span class="abertura__etiqueta">
-        <b>Portfólio</b>
-        <span class="abertura__risco" aria-hidden="true"></span>
-        Projetos no ar
-      </span>
+      <div class="selo">
+        <span class="selo__ponto"></span>
+        {{ projetos.length }} projetos no ar
+      </div>
 
       <h1 class="abertura__titulo">
-        Trabalho que já<br />
-        <span class="abertura__titulo--leve">está no ar.</span>
+        Cada projeto aqui<br />
+        <span class="abertura__titulo--leve">está rodando.</span>
       </h1>
 
-      <div class="abertura__base">
-        <p class="abertura__texto">
-          De landing page a sistema sob medida. Cada projeto aqui foi desenhado e escrito do
-          zero, sem template, e continua rodando para o cliente que pediu.
-        </p>
-
-        <ul class="numeros">
-          <li v-for="n in numeros" :key="n.rotulo" class="numero">
-            <span class="numero__valor">{{ n.valor }}</span>
-            <span class="numero__rotulo">{{ n.rotulo }}</span>
-          </li>
-        </ul>
-      </div>
+      <p class="abertura__texto">
+        De landing page a sistema sob medida. Tudo desenhado e escrito do zero, sem template,
+        e entregue no nome do cliente.
+      </p>
     </section>
 
-    <section class="lista">
-      <span class="lista__rotulo"><b>01</b> Todos os projetos</span>
+    <!-- agrupado por tipo: quem chega procurando landing page não precisa
+         garimpar no meio de sistema, e cada grupo é a porta de um serviço -->
+    <section v-for="(grupo, i) in grupos" :key="grupo.categoria" class="grupo">
+      <div class="grupo__cabecalho">
+        <span class="grupo__rotulo">
+          <b>{{ String(i + 1).padStart(2, '0') }}</b>
+          {{ grupo.categoria }}
+        </span>
+        <span class="grupo__contagem">
+          {{ grupo.itens.length }}
+          {{ grupo.itens.length === 1 ? 'projeto' : 'projetos' }}
+        </span>
+      </div>
 
       <ul class="grade">
-        <li v-for="(projeto, i) in projetos" :key="projeto.id" class="item">
-          <!-- quem tem case abre a pagina interna; quem nao tem vai pro site -->
+        <li v-for="projeto in grupo.itens" :key="projeto.id" class="item">
           <NuxtLink
             class="item__area"
             :to="destinoDoProjeto(projeto)"
             :target="projeto.slug ? null : '_blank'"
             :rel="projeto.slug ? null : 'noopener'"
           >
-            <span class="item__indice">{{ String(i + 1).padStart(2, '0') }}</span>
-
             <div class="item__midia">
               <img
                 :src="projeto.imagem"
                 :alt="`${projeto.nome}, ${projeto.categoria.toLowerCase()} para ${projeto.setor.toLowerCase()}`"
                 :width="projeto.largura"
                 :height="projeto.altura"
-                :loading="i < 2 ? 'eager' : 'lazy'"
+                :loading="i === 0 ? 'eager' : 'lazy'"
                 decoding="async"
               />
             </div>
 
             <div class="item__info">
-              <div class="item__topo">
-                <h2 class="item__nome">{{ projeto.nome }}</h2>
-                <span class="item__tag">{{ projeto.categoria }}</span>
-              </div>
-
+              <h2 class="item__nome">{{ projeto.nome }}</h2>
               <p class="item__setor">{{ projeto.setor }}</p>
 
               <span class="item__acao">
@@ -105,8 +99,9 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
 import Svgs from '~/components/global/svgs/Svgs.vue'
-import { PROJETOS as projetos, PROJETOS_COM_CASE, destinoDoProjeto } from '~/helpers/projetos'
+import { PROJETOS as projetos, destinoDoProjeto } from '~/helpers/projetos'
 import { SITE_URL, SITE_NOME, TELEFONE, ID_ORGANIZACAO, ID_SITE, urlCanonica } from '~/helpers/site'
 
 definePageMeta({ layout: false })
@@ -117,13 +112,30 @@ const linkWhatsapp =
   `https://wa.me/${TELEFONE.replace('+', '')}?text=` +
   encodeURIComponent('Olá! Vi os projetos no site e gostaria de um orçamento.')
 
-// contados a partir dos próprios dados: acrescentar um projeto atualiza os
-// números sozinho, sem risco de a página afirmar algo que deixou de ser verdade
-const numeros = [
-  { valor: projetos.length, rotulo: 'Projetos no ar' },
-  { valor: PROJETOS_COM_CASE.length, rotulo: 'Cases detalhados' },
-  { valor: new Set(projetos.map((p) => p.setor)).size, rotulo: 'Segmentos atendidos' },
-]
+// ordem fixa: começa pelo serviço mais procurado e termina no mais específico.
+// categoria que não estiver aqui entra no fim, sem sumir da página
+const ORDEM = ['Landing page', 'Site institucional', 'Sistema']
+const PLURAL = {
+  'Landing page': 'Landing pages',
+  'Site institucional': 'Sites institucionais',
+  Sistema: 'Sistemas',
+}
+
+const grupos = computed(() => {
+  const porCategoria = new Map()
+  for (const projeto of projetos) {
+    if (!porCategoria.has(projeto.categoria)) porCategoria.set(projeto.categoria, [])
+    porCategoria.get(projeto.categoria).push(projeto)
+  }
+
+  return [...porCategoria.entries()]
+    .sort((a, b) => {
+      const posA = ORDEM.indexOf(a[0])
+      const posB = ORDEM.indexOf(b[0])
+      return (posA === -1 ? 99 : posA) - (posB === -1 ? 99 : posB)
+    })
+    .map(([categoria, itens]) => ({ categoria: PLURAL[categoria] || categoria, itens }))
+})
 
 const canonica = urlCanonica('/projetos')
 
@@ -196,7 +208,7 @@ useHead({
   min-height: 100svh
   overflow: hidden
   color: var(--cor-branco)
-  background: linear-gradient(180deg, #05142a 0%, #020a18 14%, #01060f 38%, #020814 66%, #04101f 100%)
+  background: linear-gradient(180deg, #05142a 0%, #020a18 14%, #01060f 40%, #020814 68%, #04101f 100%)
 
 .luz
   position: absolute
@@ -223,123 +235,124 @@ useHead({
   background: linear-gradient(90deg, transparent 0%, rgba(160, 195, 255, 0.5) 24%, rgba(255, 255, 255, 0.9) 50%, rgba(160, 195, 255, 0.5) 76%, transparent 100%)
   box-shadow: 0 0 28px 4px rgba(130, 175, 255, 0.4)
 
+// abertura centralizada, como as seções da home: é o que diferencia daquele
+// bloco alinhado à esquerda com números na ponta
 .abertura
   position: relative
   z-index: 1
   width: 100%
-  max-width: 1720px
+  max-width: 900px
   margin: 0 auto
   padding: 190px 60px 0 60px
-
-  &__etiqueta
-    display: inline-flex
-    align-items: center
-    gap: 16px
-    font-family: var(--light)
-    font-size: 12px
-    letter-spacing: 2.4px
-    text-transform: uppercase
-    color: rgba(255, 255, 255, 0.42)
-
-    b
-      font-family: var(--semibold)
-      color: rgba(255, 255, 255, 0.8)
-
-  &__risco
-    display: block
-    width: 54px
-    height: 1px
-    background: rgba(255, 255, 255, 0.22)
+  text-align: center
 
   &__titulo
-    margin: 22px 0 0 0
+    margin: 30px 0 0 0
     font-family: var(--semibold)
-    font-size: clamp(42px, 7vw, 96px)
-    line-height: 1.02
+    font-size: clamp(38px, 5.6vw, 74px)
+    line-height: 1.05
     letter-spacing: -0.03em
 
     &--leve
       font-family: var(--light)
       color: #8aa6f0
 
-  // texto e números na mesma linha, separados por um filete: o mesmo corte
-  // horizontal que a home usa entre hero e seções
-  &__base
-    display: grid
-    grid-template-columns: minmax(0, 1fr) auto
-    align-items: end
-    gap: 60px
-    margin: 54px 0 0 0
-    padding: 40px 0 0 0
-    border-top: 1px solid rgba(255, 255, 255, 0.09)
-
   &__texto
-    max-width: 540px
-    margin: 0
+    max-width: 620px
+    margin: 24px auto 0 auto
     font-family: var(--light)
-    font-size: clamp(15px, 1.3vw, 17px)
-    line-height: 1.7
+    font-size: clamp(15px, 1.35vw, 18px)
+    line-height: 1.68
     color: rgba(255, 255, 255, 0.6)
 
-.numeros
-  display: flex
-  gap: 54px
-  margin: 0
-  padding: 0
-  list-style: none
+// mesmo selo do hero da home
+.selo
+  display: inline-flex
+  align-items: center
+  gap: 10px
+  padding: 9px 20px
+  border: 1px solid rgba(255, 255, 255, 0.14)
+  border-radius: 100px
+  background: rgba(255, 255, 255, 0.04)
+  backdrop-filter: blur(10px)
+  -webkit-backdrop-filter: blur(10px)
+  font-family: var(--light)
+  font-size: 14px
+  color: rgba(255, 255, 255, 0.78)
 
-.numero
-  &__valor
-    display: block
-    font-family: var(--semibold)
-    font-size: clamp(30px, 3.2vw, 42px)
-    line-height: 1
-    letter-spacing: -0.02em
+  &__ponto
+    width: 7px
+    height: 7px
+    border-radius: 50%
+    background: #46e08a
+    box-shadow: 0 0 0 4px rgba(70, 224, 138, 0.16)
 
-  &__rotulo
-    display: block
-    margin-top: 10px
-    font-family: var(--light)
-    font-size: 11px
-    letter-spacing: 1.6px
-    text-transform: uppercase
-    color: rgba(255, 255, 255, 0.42)
-
-.lista
+.grupo
   position: relative
   z-index: 1
   width: 100%
   max-width: 1720px
   margin: 0 auto
-  padding: 130px 60px 0 60px
+  padding: 110px 60px 0 60px
+
+  &__cabecalho
+    display: flex
+    align-items: center
+    justify-content: space-between
+    gap: 20px
+    margin-bottom: 30px
+    padding-bottom: 20px
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08)
 
   &__rotulo
     display: inline-flex
     align-items: center
-    gap: 10px
-    margin-bottom: 34px
-    font-family: var(--light)
-    font-size: 12px
-    letter-spacing: 2.4px
-    text-transform: uppercase
-    color: rgba(255, 255, 255, 0.45)
+    gap: 12px
+    font-family: var(--semibold)
+    font-size: clamp(17px, 1.7vw, 22px)
+    color: var(--cor-branco)
 
     b
       font-family: var(--semibold)
       font-style: italic
-      color: rgba(255, 255, 255, 0.75)
+      font-size: 13px
+      color: rgba(138, 166, 240, 0.8)
+
+  &__contagem
+    font-family: var(--light)
+    font-size: 13px
+    letter-spacing: 1.2px
+    text-transform: uppercase
+    color: rgba(255, 255, 255, 0.38)
 
 .grade
   display: grid
   grid-template-columns: repeat(2, 1fr)
-  gap: 28px
+  gap: 26px
   margin: 0
   padding: 0
   list-style: none
 
 .item
+  // grupo com quantidade impar deixaria o ultimo card sozinho na linha: ele
+  // estica e vira horizontal, como o destaque da home
+  &:last-child:nth-child(odd)
+    grid-column: 1 / -1
+
+    .item__area
+      display: grid
+      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr)
+      align-items: center
+      gap: 34px
+
+    .item__info
+      align-content: center
+      padding: 0 26px 0 6px
+
+    .item__nome
+      font-size: clamp(22px, 2vw, 30px)
+
   &__area
-    position: relative
     display: block
     padding: 14px 14px 24px 14px
     border: 1px solid rgba(255, 255, 255, 0.07)
@@ -358,16 +371,6 @@ useHead({
         :deep(svg)
           transform: translateX(4px)
 
-  &__indice
-    position: absolute
-    top: 30px
-    right: 30px
-    z-index: 2
-    font-family: var(--semibold)
-    font-style: italic
-    font-size: 13px
-    color: rgba(255, 255, 255, 0.5)
-
   &__midia
     img
       display: block
@@ -378,13 +381,11 @@ useHead({
       border-radius: 14px
 
   &__info
-    padding: 22px 12px 0 12px
-
-  &__topo
     display: flex
     flex-wrap: wrap
-    align-items: center
-    gap: 12px
+    align-items: baseline
+    gap: 0 14px
+    padding: 22px 12px 0 12px
 
   &__nome
     margin: 0
@@ -392,27 +393,18 @@ useHead({
     font-size: clamp(19px, 1.6vw, 23px)
     color: var(--cor-branco)
 
-  &__tag
-    padding: 6px 14px
-    border: 1px solid rgba(255, 255, 255, 0.16)
-    border-radius: 100px
-    font-family: var(--semibold)
-    font-size: 11px
-    letter-spacing: 1.2px
-    text-transform: uppercase
-    color: rgba(255, 255, 255, 0.7)
-
   &__setor
-    margin: 10px 0 0 0
+    margin: 0
     font-family: var(--light)
     font-size: 15px
-    color: rgba(255, 255, 255, 0.5)
+    color: rgba(255, 255, 255, 0.48)
 
   &__acao
     display: inline-flex
     align-items: center
     gap: 9px
-    margin: 20px 0 0 0
+    width: 100%
+    margin: 18px 0 0 0
     font-family: var(--semibold)
     font-size: 14px
     color: #8aa6f0
@@ -550,10 +542,9 @@ useHead({
     font-size: 13px
     color: rgba(255, 255, 255, 0.32)
 
-// mesmos pontos de quebra da home
 @media (max-width: 1250px)
   .abertura,
-  .lista,
+  .grupo,
   .fecho,
   .rodape
     padding-left: 32px
@@ -564,22 +555,14 @@ useHead({
     right: 32px
 
 @media (max-width: 1000px)
-  .abertura__base
-    grid-template-columns: 1fr
-    align-items: start
-    gap: 38px
-
-  .numeros
-    gap: 38px
-
   .grade
     grid-template-columns: 1fr
 
   .abertura
     padding-top: 150px
 
-  .lista
-    padding-top: 96px
+  .grupo
+    padding-top: 84px
 
   .fecho
     padding-top: 104px
@@ -589,7 +572,7 @@ useHead({
 
 @media (max-width: 820px)
   .abertura,
-  .lista,
+  .grupo,
   .fecho,
   .rodape
     padding-left: 20px
@@ -598,8 +581,4 @@ useHead({
   .rodape::before
     left: 20px
     right: 20px
-
-  .numeros
-    flex-wrap: wrap
-    gap: 28px 40px
 </style>

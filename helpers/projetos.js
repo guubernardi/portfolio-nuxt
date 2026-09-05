@@ -108,6 +108,8 @@ export const PROJETOS = [
 
   {
     id: 'conectados',
+    slug: 'conectados',
+    titulo: 'Landing page para evento',
     nome: 'Conectados',
     categoria: 'Landing page',
     setor: 'Conferência de jovens',
@@ -115,17 +117,88 @@ export const PROJETOS = [
     largura: 1200,
     altura: 675,
     site: 'https://conectados-sigma.vercel.app/',
-  },
 
-  {
-    id: 'tiro-de-guerra',
-    nome: 'Rifa Tiro de Guerra',
-    categoria: 'Sistema',
-    setor: 'Rifas online com PIX',
-    imagem: '/images/projetos/tiro-de-guerra.webp',
-    largura: 1200,
-    altura: 675,
-    site: 'https://tg-azure.vercel.app',
+    resumo:
+      'A página de uma conferência de dois dias, feita para vender ingresso enquanto o assunto está quente.',
+
+    ficha: [
+      { rotulo: 'Tipo de projeto', valor: 'Landing page' },
+      { rotulo: 'Segmento', valor: 'Evento e conferência' },
+      { rotulo: 'Formato', valor: 'Página única com venda' },
+      { rotulo: 'Evento', valor: 'Dois dias, agosto de 2026' },
+    ],
+
+    // performance entra aqui porque neste projeto ela e boa de verdade: 85 no
+    // Lighthouse com 33 requisicoes, o mais leve da lista
+    numeros: [
+      { valor: '5', unidade: '', rotulo: 'Preletores e atrações no palco' },
+      { valor: '85', unidade: '/100', rotulo: 'Desempenho no Lighthouse' },
+      { valor: '33', unidade: '', rotulo: 'Requisições para carregar a página' },
+    ],
+
+    galeria: [
+      {
+        src: '/images/projetos/conectados-mac.webp',
+        largura: 1280,
+        altura: 4783,
+        tipo: 'mac',
+        rotulo: 'No computador',
+        alt: 'Página da conferência Conectados no computador, do topo ao rodapé',
+      },
+      {
+        src: '/images/projetos/conectados-iphone.webp',
+        largura: 360,
+        altura: 7933,
+        tipo: 'iphone',
+        rotulo: 'No celular',
+        alt: 'Mesma página no celular, do topo ao rodapé',
+      },
+    ],
+
+    contexto:
+      'Evento tem prazo, e página de evento vive de uma janela curta. O ingresso é decidido no celular, quase sempre depois de ver um story ou receber o link de um amigo, e a pessoa quer saber três coisas antes de pagar: quem vai falar, quando acontece e quanto custa. Se a página demora a abrir ou esconde alguma dessas respostas, a decisão simplesmente não acontece: ninguém volta depois para conferir.',
+
+    decisoes: [
+      {
+        titulo: 'Quatro seções, nada além',
+        texto:
+          'Tema, preletores, cronograma e ingresso. Página de evento acumula banner, patrocinador e história da organização, e cada bloco a mais é uma chance de a pessoa sair antes de chegar no botão de comprar.',
+      },
+      {
+        titulo: 'Os nomes do palco em destaque',
+        texto:
+          'Cinco preletores e atrações, cada um com quem é. Em conferência, o nome de quem fala é o argumento de venda mais forte, e ele precisa aparecer antes do preço.',
+      },
+      {
+        titulo: 'A programação aberta antes da compra',
+        texto:
+          'O cronograma mostra como os dois dias se organizam. Quem vai a um evento precisa saber se consegue encaixar na agenda, e não dá para pedir que a pessoa compre primeiro e descubra depois.',
+      },
+      {
+        titulo: 'Preço e parcela na mesma linha',
+        texto:
+          'O valor aparece com a opção de parcelamento ao lado. Para público jovem, poder dividir muda a decisão tanto quanto o valor cheio, e esconder isso empurra a dúvida para uma conversa que nunca acontece.',
+      },
+      {
+        titulo: 'Esgotado dito com todas as letras',
+        texto:
+          'Quando a venda encerrou, a página passou a anunciar isso em destaque em vez de deixar o botão levar a um erro. Página de evento esgotado ainda recebe visita, e o recado certo ali constrói a expectativa da próxima edição.',
+      },
+      {
+        titulo: 'Leveza como requisito, não como enfeite',
+        texto:
+          'A página carrega com 33 requisições e pontua 85 de desempenho. Divulgação de evento acontece por link no celular, muitas vezes em rede ruim de igreja ou escola, e página pesada perde a venda antes de aparecer.',
+      },
+    ],
+
+    entregas: [
+      'Layout desenhado e aprovado antes de virar site',
+      'Página escrita do zero, sem template pronto',
+      'Blocos de preletores e cronograma dos dois dias',
+      'Área de ingresso com valor e parcelamento',
+      'Aviso de esgotado publicado ao fim das vendas',
+      'Página no ar antes do início da divulgação',
+    ],
   },
 
   {
@@ -318,7 +391,7 @@ export const PROJETOS = [
     slug: 'patas-felizes',
     titulo: 'Site para pet shop',
     nome: 'Patas Felizes',
-    categoria: 'Site institucional',
+    categoria: 'Landing page',
     setor: 'Pet shop e banho e tosa',
     imagem: '/images/projetos/patas-felizes.webp',
     largura: 1200,
@@ -329,7 +402,7 @@ export const PROJETOS = [
       'A vitrine de um pet shop dentro do shopping, com o caminho até o agendamento no canal onde os clientes já estão.',
 
     ficha: [
-      { rotulo: 'Tipo de projeto', valor: 'Site institucional' },
+      { rotulo: 'Tipo de projeto', valor: 'Landing page' },
       { rotulo: 'Segmento', valor: 'Pet shop, banho e tosa' },
       { rotulo: 'Formato', valor: 'Página única' },
       { rotulo: 'Atendimento', valor: 'Shopping Morumbi, São Paulo' },
@@ -402,6 +475,190 @@ export const PROJETOS = [
       'Lista dos oito serviços com identidade visual própria',
       'Galeria do espaço e bloco de depoimentos de clientes',
       'Agendamento ligado ao Instagram e mapa com o endereço do shopping',
+      'Site no ar, com domínio e certificado de segurança configurados',
+    ],
+  },
+  {
+    id: 'conecta-contabil',
+    slug: 'conecta-contabil',
+    titulo: 'Site para escritório de contabilidade',
+    nome: 'Conecta Contábil',
+    categoria: 'Site institucional',
+    setor: 'Contabilidade para negócios digitais',
+    imagem: '/images/projetos/conecta-contabil.webp',
+    largura: 1200,
+    altura: 800,
+    site: 'https://www.conectacontabil.digital/',
+
+    resumo:
+      'Contabilidade que fala a língua de quem vende online, com preço na mesa antes de a conversa começar.',
+
+    ficha: [
+      { rotulo: 'Tipo de projeto', valor: 'Site institucional' },
+      { rotulo: 'Segmento', valor: 'Contabilidade digital' },
+      { rotulo: 'Formato', valor: 'Site com páginas por especialidade' },
+      { rotulo: 'Atendimento', valor: 'Todo o Brasil, cem por cento digital' },
+    ],
+
+    numeros: [
+      { valor: '6', unidade: '', rotulo: 'Especialidades com página própria' },
+      { valor: '3', unidade: '', rotulo: 'Planos com preço aberto' },
+      { valor: '100', unidade: '/100', rotulo: 'SEO técnico no Lighthouse' },
+    ],
+
+    galeria: [
+      {
+        src: '/images/projetos/conecta-mac.webp',
+        largura: 1280,
+        altura: 6488,
+        tipo: 'mac',
+        rotulo: 'No computador',
+        alt: 'Site da Conecta Contábil no computador, do topo ao rodapé',
+      },
+      {
+        src: '/images/projetos/conecta-iphone.webp',
+        largura: 360,
+        altura: 12777,
+        tipo: 'iphone',
+        rotulo: 'No celular',
+        alt: 'Mesmo site no celular, do topo ao rodapé',
+      },
+    ],
+
+    contexto:
+      'Quem vende infoproduto, roda e-commerce ou cobra assinatura já tentou explicar a operação para um contador tradicional e ouviu que precisava levar as notas em papel. O problema não é preço: é achar quem entenda repasse de marketplace, split de pagamento e nota de serviço digital sem precisar de aula. Escritório de contabilidade costuma se vender como genérico e confiável, e some no meio de mil iguais.',
+
+    decisoes: [
+      {
+        titulo: 'Uma página para cada tipo de negócio',
+        texto:
+          'E-commerce, infoproduto, SaaS, agência, criador de conteúdo e dropshipping têm página própria. Quem procura contador para marketplace não quer ler sobre contabilidade em geral: quer ver a palavra do próprio negócio na tela.',
+      },
+      {
+        titulo: 'Preço aberto, antes da conversa',
+        texto:
+          'Três planos com valor e faixa de faturamento na página. Escritório que esconde preço perde quem só queria saber se cabe no bolso, e ganha uma agenda cheia de conversa que não fecha.',
+      },
+      {
+        titulo: 'O medo de trocar tratado de frente',
+        texto:
+          'A página enfrenta a objeção real de quem já tem contador: dá trabalho trocar, tem multa, vou ficar sem atendimento no meio. Migração sem custo e ausência de fidelidade aparecem escritas, não subentendidas.',
+      },
+      {
+        titulo: 'O que trava hoje, dito com as palavras do cliente',
+        texto:
+          'Uma seção lista os problemas da contabilidade tradicional para negócio digital. Quem se reconhece ali entende que do outro lado tem alguém que já viu aquilo antes, e isso vale mais que qualquer selo de qualidade.',
+      },
+      {
+        titulo: 'Prazo de resposta como compromisso público',
+        texto:
+          'Resposta em até um dia útil, escrito na página. Contador sumido é a queixa mais comum do setor, e transformar prazo em promessa visível é o tipo de diferencial que a concorrência não copia sem se comprometer.',
+      },
+      {
+        titulo: 'Sete dúvidas resolvidas antes do contato',
+        texto:
+          'Troca de contador, abertura de empresa, conciliação de marketplace, emissão de nota, faturamento baixo e fidelidade. São as perguntas que consumiam a primeira conversa inteira, respondidas antes de ela começar.',
+      },
+    ],
+
+    entregas: [
+      'Layout desenhado e aprovado antes de virar site',
+      'Site escrito do zero, sem template pronto',
+      'Seis páginas de especialidade, uma para cada tipo de negócio',
+      'Tabela de planos com preço e faixa de faturamento',
+      'Perguntas frequentes cobrindo troca de contador e abertura de empresa',
+      'Site no ar, com domínio e certificado de segurança configurados',
+    ],
+  },
+  {
+    id: 'nathalia-psi',
+    slug: 'nathalia-psi',
+    titulo: 'Site para psicóloga online',
+    nome: 'Nathalia',
+    categoria: 'Landing page',
+    setor: 'Psicologia clínica online',
+    imagem: '/images/projetos/nathalia-psi.webp',
+    largura: 1200,
+    altura: 900,
+    site: 'https://www.nathaliapsi.site/',
+
+    resumo:
+      'Uma página que dá nome ao que a pessoa está sentindo antes de falar em abordagem, técnica ou preço.',
+
+    ficha: [
+      { rotulo: 'Tipo de projeto', valor: 'Landing page' },
+      { rotulo: 'Segmento', valor: 'Psicologia clínica' },
+      { rotulo: 'Formato', valor: 'Página única com documentos' },
+      { rotulo: 'Atendimento', valor: 'Online, adultos, sessões de 50 minutos' },
+    ],
+
+    numeros: [
+      { valor: '6', unidade: '', rotulo: 'Situações em que a pessoa se reconhece' },
+      { valor: '8', unidade: '', rotulo: 'Dúvidas respondidas antes do contato' },
+      { valor: '100', unidade: '/100', rotulo: 'SEO técnico no Lighthouse' },
+    ],
+
+    galeria: [
+      {
+        src: '/images/projetos/nathalia-mac.webp',
+        largura: 1280,
+        altura: 6227,
+        tipo: 'mac',
+        rotulo: 'No computador',
+        alt: 'Site da psicóloga Nathalia no computador, do topo ao rodapé',
+      },
+      {
+        src: '/images/projetos/nathalia-iphone.webp',
+        largura: 360,
+        altura: 11913,
+        tipo: 'iphone',
+        rotulo: 'No celular',
+        alt: 'Mesmo site no celular, do topo ao rodapé',
+      },
+    ],
+
+    contexto:
+      'Quem procura terapia quase nunca chega sabendo nomear o que sente. Chega com uma sensação difusa de que algo não vai bem e com medo de que aquilo não seja motivo suficiente para ocupar o tempo de um profissional. Site de psicólogo costuma responder à pergunta errada: abre falando de abordagem, formação e técnica, coisas que importam depois. Antes disso, a pessoa precisa se reconhecer na tela.',
+
+    decisoes: [
+      {
+        titulo: 'Seis situações no lugar de uma lista de sintomas',
+        texto:
+          'A página descreve cenários do dia a dia em que a pessoa pode se reconhecer, em vez de listar transtornos. Quem chega sem diagnóstico não sabe em qual caixa se encaixa, mas sabe reconhecer a própria rotina descrita em voz alta.',
+      },
+      {
+        titulo: 'A abordagem explicada, não só citada',
+        texto:
+          'Terapia cognitivo-comportamental, DBT e ACT aparecem com explicação do que significam na prática. Sigla sozinha não ajuda ninguém a decidir; ela vira credencial quando vem acompanhada do que muda na sessão.',
+      },
+      {
+        titulo: 'O caminho da primeira sessão em quatro etapas',
+        texto:
+          'Do contato ao início do acompanhamento. Terapia online tem uma barreira específica que é não saber como a coisa começa, e desenhar o passo a passo tira a sensação de estar entrando no escuro.',
+      },
+      {
+        titulo: 'CRP e formação onde pesam',
+        texto:
+          'O registro no conselho e a graduação aparecem depois do acolhimento, não na abertura. É informação que confirma uma decisão quase tomada, e usá-la como primeira frase soa a currículo, não a convite.',
+      },
+      {
+        titulo: 'Oito dúvidas cobrindo o que trava de verdade',
+        texto:
+          'Sigilo, frequência das sessões, duração do processo, necessidade de diagnóstico e se terapia online funciona igual à presencial. São as perguntas que a pessoa não faz por vergonha e que, sem resposta, viram desistência silenciosa.',
+      },
+      {
+        titulo: 'Política e termos publicados desde o começo',
+        texto:
+          'A página tem documentos legais próprios, com noindex para não competirem com o conteúdo principal. Profissional de saúde lida com dado sensível, e deixar isso escrito é parte do cuidado, não burocracia.',
+      },
+    ],
+
+    entregas: [
+      'Layout desenhado e aprovado antes de virar site',
+      'Página escrita do zero, sem template pronto',
+      'Blocos de situações, processo e como funciona a primeira sessão',
+      'Perguntas frequentes cobrindo sigilo, formato e duração',
+      'Política de privacidade e termos de uso publicados',
       'Site no ar, com domínio e certificado de segurança configurados',
     ],
   },
