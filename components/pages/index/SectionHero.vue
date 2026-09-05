@@ -1,67 +1,6 @@
 <template>
-  <section class="hero">
-    <Teleport to="body">
-      <nav class="nav" :class="{ 'nav--rolado': rolado }">
-        <div ref="navLogoRef" class="nav__logo" @click="scrollPara('.hero')" role="button" tabindex="0" aria-label="Ir para o início">
-          <Svgs nome="logo" />
-        </div>
-
-        <div ref="navMenuRef" class="nav__menu">
-          <span
-            v-for="link in links"
-            :key="link.alvo"
-            class="nav__link"
-            @click="scrollPara(link.alvo)"
-          >
-            <SvgIcone :nome="link.icone" />
-            {{ link.rotulo }}
-          </span>
-        </div>
-
-        <a ref="navCtaRef" class="nav__cta" :href="linkWhatsapp" target="_blank" rel="noopener">
-          Solicitar orçamento
-        </a>
-
-        <button class="hamburger" :class="{ 'hamburger--aberto': menuAberto }" @click="toggleMenu" aria-label="Abrir menu">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      </nav>
-
-      <Transition name="fade-menu">
-        <div v-if="menuAberto" class="menu-mobile" @click.self="fecharMenu">
-          <div class="menu-mobile__conteudo">
-            <nav class="menu-mobile__nav">
-              <span
-                v-for="link in links"
-                :key="link.alvo"
-                class="menu-mobile__link"
-                @click="scrollPara(link.alvo)"
-              >
-                <SvgIcone :nome="link.icone" />
-                {{ link.rotulo }}
-              </span>
-            </nav>
-
-            <a class="menu-mobile__cta" :href="linkWhatsapp" target="_blank" rel="noopener" @click="fecharMenu">
-              Solicitar orçamento
-            </a>
-
-            <a
-              class="menu-mobile__insta"
-              href="https://www.instagram.com/devbygusta/"
-              target="_blank"
-              rel="noopener"
-              @click="fecharMenu"
-            >
-              <SvgIcone nome="instagram" />
-              @devbygusta
-            </a>
-          </div>
-        </div>
-      </Transition>
-    </Teleport>
+  <section id="inicio" class="hero">
+    <NavTopo />
 
     <div ref="luzRef" class="luz" aria-hidden="true">
       <span class="luz__nucleo"></span>
@@ -116,15 +55,6 @@ import { useScrollTo } from '~/composables/useScrollTo'
 const linkWhatsapp = 'https://wa.me/5511966206588?text=' +
   encodeURIComponent('Olá! Vim pelo site e gostaria de um orçamento para um projeto.')
 
-// fonte única pro menu desktop e pro mobile: antes eram duas listas duplicadas na mão
-const links = [
-  { rotulo: 'Início', icone: 'casa', alvo: '.hero' },
-  // 'Sobre' sai enquanto a seção não existe: vira link pra /sobre quando a página nascer
-  { rotulo: 'Serviços', icone: 'engrenagem', alvo: '.servicos' },
-  { rotulo: 'Projetos', icone: 'projetos', alvo: '.projetos' },
-  { rotulo: 'Contatos', icone: 'telefone', alvo: '.contato' },
-]
-
 // posições fixas: Math.random() aqui daria hidratação divergente entre servidor e cliente
 function sorteador(semente) {
   let s = semente
@@ -155,9 +85,6 @@ const estrelas = (() => {
 
 const { scrollTo: gsapScrollTo } = useScrollTo()
 
-const rolado = ref(false)
-const menuAberto = ref(false)
-
 const luzRef = ref(null)
 const feixeEsqRef = ref(null)
 const feixeDirRef = ref(null)
@@ -166,31 +93,12 @@ const seloRef = ref(null)
 const tituloRef = ref(null)
 const textoRef = ref(null)
 const acoesRef = ref(null)
-const navLogoRef = ref(null)
-const navMenuRef = ref(null)
-const navCtaRef = ref(null)
 
-let scrollTriggerInstance = null
 let contexto = null
 let animou = false
 
-function toggleMenu() {
-  menuAberto.value = !menuAberto.value
-  document.body.style.overflow = menuAberto.value ? 'hidden' : ''
-}
-
-function fecharMenu() {
-  menuAberto.value = false
-  document.body.style.overflow = ''
-}
-
 function scrollPara(seletor) {
-  fecharMenu()
   gsapScrollTo(seletor)
-}
-
-function aoTeclar(e) {
-  if (e.key === 'Escape') fecharMenu()
 }
 
 // Só a luz fica no GSAP. Nav, selo, título, texto e botões saíram para CSS:
@@ -286,20 +194,10 @@ onMounted(() => {
     })
   })
 
-  scrollTriggerInstance = ScrollTrigger.create({
-    start: 80,
-    onEnter: () => { rolado.value = true },
-    onLeaveBack: () => { rolado.value = false },
-  })
-
-  window.addEventListener('keydown', aoTeclar)
 })
 
 onBeforeUnmount(() => {
-  scrollTriggerInstance?.kill()
   contexto?.revert()
-  window.removeEventListener('keydown', aoTeclar)
-  document.body.style.overflow = ''
 })
 </script>
 
@@ -517,215 +415,6 @@ onBeforeUnmount(() => {
       background: rgba(125, 155, 255, 0.16)
       border-color: rgba(140, 165, 255, 0.3)
 
-.nav
-  position: fixed
-  // a folga da barra flutuante mora aqui: o transform só desloca a partir dela
-  top: 10px
-  left: 0
-  right: 0
-  z-index: 100
-  // grid 1fr auto 1fr centraliza o menu de verdade: com space-between ele ficava
-  // deslocado, porque logo e CTA têm larguras bem diferentes
-  display: grid
-  grid-template-columns: 1fr auto 1fr
-  align-items: center
-  gap: 24px
-  width: 100%
-  max-width: 1600px
-  margin: 0 auto
-  padding: 14px 0px
-  color: var(--cor-branco)
-  // a geometria fica constante e só o transform anima. animar top/padding/max-width
-  // forçava reflow a cada quadro e re-rasterizava os backdrop-filter de dentro —
-  // e max-width partia de `none`, que nem interpola: saltava
-  transform: translateY(14px)
-  transition: transform 0.4s ease
-  will-change: transform
-
-  // a barra em si não tem fundo: quem carrega o vidro é o pill do menu e o CTA
-  &--rolado
-    transform: translateY(0)
-
-  &__logo
-    display: flex
-    justify-self: start
-    cursor: pointer
-
-    :deep(svg)
-      width: 34px
-      height: 34px
-
-  &__menu
-    display: flex
-    justify-self: center
-    align-items: center
-    gap: 6px
-    padding: 12px 22px
-    border: 1px solid rgba(125, 155, 255, 0.18)
-    border-radius: 16px
-    background: rgba(30, 46, 115, 0.4)
-    backdrop-filter: blur(12px)
-    -webkit-backdrop-filter: blur(12px)
-
-  &__link
-    display: inline-flex
-    align-items: center
-    gap: 9px
-    padding: 11px 18px
-    border-radius: 10px
-    font-family: var(--light)
-    font-size: 15px
-    color: rgba(255, 255, 255, 0.8)
-    cursor: pointer
-    transition: background 0.4s ease, color 0.4s ease
-
-    // o ícone herda color do link, então acompanha o hover sozinho
-    :deep(svg)
-      width: 15px
-      height: 15px
-      flex-shrink: 0
-      opacity: 0.75
-      transition: opacity 0.4s ease
-
-    &:hover
-      background: rgba(125, 155, 255, 0.16)
-      color: var(--cor-branco)
-
-      :deep(svg)
-        opacity: 1
-
-  &__cta
-    grid-column: 3
-    justify-self: end
-    padding: 13px 26px
-    border: 1px solid rgba(140, 165, 255, 0.28)
-    border-radius: 12px
-    font-family: var(--semibold)
-    font-size: 14px
-    color: var(--cor-branco)
-    text-decoration: none
-    white-space: nowrap
-    background: rgba(40, 55, 150, 0.45)
-    backdrop-filter: blur(14px)
-    -webkit-backdrop-filter: blur(14px)
-    // hover mexe só no fundo: sem sombra
-    transition: background 0.4s ease
-
-    &:hover
-      background: rgba(58, 74, 190, 0.6)
-
-.hamburger
-  display: none
-  grid-column: 3
-  justify-self: end
-  flex-direction: column
-  justify-content: center
-  gap: 5px
-  padding: 8px
-  background: none
-  border: none
-  cursor: pointer
-  z-index: 101
-
-  span
-    display: block
-    width: 24px
-    height: 2px
-    border-radius: 2px
-    background: var(--cor-branco)
-    transform-origin: center
-    transition: all 0.3s ease
-
-  &--aberto
-    span:nth-child(1)
-      transform: translateY(7px) rotate(45deg)
-
-    span:nth-child(2)
-      opacity: 0
-      transform: scaleX(0)
-
-    span:nth-child(3)
-      transform: translateY(-7px) rotate(-45deg)
-
-.menu-mobile
-  position: fixed
-  inset: 0
-  z-index: 99
-  display: flex
-  align-items: center
-  justify-content: center
-  background: rgba(2, 8, 18, 0.97)
-  backdrop-filter: blur(24px)
-  -webkit-backdrop-filter: blur(24px)
-
-  &__conteudo
-    display: flex
-    flex-direction: column
-    align-items: center
-    gap: 48px
-
-  &__nav
-    display: flex
-    flex-direction: column
-    align-items: center
-    gap: 32px
-
-  &__link
-    display: inline-flex
-    align-items: center
-    gap: 14px
-    font-family: var(--semibold)
-    font-size: clamp(28px, 8vw, 40px)
-    letter-spacing: -0.5px
-    color: var(--cor-branco)
-    cursor: pointer
-    transition: opacity 0.2s ease
-
-    :deep(svg)
-      width: 0.62em
-      height: 0.62em
-      opacity: 0.55
-
-    &:hover
-      opacity: 0.5
-
-  &__cta
-    padding: 16px 34px
-    border-radius: 12px
-    font-family: var(--semibold)
-    font-size: 15px
-    color: var(--cor-branco)
-    text-decoration: none
-    background: linear-gradient(120deg, var(--cor-azul-forte) 0%, var(--cor-azul-claro) 100%)
-    box-shadow: 0 10px 30px rgba(25, 15, 163, 0.4)
-
-  &__insta
-    display: inline-flex
-    align-items: center
-    gap: 11px
-    font-family: var(--light)
-    font-size: 16px
-    color: rgba(255, 255, 255, 0.55)
-    text-decoration: none
-    transition: color 0.4s ease
-
-    &:hover
-      color: var(--cor-branco)
-
-    :deep(svg)
-      display: block
-      width: 19px
-      height: 19px
-      flex-shrink: 0
-
-.fade-menu-enter-active,
-.fade-menu-leave-active
-  transition: opacity 0.3s ease
-
-.fade-menu-enter-from,
-.fade-menu-leave-to
-  opacity: 0
-
 @keyframes pulsar-selo
   0%, 100%
     box-shadow: 0 0 0 4px rgba(70, 224, 138, 0.16)
@@ -738,29 +427,7 @@ onBeforeUnmount(() => {
   50%
     opacity: 0.15
 
-@media (max-width: 1100px)
-  .nav
-    padding: 12px 16px
-
-  .nav__link
-    padding: 9px 14px
-    font-size: 14px
-
 @media (max-width: 900px)
-  .nav
-    padding: 12px 14px
-    transform: translateY(10px)
-
-    &--rolado
-      transform: translateY(0)
-
-  .nav__menu,
-  .nav__cta
-    display: none
-
-  .hamburger
-    display: flex
-
   .hero__conteudo
     padding: 120px 26px 90px
 
@@ -784,21 +451,6 @@ onBeforeUnmount(() => {
 // entrada começa junto com o parse do estilo, que é inline, sem esperar JS.
 // Os tempos abaixo são os mesmos da timeline antiga.
 @media (prefers-reduced-motion: no-preference)
-  .nav__logo,
-  .nav__menu,
-  .nav__cta
-    opacity: 0
-    animation: heroDesce 0.6s cubic-bezier(0.33, 1, 0.68, 1) both
-
-  .nav__logo
-    animation-delay: 0.35s
-
-  .nav__menu
-    animation-delay: 0.43s
-
-  .nav__cta
-    animation-delay: 0.51s
-
   .selo
     opacity: 0
     animation: heroSobe 0.6s cubic-bezier(0.33, 1, 0.68, 1) 0.5s both
@@ -821,14 +473,6 @@ onBeforeUnmount(() => {
   from
     opacity: 0
     transform: translateY(22px)
-  to
-    opacity: 1
-    transform: translateY(0)
-
-@keyframes heroDesce
-  from
-    opacity: 0
-    transform: translateY(-18px)
   to
     opacity: 1
     transform: translateY(0)

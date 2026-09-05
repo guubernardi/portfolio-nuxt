@@ -1,5 +1,5 @@
 <template>
-  <section ref="secaoRef" class="servicos" aria-label="O que fazemos">
+  <section ref="secaoRef" id="servicos" class="servicos" aria-label="O que fazemos">
     <div ref="cabecalhoRef" class="servicos__cabecalho">
       <span class="servicos__rotulo">
         <b>01</b>

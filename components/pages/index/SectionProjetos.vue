@@ -1,5 +1,5 @@
 <template>
-  <section ref="secaoRef" class="projetos" aria-label="Cases">
+  <section ref="secaoRef" id="projetos" class="projetos" aria-label="Cases">
     <div class="projetos__cabecalho">
       <span ref="rotuloRef" class="projetos__rotulo">
         <b>03</b>
@@ -16,9 +16,16 @@
         v-for="(projeto, i) in projetos"
         :key="projeto.id"
         class="case"
-        :class="{ 'case--destaque': i === 0 }"
+        :class="{ 'case--destaque': ehLargo(i) }"
       >
-        <a class="case__area" :href="projeto.link" target="_blank" rel="noopener">
+        <!-- quem tem case abre a página interna; quem ainda não tem vai direto
+             para o site publicado, em nova aba como antes -->
+        <NuxtLink
+          class="case__area"
+          :to="destinoDoProjeto(projeto)"
+          :target="projeto.slug ? null : '_blank'"
+          :rel="projeto.slug ? null : 'noopener'"
+        >
           <span class="case__indice">{{ String(i + 1).padStart(2, '0') }}</span>
 
           <div class="case__midia">
@@ -51,13 +58,18 @@
             </div>
 
             <span v-if="i === 0" class="case__cta">
-              Ver projeto
+              {{ projeto.slug ? 'Ver o case' : 'Ver projeto' }}
               <SvgIcone nome="seta-direita" />
             </span>
           </div>
-        </a>
+        </NuxtLink>
       </li>
     </ul>
+
+    <NuxtLink to="/projetos" class="projetos__todos">
+      Ver todos os projetos
+      <SvgIcone nome="seta-direita" />
+    </NuxtLink>
   </section>
 </template>
 
@@ -66,6 +78,14 @@ import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { SITE_URL, ID_ORGANIZACAO } from '~/helpers/site'
+import { PROJETOS as projetos, destinoDoProjeto } from '~/helpers/projetos'
+
+// o primeiro card ocupa a linha inteira. Quando o total e par, o ultimo ficaria
+// sozinho na ponta, entao ele tambem estica e a grade fecha sem celula vazia
+function ehLargo(i) {
+  if (i === 0) return true
+  return projetos.length % 2 === 0 && i === projetos.length - 1
+}
 
 const secaoRef = ref(null)
 const rotuloRef = ref(null)
@@ -73,63 +93,6 @@ const tituloRef = ref(null)
 const listaRef = ref(null)
 
 let contexto = null
-
-// .webp e não .png: os cinco prints somavam 8 MB, o que sozinho derrubava o LCP
-// da página. Em webp a 1200px de largura o conjunto caiu para 300 KB.
-const projetos = [
-  {
-    id: 'jamilly',
-    nome: 'Jamilly Ferreira',
-    categoria: 'Landing page',
-    setor: 'Psicologia clínica',
-    imagem: '/images/projetos/site-jamilly.webp',
-    largura: 1200,
-    altura: 675,
-    link: 'https://www.jamillyferreirapsicologa.com.br/',
-  },
-  {
-    id: 'conectados',
-    nome: 'Conectados',
-    categoria: 'Landing page',
-    setor: 'Conferência de jovens',
-    imagem: '/images/projetos/conectados.webp',
-    largura: 1200,
-    altura: 675,
-    link: 'https://conectados-sigma.vercel.app/',
-  },
-  {
-    id: 'tiro-de-guerra',
-    nome: 'Rifa Tiro de Guerra',
-    categoria: 'Sistema',
-    setor: 'Rifas online com PIX',
-    imagem: '/images/projetos/tiro-de-guerra.webp',
-    largura: 1200,
-    altura: 675,
-    link: 'https://tg-azure.vercel.app',
-  },
-
-  {
-    id: 'citytoys',
-    nome: 'City Toys',
-    categoria: 'Site institucional',
-    setor: 'Brinquedos infláveis',
-    imagem: '/images/projetos/citytoys.webp',
-    largura: 1200,
-    altura: 800,
-    link: 'https://www.citytoysbrinquedos.com/',
-  },
-
-  {
-    id: 'toyz',
-    nome: 'Toyz',
-    categoria: 'Sistema',
-    setor: 'Locação de brinquedos',
-    imagem: '/images/projetos/toyz.webp',
-    largura: 1200,
-    altura: 675,
-    link: 'https://apptoyz.com.br/',
-  },
-]
 
 // Prova de trabalho em formato legível por máquina: é o que o Google e as IAs
 // usam para responder "ele já entregou o quê?" sem depender de ler o print.
@@ -149,7 +112,7 @@ useHead({
           item: {
             '@type': 'WebSite',
             name: projeto.nome,
-            url: projeto.link,
+            url: projeto.site,
             description: `${projeto.categoria} — ${projeto.setor}`,
             image: SITE_URL + projeto.imagem,
             creator: { '@id': ID_ORGANIZACAO },
@@ -199,6 +162,8 @@ onBeforeUnmount(() => {
 <style scoped lang="sass">
 .projetos
   position: relative
+  display: flex
+  flex-direction: column
   width: 100%
   // 1px de sobreposição na seção anterior: as cores batem na emenda, então some
   margin-top: -1px
@@ -256,6 +221,35 @@ onBeforeUnmount(() => {
     &--leve
       font-family: var(--light)
       color: #8aa6f0
+
+  &__todos
+    position: relative
+    z-index: 1
+    display: inline-flex
+    align-items: center
+    gap: 10px
+    margin: 44px auto 0 auto
+    padding: 15px 30px
+    border: 1px solid rgba(140, 165, 255, 0.24)
+    border-radius: 12px
+    background: rgba(30, 46, 115, 0.38)
+    font-family: var(--semibold)
+    font-size: 15px
+    color: var(--cor-branco)
+    text-decoration: none
+    transition: background 0.4s ease, border-color 0.4s ease
+
+    :deep(svg)
+      width: 14px
+      height: 14px
+      transition: transform 0.4s ease
+
+    &:hover
+      background: rgba(125, 155, 255, 0.16)
+      border-color: rgba(140, 165, 255, 0.34)
+
+      :deep(svg)
+        transform: translateX(4px)
 
   &__grade
     position: relative
