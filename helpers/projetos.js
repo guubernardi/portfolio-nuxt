@@ -662,6 +662,82 @@ export const PROJETOS = [
       'Site no ar, com domínio e certificado de segurança configurados',
     ],
   },
+  {
+    id: 'laura-nutricionista',
+    slug: 'laura-nutricionista',
+    titulo: 'Landing page para nutricionista',
+    nome: 'Laura Barbosa',
+    categoria: 'Landing page',
+    setor: 'Nutrição comportamental',
+    demonstracao: true,
+    imagem: '/images/projetos/laura-nutricionista.webp',
+    largura: 1200,
+    altura: 800,
+    site: 'https://lauranutri.site/',
+
+    resumo:
+      'Uma página que fala com quem já tentou cinco dietas e desistiu das cinco, sem prometer a sexta.',
+
+    ficha: [
+      { rotulo: 'Tipo de projeto', valor: 'Landing page' },
+      { rotulo: 'Segmento', valor: 'Nutrição comportamental' },
+      { rotulo: 'Origem', valor: 'Landing page com contato direto' },
+      { rotulo: 'Formato', valor: 'Página única com contato direto' },
+    ],
+
+    numeros: [
+      { valor: '6', unidade: '', rotulo: 'Situações em que a pessoa se reconhece' },
+      { valor: '3', unidade: '', rotulo: 'Formatos de atendimento explicados' },
+      { valor: '4', unidade: '', rotulo: 'Etapas do primeiro contato até o plano' },
+    ],
+
+    galeria: [],
+
+    contexto:
+      'Nutrição é um dos nichos onde a página padrão mais atrapalha. O modelo corrente abre com foto de prato colorido, promessa de emagrecimento e um botão de agendar, e fala com alguém que já decidiu. Só que quem procura nutricionista raramente está decidindo começar: está decidindo tentar de novo. Já fez dieta, já perdeu peso, já recuperou, e chega desconfiada de que o problema seja ela. Uma página que promete resultado rápido confirma exatamente o ciclo do qual ela quer sair. Montei esta como demonstração do caminho oposto, para ter no portfólio um exemplo do nicho antes de ter um cliente dele.',
+
+    decisoes: [
+      {
+        titulo: 'A página abre nomeando a frustração, não o resultado',
+        texto:
+          'O primeiro bloco lista seis situações concretas: emagrece e engorda de novo, o fim de semana desanda, comer virou culpa. Quem se reconhece em uma delas continua lendo. Começar por "perca peso" perderia justamente quem já ouviu isso e não funcionou.',
+      },
+      {
+        titulo: 'Nenhuma promessa de número em lugar nenhum',
+        texto:
+          'Sem quilos, sem prazo, sem antes e depois. Além de ser o que o Código de Ética do nutricionista restringe, é o que separa esta página do anúncio que a pessoa já aprendeu a ignorar.',
+      },
+      {
+        titulo: 'Três formatos de atendimento, com a diferença dita',
+        texto:
+          'Consulta online, presencial e acompanhamento aparecem com o que muda entre eles. Quem está em dúvida entre formatos costuma não perguntar, só sair.',
+      },
+      {
+        titulo: 'O caminho até o plano em quatro etapas',
+        texto:
+          'Do primeiro oi no WhatsApp até o plano na mão, com a conversa de uma hora no meio. Nutrição carrega o medo de receber uma folha de papel com proibições, e desenhar o processo tira esse medo antes da pergunta.',
+      },
+      {
+        titulo: 'Prova por permanência, não por transformação',
+        texto:
+          'Os depoimentos falam de quem não voltou para a dieta de antes, e não de quantos quilos caíram. É a prova que interessa para quem já emagreceu várias vezes e sempre voltou.',
+      },
+      {
+        titulo: 'Contato pelo WhatsApp, sem formulário',
+        texto:
+          'A página inteira leva para uma conversa, não para um agendamento imediato. Quem está na dúvida de tentar de novo precisa perguntar antes de marcar, e formulário não serve para perguntar.',
+      },
+    ],
+
+    entregas: [
+      'Layout desenhado do zero, sem template',
+      'Página escrita inteira, do título ao rodapé',
+      'Blocos de situações, formatos de atendimento e processo',
+      'Depoimentos e perguntas frequentes',
+      'Estrutura pronta para receber os dados reais de um cliente',
+      'No ar, com domínio próprio',
+    ],
+  },
 ]
 
 // destino do card na home: página interna quando o case existe, site publicado

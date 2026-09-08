@@ -58,7 +58,9 @@
             </div>
 
             <div class="item__info">
-              <h2 class="item__nome">{{ projeto.nome }}</h2>
+              <h2 class="item__nome">
+                {{ projeto.nome }}
+              </h2>
               <p class="item__setor">{{ projeto.setor }}</p>
 
               <span class="item__acao">
@@ -392,6 +394,20 @@ useHead({
     font-family: var(--semibold)
     font-size: clamp(19px, 1.6vw, 23px)
     color: var(--cor-branco)
+
+  &__selo
+    display: inline-block
+    margin-left: 8px
+    padding: 3px 9px
+    border: 1px solid rgba(240, 180, 90, 0.3)
+    border-radius: 100px
+    background: rgba(240, 180, 90, 0.1)
+    font-family: var(--light)
+    font-size: 11px
+    letter-spacing: 0.2px
+    vertical-align: middle
+    white-space: nowrap
+    color: rgba(245, 205, 150, 0.9)
 
   &__setor
     margin: 0

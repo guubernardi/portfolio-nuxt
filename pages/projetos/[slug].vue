@@ -21,8 +21,16 @@
         <span class="abertura__etiqueta">
           <b>{{ projeto.nome }}</b>
           <span aria-hidden="true">·</span>
-          Case
+          {{ projeto.demonstracao ? 'Nutrição' : 'Case' }}
         </span>
+
+        <!-- Projeto de demonstração precisa dizer que é, e em cima, não numa
+             nota de rodapé. Passar demo por trabalho contratado desmonta na
+             primeira pergunta, e é o portfólio inteiro que perde. -->
+        <p v-if="projeto.demonstracao" class="aviso-demo">
+          Este eu fiz por conta própria, para ter um exemplo do nicho no portfólio. Não foi
+          trabalho contratado, e os dados da página são fictícios.
+        </p>
 
         <h1 class="abertura__titulo">{{ projeto.nome }}</h1>
         <p class="abertura__resumo">{{ projeto.resumo }}</p>
@@ -66,7 +74,9 @@
       </ul>
     </section>
 
-    <section class="bloco">
+    <!-- sem capturas, a seção inteira sai: título sobre galeria vazia é pior
+         que não ter a seção -->
+    <section v-if="projeto.galeria?.length" class="bloco">
       <span class="bloco__rotulo"><b>02</b> A interface</span>
       <h2 class="bloco__titulo">
         Cada tela, <span class="bloco__titulo--leve">no detalhe.</span>
@@ -177,7 +187,9 @@
               decoding="async"
             />
             <span class="outro__nome">{{ outro.nome }}</span>
-            <span class="outro__tag">{{ outro.categoria }}</span>
+            <span class="outro__tag" :class="{ 'outro__tag--proprio': outro.demonstracao }">
+              {{ outro.demonstracao ? 'Nutrição' : outro.categoria }}
+            </span>
           </a>
         </li>
       </ul>
@@ -437,6 +449,21 @@ useHead({
     flex-wrap: wrap
     gap: 14px
     margin: 36px 0 0 0
+
+// fundo âmbar de propósito: é informação que corrige uma suposição, não um
+// detalhe decorativo
+.aviso-demo
+  max-width: 620px
+  margin: 20px 0 0 0
+  padding: 12px 16px
+  border: 1px solid rgba(240, 180, 90, 0.28)
+  border-radius: 10px
+  background: rgba(240, 180, 90, 0.09)
+  font-family: var(--light)
+  font-size: 14px
+  line-height: 1.6
+  color: rgba(245, 205, 150, 0.92)
+  display: none
 
 .ficha
   margin-top: 12px
@@ -918,6 +945,11 @@ useHead({
     font-family: var(--light)
     font-size: 13px
     color: rgba(255, 255, 255, 0.45)
+
+    &--proprio
+      border-color: rgba(240, 180, 90, 0.3)
+      background: rgba(240, 180, 90, 0.1)
+      color: rgba(245, 205, 150, 0.9)
 
 .rodape
   position: relative
