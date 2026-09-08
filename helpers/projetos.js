@@ -691,7 +691,24 @@ export const PROJETOS = [
       { valor: '4', unidade: '', rotulo: 'Etapas do primeiro contato até o plano' },
     ],
 
-    galeria: [],
+    galeria: [
+      {
+        src: '/images/projetos/laura-mac.webp',
+        largura: 1280,
+        altura: 9604,
+        tipo: 'mac',
+        rotulo: 'No computador',
+        alt: 'Página da nutricionista Laura no computador, do topo ao rodapé',
+      },
+      {
+        src: '/images/projetos/laura-iphone.webp',
+        largura: 360,
+        altura: 14256,
+        tipo: 'iphone',
+        rotulo: 'No celular',
+        alt: 'Mesma página no celular, do topo ao rodapé',
+      },
+    ],
 
     contexto:
       'Nutrição é um dos nichos onde a página padrão mais atrapalha. O modelo corrente abre com foto de prato colorido, promessa de emagrecimento e um botão de agendar, e fala com alguém que já decidiu. Só que quem procura nutricionista raramente está decidindo começar: está decidindo tentar de novo. Já fez dieta, já perdeu peso, já recuperou, e chega desconfiada de que o problema seja ela. Uma página que promete resultado rápido confirma exatamente o ciclo do qual ela quer sair. Montei esta como demonstração do caminho oposto, para ter no portfólio um exemplo do nicho antes de ter um cliente dele.',
