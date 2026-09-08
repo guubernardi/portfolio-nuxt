@@ -58,7 +58,7 @@ o que foi entregue. Lista completa em https://www.gustavobernardi.com/projetos
 - Laura Barbosa — landing page para nutrição comportamental. Projeto próprio,
   feito como demonstração do nicho, não trabalho contratado.
   Case: https://www.gustavobernardi.com/projetos/laura-nutricionista
-  No ar: https://lauranutri.site/
+  No ar: https://www.lauranutri.site/
 - Nathalia — landing page para psicologia clínica online.
   Case: https://www.gustavobernardi.com/projetos/nathalia-psi
   No ar: https://www.nathaliapsi.site/

@@ -673,7 +673,7 @@ export const PROJETOS = [
     imagem: '/images/projetos/laura-nutricionista.webp',
     largura: 1200,
     altura: 800,
-    site: 'https://lauranutri.site/',
+    site: 'https://www.lauranutri.site/',
 
     resumo:
       'Uma página que fala com quem já tentou cinco dietas e desistiu das cinco, sem prometer a sexta.',
