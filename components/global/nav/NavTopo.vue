@@ -108,7 +108,7 @@ const links = [
   { id: 'contato', rotulo: 'Contatos', icone: 'telefone', ancora: 'contato' },
 ]
 
-// Serviços fica aceso nas onze páginas de serviço, não só na /servicos: quem
+// Serviços fica aceso nas doze páginas de serviço, não só na /servicos: quem
 // está lendo /site-para-psicologo continua dentro dessa parte do site
 const rotasDeServico = new Set(SERVICOS.map((s) => `/${s.slug}`))
 

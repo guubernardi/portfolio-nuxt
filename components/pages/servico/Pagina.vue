@@ -214,7 +214,7 @@ import { ETAPAS, servicoPorSlug } from '~/helpers/servicos'
 import { SITE_URL, SITE_NOME, TELEFONE, ID_ORGANIZACAO, ID_SITE, urlCanonica } from '~/helpers/site'
 
 // A estrutura da página de serviço mora aqui e o conteúdo mora no
-// helpers/servicos.js. São cinco nichos com o mesmo esqueleto: manter cinco
+// helpers/servicos.js. São seis nichos com o mesmo esqueleto: manter seis
 // cópias deste arquivo garantiria que a primeira correção de estilo passasse a
 // valer em uma só delas.
 const props = defineProps({

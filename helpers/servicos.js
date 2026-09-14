@@ -122,6 +122,117 @@ export const SERVICOS = [
     },
   },
 
+  // ------------------------------------------------------------- nutricionista
+  {
+    slug: 'site-para-nutricionista',
+    eixo: 'nicho',
+    filtro: (p) => /nutri/i.test(p.setor),
+
+    titulo: 'Site para nutricionista',
+    chamada: 'que não promete a próxima dieta.',
+    resumo:
+      'Uma página para quem já tentou mudar a alimentação algumas vezes e chega desconfiada: como é a consulta, o que muda do que ela já fez e como falar com você antes de marcar.',
+    acaoExemplos: 'Ver um exemplo no ar',
+    mensagemWhatsapp: 'Olá! Sou nutricionista e gostaria de um orçamento para um site.',
+
+    tituloSeo: 'Site para nutricionista',
+    descricaoSeo:
+      'Criação de site para nutricionista: página escrita do zero, com a consulta explicada, os formatos de atendimento e contato direto no WhatsApp, sem promessa de resultado.',
+    servicoSeo: 'Criação de site para nutricionista',
+    publicoSeo: 'Nutricionistas',
+
+    problema: {
+      titulo: 'Quem procura nutricionista',
+      chamada: 'quase nunca está começando.',
+      texto:
+        'Está tentando de novo. Já fez dieta da internet, já emagreceu e voltou a engordar, e chega desconfiada de que o problema seja ela. Site de nutricionista costuma abrir com prato colorido e promessa de resultado, que é justamente a linguagem do ciclo de onde ela quer sair. Antes de marcar, ela precisa entender como a consulta funciona e por que dessa vez seria diferente.',
+      duvidas: [
+        'Vou ter que cortar tudo o que eu gosto?',
+        'Como é a primeira consulta?',
+        'Consulta online funciona igual à presencial?',
+        'De quanto em quanto tempo são os retornos?',
+        'Atende por plano ou é só particular?',
+        'Quanto custa e o que está incluso?',
+      ],
+    },
+
+    entregasTitulo: { titulo: 'Uma página que explica', chamada: 'antes de a pessoa perguntar.' },
+    entregas: [
+      {
+        titulo: 'Texto para quem já tentou antes',
+        texto:
+          'A página começa pelas situações em que a pessoa se reconhece, não pelo resultado prometido. Quem já fez cinco dietas lê "perca peso" na primeira linha e fecha a aba.',
+      },
+      {
+        titulo: 'A consulta explicada até o plano',
+        texto:
+          'O que acontece na primeira conversa, o que você avalia, quando o plano chega e como são os retornos. Tirar o mistério da consulta tira o medo de sair com uma folha de proibições.',
+      },
+      {
+        titulo: 'Formatos de atendimento com a diferença dita',
+        texto:
+          'Online, presencial e acompanhamento, cada um com o que muda entre eles. Quem não entende qual escolher costuma não perguntar, só sair.',
+      },
+      {
+        titulo: 'Dentro do que o Código de Ética permite',
+        texto:
+          'Sem antes e depois e sem promoção de consulta, que o código de 2026 veda, e sem promessa de quilos ou prazo, que afasta quem já tentou. A página convence pelo jeito que você atende.',
+      },
+      {
+        titulo: 'Encontrável no Google e pelas IAs',
+        texto:
+          'A página descreve para os buscadores quem você é, o que atende e onde. É o que permite ao Google e ao ChatGPT citarem a informação certa em vez de adivinharem.',
+      },
+      {
+        titulo: 'No seu nome, com você dono dos acessos',
+        texto:
+          'Domínio e hospedagem ficam na sua conta. Se um dia quiser levar o site para outro lugar, você leva, sem depender de ninguém.',
+      },
+    ],
+
+    exemplosTitulo: { titulo: 'Uma página de nutricionista', chamada: 'no ar agora.' },
+
+    perguntas: [
+      {
+        pergunta: 'Preciso ter os textos prontos?',
+        resposta:
+          'Não. Dá para começar do que você já explica na primeira consulta e do que responde no WhatsApp toda semana. Esse material costuma ser melhor do que qualquer texto escrito do zero.',
+      },
+      {
+        pergunta: 'Posso mostrar antes e depois de paciente?',
+        resposta:
+          'Não. O Código de Ética e de Conduta de 2026, a Resolução CFN nº 856, ampliou a restrição a divulgar resultado de paciente e veda oferta, promoção e sorteio de consulta como propaganda. A página é montada dentro disso.',
+      },
+      {
+        pergunta: 'Atendo online e presencial. O site cobre os dois?',
+        resposta:
+          'Cobre. A página explica as duas modalidades, com o endereço aparecendo para quem busca atendimento na região e o formato online explicado para quem está em outra cidade.',
+      },
+      {
+        pergunta: 'Tenho uma linha de trabalho específica. Cabe na página?',
+        resposta:
+          'Cabe, e ajuda. Nutrição esportiva, comportamental, materno-infantil ou clínica falam com pessoas diferentes, e dizer a sua com clareza faz quem é do seu público se reconhecer e quem não é seguir procurando.',
+      },
+      {
+        pergunta: 'Já tenho site. Dá para refazer?',
+        resposta:
+          'Dá, e é comum. Refazemos mantendo o endereço que seus pacientes já conhecem, sem perder o que você construiu de busca até aqui.',
+      },
+      {
+        pergunta: 'E depois que entra no ar?',
+        resposta:
+          'Acompanho o período logo após o lançamento para corrigir o que aparecer no uso real. Ajustes e evoluções depois disso são combinados à parte.',
+      },
+    ],
+
+    fecho: {
+      titulo: 'Vamos montar',
+      chamada: 'o seu?',
+      texto:
+        'Manda uma mensagem contando como você atende hoje e para quem. Sem formulário longo e sem compromisso.',
+    },
+  },
+
   // ----------------------------------------------------------------- contador
   {
     slug: 'site-para-contador',
