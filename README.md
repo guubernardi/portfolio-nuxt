@@ -7,4 +7,7 @@ Meu portfólio pessoal com foco em apresentar projetos, habilidades e um resumo 
 - Layout responsivo (desktop e mobile)
 - Navegação com scroll suave entre seções
 
+## Identidade visual do Instagram
+Paleta, prompts, roteiros e padrões dos carrosséis do @devbygusta estão em [`docs/identidade-visual`](docs/identidade-visual).
+
 Feito por Gustavo Bernardi.
