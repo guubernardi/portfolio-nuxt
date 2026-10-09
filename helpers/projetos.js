@@ -387,6 +387,100 @@ export const PROJETOS = [
     ],
   },
   {
+    id: 'astro',
+    slug: 'astro',
+    titulo: 'App de finanças pessoais',
+    nome: 'Astro',
+    categoria: 'Sistema',
+    setor: 'Finanças pessoais',
+    imagem: '/images/projetos/astro.webp',
+    largura: 1200,
+    altura: 800,
+    site: 'https://astrofinancas.com.br/',
+
+    resumo:
+      'O app de finanças que lê o extrato, separa os gastos e diz quanto dá pra gastar até o fim do mês, sem planilha.',
+
+    ficha: [
+      { rotulo: 'Tipo de projeto', valor: 'Aplicativo web' },
+      { rotulo: 'Segmento', valor: 'Finanças pessoais' },
+      { rotulo: 'Formato', valor: 'Assinatura mensal ou anual' },
+      { rotulo: 'Acesso', valor: 'Navegador do computador e do celular' },
+    ],
+
+    // Lighthouse mobile da página de apresentação, medido em 2026-10-09.
+    // Desempenho (75) ficou de fora: não é bom o bastante para virar vitrine
+    numeros: [
+      { valor: '12', unidade: '', rotulo: 'Recursos dentro do mesmo app' },
+      { valor: '7', unidade: ' dias', rotulo: 'Teste grátis, sem cartão' },
+      { valor: '100', unidade: '/100', rotulo: 'Acessibilidade no Lighthouse' },
+    ],
+
+    galeria: [
+      {
+        src: '/images/projetos/astro-mac.webp',
+        largura: 1280,
+        altura: 6663,
+        tipo: 'mac',
+        rotulo: 'No computador',
+        alt: 'Página do app Astro no computador, do topo ao rodapé',
+      },
+      {
+        src: '/images/projetos/astro-iphone.webp',
+        largura: 360,
+        altura: 10008,
+        tipo: 'iphone',
+        rotulo: 'No celular',
+        alt: 'Mesma página no celular, do topo ao rodapé',
+      },
+    ],
+
+    contexto:
+      'Quem vive com o salário apertado não quer aprender a investir: quer entender por que o dinheiro acaba antes do mês. A planilha resolve isso no papel e é abandonada na segunda semana, porque lançar gasto à mão vira mais uma tarefa do dia. O app do banco mostra só aquele banco, e os apps que juntam tudo sozinhos custam caro justamente para quem está tentando economizar. O Astro precisava organizar sem esforço e caber no mês que ele promete ajudar a fechar.',
+
+    decisoes: [
+      {
+        titulo: 'O extrato entra do jeito que a pessoa já tem',
+        texto:
+          'PDF, planilha ou até um print da tela do banco. A leitura por IA separa cada gasto e coloca na categoria certa. Sem conexão direta com o banco, a alternativa a lançar tudo à mão é aproveitar o arquivo que o banco já entrega, e a pessoa não passa a senha para ninguém.',
+      },
+      {
+        titulo: 'Um assistente que responde com os números dela',
+        texto:
+          'A pergunta é a da vida real: quanto posso gastar até o fim do mês? A resposta vem em valor por dia, com aluguel e fatura já descontados. Relatório exige interpretação; resposta direta, não.',
+      },
+      {
+        titulo: 'Orçamento em três caixas, não em vinte categorias',
+        texto:
+          'A renda se divide em necessidades, desejos e objetivos, com o 50/30/20 como ponto de partida ajustável e dicas do mês escritas por IA. Quem nunca fez orçamento não precisa de mais detalhe, precisa de uma regra que caiba na cabeça.',
+      },
+      {
+        titulo: 'Cartão e assinatura se lançam sozinhos',
+        texto:
+          'Compra parcelada vira parcelas automaticamente, cada fatura já sabe quando fecha e vence, e a cobrança de cada assinatura entra todo mês sem ninguém lembrar. É exatamente o gasto que some da conta de cabeça e aparece de surpresa no dia 10.',
+      },
+      {
+        titulo: 'A página prova mostrando o app funcionando',
+        texto:
+          'Produto novo não tem depoimento nem número de usuário, e inventar seria pior que não ter. Cada recurso aparece em movimento, com a tela real do app, para a pessoa ver o que vai usar antes de criar a conta.',
+      },
+      {
+        titulo: 'Teste sem cartão e preço que não pesa',
+        texto:
+          'Sete dias grátis sem pedir cartão, e depois R$ 14,99 por mês ou R$ 9,99 no plano anual. Para quem está tentando gastar menos, mais uma mensalidade cara seria contradição, e o preço precisava ser argumento, não obstáculo.',
+      },
+    ],
+
+    entregas: [
+      'Identidade e interface do app desenhadas do zero',
+      'Importação de extrato e fatura em PDF, planilha ou print, com leitura por IA',
+      'Assistente que responde perguntas sobre os próprios gastos',
+      'Cartões, faturas, assinaturas, metas e orçamento no mesmo app',
+      'Assinatura mensal e anual com teste grátis e pagamento por cartão',
+      'App e página de apresentação no ar, com domínio e certificado de segurança',
+    ],
+  },
+  {
     id: 'patas-felizes',
     slug: 'patas-felizes',
     titulo: 'Site para pet shop',

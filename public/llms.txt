@@ -75,6 +75,9 @@ o que foi entregue. Lista completa em https://www.gustavobernardi.com/projetos
 - Toyz — sistema de gestão para locadoras de infláveis.
   Case: https://www.gustavobernardi.com/projetos/toyz
   No ar: https://apptoyz.com.br/
+- Astro — app de finanças pessoais, com importação de extrato e assistente com IA.
+  Case: https://www.gustavobernardi.com/projetos/astro
+  No ar: https://astrofinancas.com.br/
 - Conectados — landing page para conferência de jovens.
   Case: https://www.gustavobernardi.com/projetos/conectados
   No ar: https://conectados-sigma.vercel.app/
