@@ -86,6 +86,24 @@ O prompt que gerou o `@cenario-devbygusta` ([imagem](assets/cenario-devbygusta.j
 Empty cinematic background plate for a social media cover. No people, no characters, no text, no letters. A dark futuristic tech room in deep navy, almost black, filled with floating translucent holographic UI panels: website wireframes, analytics dashboards, charts, code windows, browser windows, warning icons and loading spinners, all glowing cyan and electric blue. Volumetric teal light bursting from the center behind where a character would stand, fine glowing particles and bokeh, subtle tech grid lines and thin HUD frame lines near the edges, strong depth of field. Keep the central lower area open for a hero character in the foreground and keep clean dark space in the top third for a big headline. Color palette strictly: abyss navy #020715, night navy #021228, petrol blue #0A4E70, electric blue #07B1E8, cyan glow #1AD8E9, icy white highlights #F3F7F9. High contrast, sharp, premium 3D render look, vertical 4:5.
 ```
 
+## 6. Mockup do post de case
+
+Duas gerações por cena. Primeiro a cena com os prints como referência de imagem (a hero do desktop e a do celular), pra IA acertar o enquadramento e o que aparece nas telas:
+
+```
+Premium device mockup scene for an Instagram portfolio cover. A dark space-gray laptop (MacBook Pro style) in a slight three-quarter angle, and a black smartphone (iPhone style) standing upright in front of it on the right side, both resting on a rough dark stone pedestal. The laptop screen displays EXACTLY the website from the FIRST reference image. The phone screen displays EXACTLY the mobile page from the SECOND reference image. Keep every screen text, layout and color identical to the references, do not invent, translate or change any text on the screens. BACKGROUND: deep near-black navy (#020715), a large soft electric blue (#07B1E8) glow behind the devices fading into black, a few tiny stars and blue particles, thin blue rim light on the device edges, cinematic, high contrast, sharp. COMPOSITION: the top 40% of the image is dark, calm and empty to receive a headline later; the devices sit in the lower 60%, centered, laptop big in the frame. Vertical 4:5. No extra text outside the screens, no logos, no watermark, no hands.
+```
+
+Pro slide do celular, troque o primeiro parágrafo por dois celulares inclinados em ângulos diferentes, um encostando no outro, sobre uma pedra vulcânica, e deixe só os 30% de cima vazios.
+
+O texto miúdo das telas sempre sai inventado. Por isso vem a segunda geração, com a cena aprovada como referência:
+
+```
+Edit the reference image. Keep EVERYTHING exactly the same: same laptop, same smartphone, same positions, same angles, same stone pedestal, same blue glow background, same framing and size. The ONLY change: the entire display area of the laptop screen and the entire display area of the phone screen become a flat, uniform, pure chroma green (#00FF00), edge to edge inside the screen bezel, with no content, no text, no reflections, no gradient, no shading. Vertical 4:5.
+```
+
+Depois rode o [`scripts/encaixar-telas.py`](scripts/encaixar-telas.py) com os prints reais. Às vezes a IA pinta só parte da tela de verde; aí a detecção automática erra e os cantos vão à mão (o script explica como). Confira sempre o `-conferencia.jpg` que ele gera.
+
 ## Problemas comuns e como resolver
 
 | Problema | Solução |
@@ -95,3 +113,5 @@ Empty cinematic background plate for a social media cover. No people, no charact
 | Personagem encostando no texto ou no chip | Desça o retângulo da cena (`y` entre 60 e 230) |
 | "NSFW: Content detected" | É o filtro de personagem. Não cobra crédito; troque o personagem |
 | Erro 403 ao gerar várias de uma vez | Mande em lotes de 3, ou uma por vez |
+| Texto das telas do mockup inventado | Normal. Gere a versão com tela verde e cole o print real com o `encaixar-telas.py` |
+| Rachaduras laranja na pedra do mockup | `--sem-vermelho` no `encaixar-telas.py` |

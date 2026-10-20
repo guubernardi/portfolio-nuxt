@@ -10,7 +10,10 @@ Padrões visuais e de conteúdo do perfil @devbygusta no Instagram: paleta, capa
 |---|---|
 | [`prompts.md`](prompts.md) | Prompts prontos pra Magnific: capa, cena sem texto, poses e personagem original |
 | [`carrosseis.md`](carrosseis.md) | Roteiros, legendas e ordem de publicação dos carrosséis |
+| [`referencias.md`](referencias.md) | Referências visuais de outros perfis e as pautas na fila |
 | [`figma/montar-slides-cena-a-cena.js`](figma/montar-slides-cena-a-cena.js) | Script do Figma que monta degradês, chrome, copy e chip dos slides internos |
+| [`scripts/encaixar-telas.py`](scripts/encaixar-telas.py) | Cola os prints reais nas telas verdes dos mockups do post de case |
+| [`scripts/capturar-pagina.mjs`](scripts/capturar-pagina.mjs) e [`costurar-pagina.py`](scripts/costurar-pagina.py) | Print da página inteira no computador e no celular, para a galeria do case e as fatias do carrossel |
 | [`skills/instagram-carousel/SKILL.md`](skills/instagram-carousel/SKILL.md) | Skill do Claude Code que cria os carrosséis seguindo esse padrão |
 | `assets/` | Paleta e o cenário-assinatura |
 
@@ -59,6 +62,25 @@ Anatomia de um slide interno, de baixo pra cima:
 4. `Ruído & Textura` a 35%
 5. `devbygusta` no topo, índice `02 / 07` e seta `→` embaixo, e o bloco de conteúdo em `x: 72, y: 170`
 
+## O post de case (entrega de projeto)
+
+Formato aprovado em 12/10/2026, inspirado no portfólio do @andrey.lopess. O primeiro foi o do Astro (seção `Carrosel — Case Astro (novo formato)` no Figma), e os próximos partem dele. Os cases antigos, só com texto e print, ficam como estão.
+
+| # | Slide | Conteúdo |
+|---|---|---|
+| 01 | Capa | Mockup da Magnific (notebook e celular numa pedra), "Novo Projeto" e uma linha com o tipo e o nome |
+| 02 | Sobre o projeto | Ícone ou logo do cliente, até 40 palavras e 4 cards (tipo, segmento, formato, acesso) |
+| 03 | Paleta e fonte | As cores, o gradiente e a fonte do cliente |
+| 04 a 07 | A página | O print de página inteira cortado em sequência, com um selo de vidro (índice e uma frase curta) |
+| 08 | No celular | Mockup da Magnific com dois celulares |
+| 09 | Vamos criar o seu? | O CTA de sempre |
+
+- **Cor:** o que é do perfil (fundo `#020715`, glow, destaques, brilho atrás da página) fica em azul elétrico e ciano. As cores do cliente só aparecem no que é dele: telas, slide da paleta e ícone. Assim o case não destoa no grid.
+- **A página:** entra com 920 de largura, em `x: 80`. O primeiro corte começa em `y: 270`, debaixo do título; os do meio ocupam o slide inteiro; o último termina com os cantos de baixo arredondados e "No ar em {endereço}".
+- **Página longa:** se a página escalada passar muito de 4 fatias (a da Clínica Brenna Damasceno tem 14 mil px), os slides 04 a 06 seguem contínuos do topo e o 07 mostra a seção mais forte. Corte sempre no limite de uma seção, e de preferência entre duas seções da mesma cor, para a emenda não aparecer.
+- **Telas dos mockups:** sempre com o print real. A IA inventa o texto miúdo das telas (no mockup da Jamilly, inventou um número de CRP). Peça a cena já com as telas em verde chapado (dá certo de primeira quando não vai print como referência) e rode `scripts/encaixar-telas.py` com `--manter-por-cima`, que deixa o notch e as pétalas por cima do print. Os prompts estão em [`prompts.md`](prompts.md).
+- **Rótulo de IA:** ligado, porque a capa é um render realista feito com IA.
+
 ## Assets na Magnific
 
 | Item | Tipo | Referência |
@@ -88,6 +110,7 @@ Arquivo `Indentidade Gustavo Bernardi`, página `Indentidade Gustavo Bernardi`. 
 
 As capas usam personagens famosos pra prender atenção. É uma decisão consciente, sabendo que existe risco por ser uma conta comercial.
 
-- O gerador bloqueia alguns personagens: Simpsons e Marvel caíram. Garfield, Bob Esponja, Batman, Scooby-Doo, Papa-Léguas, Mario, Flash (Zootopia) e Tio Patinhas passaram. Personagem novo: testar com uma imagem antes de gerar o carrossel inteiro.
+- O gerador bloqueia alguns personagens: Simpsons, Homem de Ferro, Ciclope e Toy Story (Woody e Buzz) caíram. Garfield, Bob Esponja, Batman, Scooby-Doo, Papa-Léguas, Mario, Flash (Zootopia), Tio Patinhas, Pinóquio, Patolino, Fred Flintstone e Homem-Aranha (em LEGO) passaram. Personagem novo: testar com uma imagem antes de gerar o carrossel inteiro.
+- Você mesmo pode entrar como personagem (é sua imagem, com sua autorização): a foto vai como referência de imagem. Já funcionou como minifigura de LEGO.
 - Pessoa real não entra nas cenas internas. Nos carrosséis com capa de pessoa real, o miolo usa personagem original.
 - Capa com imagem realista feita com IA vai com o rótulo de IA ligado no Instagram.

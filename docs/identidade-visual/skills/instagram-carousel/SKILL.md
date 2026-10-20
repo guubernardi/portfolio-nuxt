@@ -171,6 +171,39 @@ Lições das gerações em lote (2026-10-05):
   a cena 02 primeiro e use ela como referência nas outras, pra manter o mesmo
   visual.
 
+## Carrossel de case (entrega de projeto)
+
+Formato aprovado em 2026-10-12. Modelo pronto: seção `Carrosel — Case Astro
+(novo formato)` (`443:25`). Duplique a seção, troque as imagens e os textos.
+Os cases antigos (Capa, Sobre, Desafio, Primeira dobra, Dores, Estrutura,
+Paleta, No ar, Vamos criar) ficam como estão.
+
+| # | Frame | Conteúdo |
+|---|---|---|
+| 01 | `01 Capa` | `Cena` 1080x1350 (mockup), scrims de cima (640) e de baixo (300), "Novo\nProjeto" Bold 132 em `72, 170`, legenda Medium 28 ciano em `72, 466` |
+| 02 | `02 Sobre o projeto` | Ícone 200x200 raio 46 em `72, 190` com glow, título SemiBold 76 em `72, 440`, corpo Regular 34 a 78%, ficha 2x2 em `72, 930` |
+| 03 | `03 Paleta e fonte` | 4 colunas 270x660 com as cores do cliente, título, barra do gradiente, "Aa" SemiBold 200 e os pesos da fonte |
+| 04 a 07 | `Página` | Print de página inteira com 920 de largura em `x: 80`. 04 começa em `y: 270` (título "Do topo ao rodapé" em cima); 05 e 06 ocupam 0 a 1350; 07 termina com raio 28 embaixo e "No ar em" + endereço |
+| 08 | `08 No celular` | `Cena` com dois celulares, título SemiBold 76 e subtítulo |
+| 09 | `09 Vamos criar` | "Vamos criar\no seu?" Bold 110, subtítulo, botão branco "ENTRE EM CONTATO", @devbygusta e site |
+
+- **Cor:** o perfil manda no ambiente: fundo `#020715`, glow `#07B1E8` a 38%,
+  sombra da página `#07B1E8` a 30%, destaques de texto `#1AD8E9`. As cores do
+  cliente só no conteúdo dele (telas, slide 03, ícone).
+- **Selo índice (04 a 06):** auto-layout com fundo `#020715` a 82%, borda branca
+  12%, background blur 24, raio 999, padding 28/16, em `72, 1226`, com
+  "04 / 09 · {frase curta}". A seta vai num círculo de vidro 64x64 em `944, 1226`.
+- **Cortes da página:** a página inteira escalada pra 920 de largura é cortada
+  em 1080 + 1350 + 1350 + o resto. Corte o print original nessas alturas
+  divididas pela escala (920 / largura do print).
+- **Mockups:** gere a cena na Magnific, gere de novo com as telas em verde e cole
+  os prints reais com `docs/identidade-visual/scripts/encaixar-telas.py`
+  (`--ciano --sem-vermelho`). Nunca use a tela desenhada pela IA: ela inventa o
+  texto miúdo. Prompts em `prompts.md`, seção 6.
+- **Legenda:** gancho nos primeiros 125 caracteres com a dor de quem usa o
+  produto, as decisões do projeto em setas (→), o que foi feito, convite pro
+  direct e 5 hashtags do tema. Rótulo de IA ligado (render realista).
+
 ## Elementos ilustrativos
 
 Cards de vidro que reforçam o argumento. Todos: raio 24, fundo branco 6%,
@@ -274,11 +307,21 @@ prender atenção, sabendo do risco (conta comercial, chance de derrubada por
 direito autoral). Não repita o aviso a cada pedido.
 
 - A Magnific barra alguns personagens com "NSFW: Content detected" (não cobra):
-  Simpsons e Marvel (Homem de Ferro, Ciclope) caíram, inclusive mandando só a
+  Simpsons, Marvel (Homem de Ferro, Ciclope) e Toy Story (Woody e Buzz,
+  2026-10-12) caíram, inclusive mandando só a
   imagem do personagem sem citar o nome. Não tente driblar o filtro; troque de
   personagem.
 - Passaram: Garfield, Bob Esponja, Batman, Scooby-Doo, Papa-Léguas e Coiote,
-  Mario, Flash (Zootopia) e Tio Patinhas. Ou seja, não é "tudo da Disney".
+  Mario, Flash (Zootopia), Tio Patinhas, Pinóquio, Patolino e Homem-Aranha (como
+  minifigura de LEGO, 2026-10-12). Ou seja, não é "tudo da Disney" nem "tudo da Marvel".
+- O próprio Gustavo pode ser personagem: a foto dele (creation `WDHgSVWcXe` no
+  projeto Identidade devbygusta) vai como referência `image`. A minifigura de
+  LEGO aprovada é a creation `w4DaHOp7EI` (a `s7cIvi0l8e` com o risco da
+  sobrancelha corrigido à mão; ele NÃO tem risco): franja alta e bagunçada com degradê,
+  sobrancelha grossa inteira (sem risco), bigode ralo, cavanhaque fino só no
+  queixo, brinco na orelha, corrente de prata, camisa branca do Santos, corpo
+  magro. Use ela como referência nas cenas. Ao pedir edição, cite o cavanhaque e
+  o bigode: numa edição que mexia no rosto, eles sumiram.
   Personagem novo: teste com 1 imagem antes de gerar o carrossel inteiro.
 - Gente real (atores, famosos) tem também direito de imagem: prefira
   personagem animado; se for herói de filme, capacete/máscara e estilo 3D
@@ -289,7 +332,6 @@ direito autoral). Não repita o aviso a cada pedido.
 ## Contexto do perfil
 
 @devbygusta é o perfil de dev do Gustavo, usado para captar clientes. Ele vende
-site institucional a partir de R$800 e atende o Brasil todo, sem nicho. Os cases
-já publicados seguem 9 slides (Capa, Sobre, Desafio, Primeira dobra, Dores,
-Estrutura, Paleta, No ar, Vamos criar) — carrossel de case usa essa estrutura;
-carrossel educativo usa a deste documento.
+site institucional a partir de R$800 e atende o Brasil todo, sem nicho. Carrossel
+de case segue a seção "Carrossel de case (entrega de projeto)"; carrossel
+educativo usa o resto deste documento.

@@ -17,6 +17,12 @@ Um post a cada dois dias, às 12:15.
 | 17/10 | Site não é gasto (Tio Patinhas) | Objeção | Não |
 | 19/10 | Perdendo clientes online (Mario) | Problema | Não |
 | 21/10 | Quanto tempo sua equipe perde por dia? (preguiça) | Automação | Não |
+| 23/10 | Case Astro, app de finanças (formato novo de case) | Case | Sim |
+| 25/10 | 7 mentiras que te contaram sobre ter um site (Pinóquio) | Educativo (mitos) | Não |
+| 27/10 | Fez o site no ChatGPT e agora está surtando (Patolino) | Comparação | Não |
+| 29/10 | Como nasce um site, bloco por bloco (Gustavo em LEGO) | Processo | Sim |
+| 31/10 | Seu site ainda está na idade da pedra (Fred Flintstone) | Problema | Não |
+| 02/11 | Case Clínica Brenna Damasceno (formato novo de case) | Case | Sim |
 
 Por que essa ordem:
 
@@ -175,6 +181,110 @@ O Mario é o dono da loja; o Toad, o cliente que procura e some.
 > Serviços, localização e contato numa página que funciona no celular e leva direto pra falar com você.
 >
 > #sitesprofissionais #presencadigital #empreendedorismo #negocioslocais #desenvolvimentoweb
+
+## Case Clínica Brenna Damasceno (formato novo de case)
+
+Seção `Carrosel — Case Clínica Brenna Damasceno (novo formato)` no Figma. Capa com notebook e celular num pedestal de mármore e pétalas em ciano (o Método Florescer da clínica), slide da paleta com vinho, vinho escuro, rosa claro e dourado e o itálico da Figtree, a página do topo até a equipe nos slides 04 a 06, o "Com quem começar" no 07 e dois celulares no 08 (o "Com quem começar" e o cartão da Brenna).
+
+> Quem procura terapia raramente sabe dar nome ao que sente. E diante de uma equipe inteira, não sabe com quem começar.
+>
+> O site da Clínica Brenna Damasceno foi desenhado pra esse momento:
+>
+> → a página abre com as situações que ela está vivendo, antes do currículo
+> → ela marca o que sente entre 25 temas e a página indica com qual psicóloga começar
+> → o WhatsApp já abre com o nome da psicóloga e os temas marcados
+>
+> Fiz do zero: layout, site e o cadastro dos materiais gratuitos. Arrasta pro lado pra ver a página.
+>
+> Tem uma clínica com mais de um profissional? Me chama no direct.
+>
+> #sitepsicologa #psicologiaperinatal #clinicadepsicologia #webdesign #devbrasil
+
+Rótulo de IA ligado (a capa é render realista).
+
+## 7 mentiras que te contaram sobre ter um site (Pinóquio)
+
+Cada slide é uma mentira, e o nariz do Pinóquio cresce um pouco mais a cada uma; no resumo, ele volta ao normal. São 9 slides, um acima do padrão, porque lista numerada segura o arrasto. Referência: o pin "7 mentiras que te contaram" do Pinterest.
+
+| # | Eyebrow | Título | Cena |
+|---|---|---|---|
+| 02 | MENTIRA 1 | Instagram já **basta** | Segurando o celular com o perfil, nariz começando a crescer |
+| 03 | MENTIRA 2 | Site é coisa de empresa **grande** | Pequeno no meio de prédios enormes |
+| 04 | MENTIRA 3 | Meu cliente é do **bairro** | Na porta da lojinha, nariz atravessando a rua |
+| 05 | MENTIRA 4 | Com template fica pronto num **dia** | Empilhando blocos genéricos, cronômetro do lado |
+| 06 | MENTIRA 5 | Preciso entender de **tecnologia** | Nariz enroscado nos cabos |
+| 07 | MENTIRA 6 | Meu sobrinho **faz** | Apontando pra um site quebrado, ninho no nariz |
+| 08 | A MAIOR DELAS | Com site, o cliente chega **sozinho** | Nariz virando galho, painel vazio esperando visita |
+| 09 | RESUMINDO | Site não é mágica. É onde o cliente **decide**. | Nariz normal, joinha, site pronto |
+
+> Instagram basta, site é coisa de empresa grande, meu sobrinho faz. Você já ouviu pelo menos uma dessas.
+>
+> São 7 mentiras que deixam empresa boa com cara de amadora bem na hora em que o cliente vai decidir. A última é a que mais contam pra vender site.
+>
+> #sitesprofissionais #presencadigital #empreendedorismo #desenvolvimentoweb #negocioslocais
+
+## Fez o site no ChatGPT e agora está surtando (Patolino)
+
+O Patolino faz o site no ChatGPT às 3 da manhã e surta a cada problema; no fim, com site próprio, dorme tranquilo. O post não fala mal de IA: o ponto é que o ChatGPT entrega código, e site é o que fica no ar funcionando. Referência: `referencias/patolino-surtando.png`.
+
+| # | Eyebrow | Título | Cena |
+|---|---|---|---|
+| 02 | O COMEÇO | Em minutos o código **saiu** | De madrugada, código brilhando no notebook |
+| 03 | PROBLEMA 1 | E agora, onde isso **fica**? | Perdido no meio de abas e tutoriais |
+| 04 | PROBLEMA 2 | O formulário não **chega** | Apertando o botão, cartas sumindo no vazio |
+| 05 | PROBLEMA 3 | Cada ajuste vira **remendo** | Remendando o site com fita adesiva |
+| 06 | PROBLEMA 4 | Igual a mil **outros** | Corredor de sites idênticos |
+| 07 | O QUE MUDA | Feito pra **você** | Dormindo tranquilo, site com checks verdes |
+| 08 | RESUMINDO | O ChatGPT te entrega código. Site é o que fica no ar **funcionando**. | Joinha ao lado do site pronto |
+
+> Pedir um site pro ChatGPT leva minutos. Colocar no ar, fazer o formulário funcionar e ajustar no celular leva o fim de semana inteiro.
+>
+> O código é a parte fácil. Site próprio é o que fica no ar funcionando, com o texto do seu negócio e alguém que responde quando precisa mudar.
+>
+> #sitesprofissionais #inteligenciaartificial #chatgpt #desenvolvimentoweb #empreendedorismo
+
+Ao gerar cenas com a capa como referência, o modelo copiou o "SURTANDO" duas vezes. Resolveu usar a cena 03 (sem texto) como referência e pedir "no headline" e "only one Daffy Duck".
+
+## Como nasce um site, bloco por bloco (LEGO)
+
+O Gustavo em minifigura de LEGO, com o Homem-Aranha e o Batman, monta um site peça por peça: cada slide é um bloco do processo. Referência: `referencias/lego-transforme.png`. Rótulo de IA ligado (foto realista com pessoa real).
+
+| # | Eyebrow | Título | Cena |
+|---|---|---|---|
+| 02 | BLOCO 1 · CONVERSA | Primeiro eu **escuto** | Na mesa, anotando enquanto o Batman explica |
+| 03 | BLOCO 2 · ESTRUTURA | A ordem vem antes da **cor** | Separando as peças por cor, o Aranha entregando uma |
+| 04 | BLOCO 3 · LAYOUT | Você aprova **antes** | Mostrando a planta do layout pro Batman |
+| 05 | BLOCO 4 · CÓDIGO | Feito sob **medida** | No notebook, o Aranha segurando as peças com teia |
+| 06 | BLOCO 5 · NO AR | Domínio, cadeado e **pronto** | Site de peças aceso, com o cadeado em cima |
+| 07 | RESUMINDO | Site bom não sai pronto. É montado **bloco por bloco**. | Os três comemorando |
+
+> Site não aparece pronto do nada. Ele é montado em etapas, e cada uma evita um retrabalho lá na frente.
+>
+> Conversa, estrutura, layout aprovado, código sob medida e site no ar com domínio e cadeado: é assim que eu monto cada projeto.
+>
+> #sitesprofissionais #webdesign #processocriativo #desenvolvimentoweb #empreendedorismo
+
+## Seu site ainda está na idade da pedra (Fred Flintstone)
+
+Cada slide é um sinal de site parado no tempo. Era pra ser o Woody, mas Toy Story foi barrado no gerador; o Fred encaixou melhor no tema.
+
+| # | Eyebrow | Título | Cena |
+|---|---|---|---|
+| 02 | SINAL 1 | Telefone que não **atende** | Concha no ouvido, esperando |
+| 03 | SINAL 2 | Promoção que já **acabou** | Soprando a poeira de uma placa com musgo |
+| 04 | SINAL 3 | Fotos de outra **época** | Confuso diante das pinturas da caverna |
+| 05 | SINAL 4 | O navegador avisa: **não seguro** | Porta de pedra com cadeado quebrado |
+| 06 | SINAL 5 | O rodapé **entrega** | Escavando uma pedra antiga com pincel e lupa |
+| 07 | O QUE MUDA | Um site que **acompanha** você | Saindo da caverna pra cidade iluminada |
+| 08 | RESUMINDO | O cliente não volta pra ver se você **mudou**. | Joinha ao lado do site moderno |
+
+> Telefone que não atende, promoção vencida na primeira tela, © 2019 no rodapé. O cliente vê isso e acha que a empresa fechou.
+>
+> Site parado no tempo não dá erro, só passa a impressão de abandono. São 5 sinais que entregam isso na hora.
+>
+> #manutencaodesites #sitesprofissionais #presencadigital #pequenasempresas #desenvolvimentoweb
+
+A cena 04 veio com "SHOP" escrito na placa da pintura. Apagar à mão deixou mancha; pedir a mesma cena de novo com "the plaque is blank, no text" resolveu.
 
 ## Quanto tempo sua equipe perde por dia?
 
