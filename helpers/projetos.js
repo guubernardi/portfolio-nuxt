@@ -202,6 +202,103 @@ export const PROJETOS = [
   },
 
   {
+    id: 'brenna-damasceno',
+    slug: 'clinica-brenna-damasceno',
+    titulo: 'Landing page para clínica de psicologia',
+    nome: 'Clínica Brenna Damasceno',
+    categoria: 'Landing page',
+    setor: 'Psicologia para mulheres e mães',
+    imagem: '/images/projetos/brenna-damasceno.webp',
+    largura: 1200,
+    altura: 800,
+    site: 'https://clinicabrennadamasceno.com.br/',
+
+    resumo:
+      'A página de uma clínica com quatro psicólogas, que ajuda a paciente a descobrir com quem começar antes da primeira mensagem.',
+
+    ficha: [
+      { rotulo: 'Tipo de projeto', valor: 'Landing page' },
+      { rotulo: 'Segmento', valor: 'Psicologia perinatal e saúde mental feminina' },
+      { rotulo: 'Formato', valor: 'Página única' },
+      { rotulo: 'Atendimento', valor: 'Online, com sede em Fortaleza' },
+    ],
+
+    // Lighthouse mobile pelo PageSpeed em 2026-10-19: SEO 100, acessibilidade 96,
+    // práticas 100. Desempenho (77) ficou de fora, como nos outros
+    numeros: [
+      { valor: '25', unidade: '', rotulo: 'Temas para indicar a psicóloga certa' },
+      { valor: '4', unidade: '', rotulo: 'Psicólogas apresentadas, cada uma com CRP' },
+      { valor: '100', unidade: '/100', rotulo: 'SEO técnico no Lighthouse' },
+    ],
+
+    // capturas com "reduzir movimento" ligado: nesse modo o site tira as cartas
+    // que grudam na tela e a página fica contínua. O celular vai em JPG porque
+    // passa da altura máxima do WebP (16383 px)
+    galeria: [
+      {
+        src: '/images/projetos/brenna-mac.webp',
+        largura: 1280,
+        altura: 14252,
+        tipo: 'mac',
+        rotulo: 'No computador',
+        alt: 'Site da Clínica Brenna Damasceno no computador, do topo ao rodapé',
+      },
+      {
+        src: '/images/projetos/brenna-iphone.jpg',
+        largura: 360,
+        altura: 20142,
+        tipo: 'iphone',
+        rotulo: 'No celular',
+        alt: 'Mesmo site no celular, do topo ao rodapé',
+      },
+    ],
+
+    contexto:
+      'Clínica de psicologia de Fortaleza, com quatro psicólogas, especializada no cuidado de mulheres e mães e com atendimento online para todo o Brasil. Quem procura chega cansada, muitas vezes sem conseguir dar nome ao que sente, e encontra uma equipe inteira sem saber com quem começar. Até então, o caminho até a clínica passava pela bio do Instagram e pelo perfil da Brenna no Doctoralia. O site precisava fazer a mulher se reconhecer, entender como funciona e chegar ao WhatsApp já sabendo com quem quer falar.',
+
+    decisoes: [
+      {
+        titulo: 'A página começa pelo que ela está vivendo',
+        texto:
+          'Antes do método e da equipe vêm oito situações: ansiedade, culpa, sobrecarga, cansaço, autocobrança, a sensação de estar perdida de si. Quem se reconhece em uma delas lê "isso tem cuidado" e continua. Abrir pelo currículo falaria só com quem já decidiu.',
+      },
+      {
+        titulo: 'Com quem começar, respondido na própria página',
+        texto:
+          'A paciente marca o que está vivendo entre 25 temas, em cinco grupos, e a página mostra a psicóloga da equipe que mais combina. O WhatsApp já abre com o nome dela e os temas marcados na mensagem. Tema que nenhuma atende vai para a equipe, em vez de virar um beco sem saída.',
+      },
+      {
+        titulo: 'Cada psicóloga com registro, formação e o próprio botão',
+        texto:
+          'Os cartões mostram CRP, formação e as experiências de cada uma, e cada cartão abre a conversa já pedindo aquela psicóloga. A Brenna aparece como fundadora e supervisora, com a formação por ano e a supervisão semanal da equipe.',
+      },
+      {
+        titulo: 'Três passos e nenhum formulário',
+        texto:
+          'Chamar no WhatsApp, escolher a psicóloga ou receber a indicação, começar as sessões online. Desenhar o caminho tira o peso de quem nunca fez terapia, e a conversa acontece no canal que ela já usa.',
+      },
+      {
+        titulo: 'Material gratuito que vira contato',
+        texto:
+          'Os dois checklists em PDF, um para gestantes e outro para mães de bebês até 3 anos, pedem nome e WhatsApp, com o aceite da LGPD, antes do download. O cadastro cai numa planilha da clínica, e se a planilha falhar o PDF baixa do mesmo jeito.',
+      },
+      {
+        titulo: 'Prova sem nome e sem estrela',
+        texto:
+          'As opiniões de pacientes aparecem sem nome e levam às avaliações do Doctoralia. A página também não marca nota em estrela para o Google: avaliação publicada no próprio site é ignorada pelo buscador e mal vista pelo conselho de psicologia.',
+      },
+    ],
+
+    entregas: [
+      'Layout desenhado no Figma e aprovado antes de virar site',
+      'Indicação de psicóloga pelos temas que a paciente marca',
+      'Cartões das quatro psicólogas, com agendamento direto no WhatsApp',
+      'Checklists gratuitos com cadastro de nome e WhatsApp numa planilha da clínica',
+      'Animações no scroll, com uma versão sem movimento para quem prefere',
+      'No ar com domínio próprio e preparado para ser encontrado no Google',
+    ],
+  },
+  {
     id: 'citytoys',
     slug: 'city-toys',
     titulo: 'Site para locação de brinquedos infláveis',

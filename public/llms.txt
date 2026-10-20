@@ -63,6 +63,10 @@ o que foi entregue. Lista completa em https://www.gustavobernardi.com/projetos
 - Nathalia — landing page para psicologia clínica online.
   Case: https://www.gustavobernardi.com/projetos/nathalia-psi
   No ar: https://www.nathaliapsi.site/
+- Clínica Brenna Damasceno — landing page para clínica de psicologia de mulheres e mães,
+  com indicação de psicóloga por tema.
+  Case: https://www.gustavobernardi.com/projetos/clinica-brenna-damasceno
+  No ar: https://clinicabrennadamasceno.com.br/
 - Conecta Contábil — site institucional para contabilidade de negócios digitais.
   Case: https://www.gustavobernardi.com/projetos/conecta-contabil
   No ar: https://www.conectacontabil.digital/
