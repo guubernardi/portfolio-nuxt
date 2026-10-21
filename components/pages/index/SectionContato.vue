@@ -2,7 +2,7 @@
   <section ref="secaoRef" id="contato" class="contato" aria-label="Contato">
     <div ref="painelRef" class="contato__painel">
       <span class="contato__rotulo">
-        <b>06</b>
+        <b>07</b>
         Contato
       </span>
 
