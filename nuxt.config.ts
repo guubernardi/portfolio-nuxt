@@ -15,6 +15,10 @@ export default defineNuxtConfig({
   features: {
     inlineStyles: true
   },
+  // grafia alternativa do briefing da Nuárr: quem digitar o link de memória cai no lugar certo
+  routeRules: {
+    '/quiz-clinica-naur': { redirect: { to: '/quiz-clinica-nuarr', statusCode: 301 } }
+  },
   modules: ['@pinia/nuxt', '@nuxt/image'],
   image: {
     quality: 80,
