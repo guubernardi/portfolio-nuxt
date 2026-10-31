@@ -5,7 +5,7 @@
 
       <div class="sobre__conteudo">
         <div class="sobre__foto-wrap">
-          <img class="sobre__foto" ref="fotoRef" src="/images/gustavo.png" alt="Foto de Gustavo Bernardi" />
+          <img class="sobre__foto" ref="fotoRef" src="https://unicpages-assets.nyc3.digitaloceanspaces.com/imagens/du2i3qhs51oy2ow0-gustavo.webp" alt="Foto de Gustavo Bernardi" />
         </div>
 
         <div class="sobre__texto" ref="textoRef">
