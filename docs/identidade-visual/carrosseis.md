@@ -182,6 +182,28 @@ O Mario é o dono da loja; o Toad, o cliente que procura e some.
 >
 > #sitesprofissionais #presencadigital #empreendedorismo #negocioslocais #desenvolvimentoweb
 
+## Case Qualifix, sistema industrial (formato novo de case)
+
+Sistema não tem uma página pra fatiar, então os slides 04 a 07 mostram uma tela cada (Programação, a reunião das 9h no Modo Diretoria, OEE e Plano de ação), com o cartão sangrando pela direita e por baixo. O slide 08 troca o celular pela TV da sala de reunião, que é onde o Modo Diretoria roda de verdade. Slides em `Documents/pessoal/devbygusta-carrosseis/case-qualifix/` (montados em HTML, com o Figma fora do ar nesta sessão).
+
+As telas saíram do sistema rodando local, com um backup restaurado num banco temporário e os dados trocados por fictícios (clientes, pessoas, produtos, OPs e códigos). O relógio da API e do navegador foi adiantado pro último dia com dados, pra o "hoje" das telas não aparecer vazio.
+
+> Fábrica que programa a produção em planilha só vê o atraso na reunião do dia seguinte.
+>
+> O sistema da Qualifix, de estamparia de metais e injeção plástica, junta os três setores num lugar só:
+>
+> → a programação de cada máquina atualiza em tempo real, no computador e no celular
+> → a reunião das 9h abre na TV com o fechamento de ontem e o que ficou fora da meta
+> → OEE e paradas saem das planilhas da fábrica, sem ninguém montar relatório
+>
+> Fiz do zero: layout, sistema e API, com login por perfil e histórico de cada alteração.
+>
+> Tem um processo que ainda vive em planilha? Me chama no direct.
+>
+> #sistemasobmedida #gestaodaproducao #oee #industria #devbrasil
+
+Rótulo de IA ligado (capa e TV são render realista).
+
 ## Case Clínica Brenna Damasceno (formato novo de case)
 
 Seção `Carrosel — Case Clínica Brenna Damasceno (novo formato)` no Figma. Capa com notebook e celular num pedestal de mármore e pétalas em ciano (o Método Florescer da clínica), slide da paleta com vinho, vinho escuro, rosa claro e dourado e o itálico da Figtree, a página do topo até a equipe nos slides 04 a 06, o "Com quem começar" no 07 e dois celulares no 08 (o "Com quem começar" e o cartão da Brenna).

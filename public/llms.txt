@@ -76,6 +76,9 @@ o que foi entregue. Lista completa em https://www.gustavobernardi.com/projetos
 - Patas Felizes — landing page para pet shop e banho e tosa.
   Case: https://www.gustavobernardi.com/projetos/patas-felizes
   No ar: https://www.patasfelizes.com/
+- Qualifix — sistema de produção para indústria de estamparia e injeção plástica, com programação
+  em tempo real, painéis, OEE e a reunião da diretoria na TV.
+  Case: https://www.gustavobernardi.com/projetos/qualifix
 - Toyz — sistema de gestão para locadoras de infláveis.
   Case: https://www.gustavobernardi.com/projetos/toyz
   No ar: https://apptoyz.com.br/

@@ -392,6 +392,102 @@ export const PROJETOS = [
   },
 
   {
+    id: 'qualifix',
+    slug: 'qualifix',
+    titulo: 'Sistema de produção para indústria',
+    nome: 'Qualifix',
+    categoria: 'Sistema',
+    setor: 'Estamparia de metais e injeção plástica',
+    imagem: '/images/projetos/qualifix.webp',
+    largura: 1200,
+    altura: 800,
+    // o sistema fica atrás de login: o link leva pra tela de entrar, que já mostra o produto
+    site: 'https://sistemaqualifix.online/',
+
+    resumo:
+      'O sistema que junta a programação, os indicadores e a reunião diária de uma fábrica num lugar só, atualizado em tempo real.',
+
+    ficha: [
+      { rotulo: 'Tipo de projeto', valor: 'Sistema web' },
+      { rotulo: 'Segmento', valor: 'Estamparia de metais e injeção plástica' },
+      { rotulo: 'Formato', valor: 'Web e app instalável' },
+      { rotulo: 'Acesso', valor: 'Login com 4 perfis' },
+    ],
+
+    // contados no próprio sistema: setores, perfis e tutoriais publicados
+    numeros: [
+      { valor: '3', unidade: '', rotulo: 'Setores da fábrica no mesmo quadro' },
+      { valor: '4', unidade: '', rotulo: 'Perfis de acesso, conferidos no servidor' },
+      { valor: '13', unidade: '', rotulo: 'Tutoriais em vídeo dentro do sistema' },
+    ],
+
+    // o sistema não tem página pública, então a galeria empilha as telas de uso.
+    // capturadas numa cópia local com os dados da fábrica trocados por fictícios
+    galeria: [
+      {
+        src: '/images/projetos/qualifix-mac.webp',
+        largura: 1280,
+        altura: 4530,
+        tipo: 'mac',
+        rotulo: 'No computador',
+        alt: 'Telas do sistema da Qualifix no computador: programação, reunião da diretoria, visão executiva, OEE e plano de ação, com dados de exemplo',
+      },
+      {
+        src: '/images/projetos/qualifix-iphone.webp',
+        largura: 360,
+        altura: 4097,
+        tipo: 'iphone',
+        rotulo: 'No celular',
+        alt: 'Programação e plano de ação no celular, com dados de exemplo',
+      },
+    ],
+
+    contexto:
+      'A Qualifix é uma indústria de estamparia de metais e injeção de termoplásticos, com três setores: Injeção, Estamparia e Montagem. A programação da produção, os painéis e os planos de ação ficavam em páginas soltas, sem login, e o responsável por uma alteração era um campo de texto que qualquer um preenchia. Produção, paradas e OEE vinham das planilhas de controle de cada setor, que o navegador precisava baixar inteiras. O sistema novo precisava manter tudo o que a fábrica já usava, saber quem mexeu em quê e chegar pronto à reunião da diretoria das 9h.',
+
+    decisoes: [
+      {
+        titulo: 'A programação muda em todos os aparelhos ao mesmo tempo',
+        texto:
+          'Quando o PCP troca uma OP de máquina, a mudança aparece no computador, no celular e na TV sem ninguém recarregar a página, e só o que mudou trafega. Antes, cada setor era um documento regravado inteiro a cada alteração.',
+      },
+      {
+        titulo: 'Login por perfil e o nome de quem mexeu',
+        texto:
+          'O PCP edita a programação, a Supervisão cuida dos planos de ação, a Diretoria só consulta e o administrador cuida dos usuários. A permissão é conferida no servidor, não só na tela, e toda alteração grava quem fez.',
+      },
+      {
+        titulo: 'A reunião das 9h numa TV',
+        texto:
+          'O Modo Diretoria tem duas visões: o Agora, com as prioridades do dia, e o Ontem, com o fechamento do dia anterior em oito abas. Roda em tela cheia na sala da diretoria e é controlado pelo teclado durante a reunião.',
+      },
+      {
+        titulo: 'As planilhas continuam, quem lê é o servidor',
+        texto:
+          'A fábrica segue lançando nas planilhas de controle de cada setor. O servidor lê os arquivos, acha as colunas pelo nome e avisa com uma mensagem clara quando falta alguma, em vez de deixar o painel errado em silêncio.',
+      },
+      {
+        titulo: 'Indicadores com a fórmula escrita',
+        texto:
+          'OEE, eficiência e paradas foram refeitos com a fórmula documentada, em vez de copiar o cálculo antigo só para os números baterem. Ficou combinado desde o começo que alguns números iam mudar.',
+      },
+      {
+        titulo: 'O sistema é da Qualifix',
+        texto:
+          'Código, banco e dados pertencem à empresa, e a documentação foi escrita para outro desenvolvedor conseguir assumir. Cada pessoa ainda encontra, dentro do sistema, tutoriais em vídeo das telas que usa.',
+      },
+    ],
+
+    entregas: [
+      'Layout desenhado e aprovado antes de virar sistema',
+      'Programação dos três setores em tempo real, no computador, no celular e na TV',
+      'Painéis por setor com produção, OEE, paradas e setup',
+      'Plano de ação com verificação de eficácia e exportação para Excel',
+      'Dados do sistema antigo migrados e 13 tutoriais em vídeo',
+      'App instalável, com login por perfil e histórico de cada alteração',
+    ],
+  },
+  {
     id: 'toyz',
     slug: 'toyz',
     titulo: 'Sistema de gestão para locadoras',
