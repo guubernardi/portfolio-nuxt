@@ -1021,16 +1021,13 @@ export const SERVICOS = [
     icone: 'carrinho-compras',
     nomeCurto: 'E-commerce',
     resumoCurto: 'Loja que carrega rápido e fecha venda.',
-    // nenhuma loja publicada no portfólio até agora, então a seção de exemplos
-    // some sozinha. Quando entrar um case de e-commerce, basta trocar este
-    // filtro por p.categoria === 'E-commerce' e a prova aparece aqui
-    filtro: () => false,
+    filtro: (p) => p.categoria === 'E-commerce',
 
     titulo: 'Criação de loja virtual',
     chamada: 'que não perde a venda no meio.',
     resumo:
       'Loja em Shopify com o tema trabalhado no código, montada em volta do caminho até o pagamento e funcionando no celular, que é onde a compra acontece.',
-    acaoExemplos: '',
+    acaoExemplos: 'Ver uma loja no ar',
     mensagemWhatsapp: 'Olá! Gostaria de um orçamento para uma loja virtual.',
 
     tituloSeo: 'Criação de loja virtual em Shopify',
@@ -1088,7 +1085,7 @@ export const SERVICOS = [
       },
     ],
 
-    exemplosTitulo: { titulo: '', chamada: '' },
+    exemplosTitulo: { titulo: 'Uma loja', chamada: 'vendendo agora.' },
 
     perguntas: [
       {

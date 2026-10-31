@@ -204,6 +204,28 @@ As telas saíram do sistema rodando local, com um backup restaurado num banco te
 
 Rótulo de IA ligado (capa e TV são render realista).
 
+## Case Gama 3D, loja virtual (formato novo de case)
+
+Primeiro case de e-commerce. Loja tem várias páginas, então os slides 04 a 07 seguem o jeito do sistema, uma tela cada: a vitrine (home), a coleção de filamentos com o filtro de marca aberto, o cartão de compra do produto ("Leve mais, pague menos" e as outras cores) e a gaveta do carrinho com o botão de motoboy. As telas que têm o conteúdo na direita (produto e carrinho) são recortadas pra caber antes da borda do slide, senão os preços e o botão saem cortados. Slides em `Documents/pessoal/devbygusta-carrosseis/case-gama3d/`, montados em HTML como os da Qualifix.
+
+As telas saíram da loja no ar, com o analytics e o pixel bloqueados na captura pra não contar visita nem "adicionou ao carrinho" falso nos números da Gama.
+
+> Quem vende filamento pelo direct passa o dia respondendo a mesma coisa: tem essa cor? quanto fica o frete?
+>
+> A loja virtual da Gama 3D responde isso antes da mensagem:
+>
+> → 94 filamentos de cinco marcas, com filtro por marca e as outras cores do mesmo filamento a um toque
+> → desconto por volume que soma as cores, e o carrinho avisa quantas bobinas faltam
+> → frete calculado no checkout, motoboy pelo WhatsApp ou retirada na loja
+>
+> Fiz o layout, o tema no Shopify e o cadastro do catálogo a partir das planilhas de estoque.
+>
+> Vende pelo direct e quer parar de responder preço um por um? Me chama.
+>
+> #lojavirtual #ecommerce #shopify #impressao3d #devbrasil
+
+Rótulo de IA ligado (capa e celulares são render realista).
+
 ## Case Clínica Brenna Damasceno (formato novo de case)
 
 Seção `Carrosel — Case Clínica Brenna Damasceno (novo formato)` no Figma. Capa com notebook e celular num pedestal de mármore e pétalas em ciano (o Método Florescer da clínica), slide da paleta com vinho, vinho escuro, rosa claro e dourado e o itálico da Figtree, a página do topo até a equipe nos slides 04 a 06, o "Com quem começar" no 07 e dois celulares no 08 (o "Com quem começar" e o cartão da Brenna).

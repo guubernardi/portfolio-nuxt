@@ -392,6 +392,102 @@ export const PROJETOS = [
   },
 
   {
+    id: 'gama3d',
+    slug: 'gama-3d',
+    titulo: 'Loja virtual para impressão 3D',
+    nome: 'Gama 3D',
+    categoria: 'E-commerce',
+    setor: 'Filamentos e insumos para impressão 3D',
+    imagem: '/images/projetos/gama3d.webp',
+    largura: 1200,
+    altura: 800,
+    site: 'https://gama3d.com.br/',
+
+    resumo:
+      'A loja de uma revenda de impressão 3D que vendia só pelo direct: quase cem filamentos, desconto por volume e frete resolvido do carretel à estante de aço.',
+
+    ficha: [
+      { rotulo: 'Tipo de projeto', valor: 'Loja virtual' },
+      { rotulo: 'Segmento', valor: 'Filamentos, peças e impressoras 3D' },
+      { rotulo: 'Formato', valor: 'Shopify com tema personalizado' },
+      { rotulo: 'Entrega', valor: 'Correios, motoboy ou retirada' },
+    ],
+
+    // Lighthouse mobile pelo PageSpeed em 2026-10-30: desempenho 85,
+    // acessibilidade 87, práticas 96, SEO 92. Nenhum chegou a 100, então os
+    // números são da própria loja (contados no /products.json no mesmo dia)
+    numeros: [
+      { valor: '94', unidade: '', rotulo: 'Filamentos à venda, cada cor com página própria' },
+      { valor: '5', unidade: '', rotulo: 'Marcas de filamento no filtro da coleção' },
+      { valor: '3', unidade: '', rotulo: 'Jeitos de receber: Correios, motoboy ou retirada' },
+    ],
+
+    galeria: [
+      {
+        src: '/images/projetos/gama3d-mac.webp',
+        largura: 1280,
+        altura: 4738,
+        tipo: 'mac',
+        rotulo: 'No computador',
+        alt: 'Página inicial da loja da Gama 3D no computador, do topo ao rodapé',
+      },
+      {
+        src: '/images/projetos/gama3d-iphone.webp',
+        largura: 360,
+        altura: 11480,
+        tipo: 'iphone',
+        rotulo: 'No celular',
+        alt: 'Mesma página no celular, do topo ao rodapé',
+      },
+    ],
+
+    contexto:
+      'A Gama 3D vende filamento para impressora 3D, peças de reposição, impressoras e porta-paletes, com loja física em São Bernardo do Campo. Até a loja virtual existir, toda venda passava pelo direct do Instagram e pelo WhatsApp, e cada pedido começava pelas mesmas perguntas: tem essa cor, de qual marca, quanto fica o frete. O estoque morava em planilhas. A loja precisava mostrar quase cem filamentos de cinco marcas sem virar uma prateleira bagunçada, e resolver no mesmo carrinho o frete de um carretel de 1 kg e o de uma estante de aço de 2 metros.',
+
+    decisoes: [
+      {
+        titulo: 'As cores do logo viraram o mapa da loja',
+        texto:
+          'O cliente pediu a loja com as cores do logo, que é um arco-íris inteiro. Em vez de espalhar o arco pela tela, cada categoria ganhou uma cor, na ordem do gradiente, e o menu, a faixa de benefícios e as categorias remontam o logo lidos em sequência. Preço, botão de comprar e cabeçalho ficam sempre no azul do GAMA, da vitrine ao checkout. Nas letras entra uma versão mais escura de cada cor, porque o amarelo do logo como texto não passa no contraste.',
+      },
+      {
+        titulo: 'Cada cor é um produto, e as irmãs aparecem juntas',
+        texto:
+          'Filamento se escolhe pela cor, e cada cor tem estoque, foto e página próprios. Na página do produto, as outras cores da mesma linha aparecem lado a lado, com a esgotada riscada e anunciada como esgotada para leitor de tela. No PLA Silk da Voolt3D são 19 cores a um toque, sem voltar para a lista.',
+      },
+      {
+        titulo: 'O catálogo saiu da planilha de estoque',
+        texto:
+          'Os filamentos foram cadastrados por script a partir das planilhas de estoque da loja, com marca no título, material, peso e categoria. As fotos vêm do catálogo de cada fabricante e só entram quando a cor bate exatamente, porque foto de outra cor é pior que foto nenhuma. Uma linha com preço dez vezes fora das vizinhas ficou de fora do cadastro em vez de ir para o ar.',
+      },
+      {
+        titulo: 'Desconto por volume que soma as cores',
+        texto:
+          'Quem imprime em série compra bobina em quantidade e em várias cores. A partir de 5 e de 10 unidades o preço cai, somando as cores do mesmo filamento, e o carrinho avisa quantas bobinas faltam para chegar no desconto. A regra roda num app próprio da loja, sem cupom para lembrar de digitar.',
+      },
+      {
+        titulo: 'Frete para um carretel e para uma estante de 2 metros',
+        texto:
+          'Filamento sai pelos Correios, com o frete calculado no checkout. O porta-palete é uma estante de aço de 2 m que não cabe nos Correios, então o botão de compra dele vira "Combinar frete pelo WhatsApp", já com o produto escrito na mensagem. Para quem está perto, o carrinho oferece motoboy pelo WhatsApp com o pedido montado, e a retirada na loja aparece desde o topo da página.',
+      },
+      {
+        titulo: 'Busca e filtro para quem já sabe o que quer',
+        texto:
+          'A busca sugere produtos enquanto a pessoa digita e acha "Filamento" a partir de "fila". O filtro de marca escolhe uma por vez, para a lista nunca zerar, e no celular a barra de baixo deixa o carrinho no centro, ao alcance do polegar.',
+      },
+    ],
+
+    entregas: [
+      'Layout e tema da loja trabalhados no código, no Shopify',
+      'Catálogo cadastrado a partir das planilhas de estoque, com fotos dos fabricantes',
+      'Página de produto com ficha técnica, cores irmãs e desconto por volume',
+      'Desconto por volume num app próprio, somando as cores do mesmo filamento',
+      'Frete pelos Correios, motoboy e porta-palete combinados pelo WhatsApp',
+      'Dados estruturados de loja e produto preparados para o Google',
+    ],
+  },
+
+  {
     id: 'qualifix',
     slug: 'qualifix',
     titulo: 'Sistema de produção para indústria',

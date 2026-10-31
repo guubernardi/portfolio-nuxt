@@ -76,6 +76,10 @@ o que foi entregue. Lista completa em https://www.gustavobernardi.com/projetos
 - Patas Felizes — landing page para pet shop e banho e tosa.
   Case: https://www.gustavobernardi.com/projetos/patas-felizes
   No ar: https://www.patasfelizes.com/
+- Gama 3D — loja virtual em Shopify para filamentos e insumos de impressão 3D, com
+  desconto por volume e frete pelos Correios, motoboy ou retirada.
+  Case: https://www.gustavobernardi.com/projetos/gama-3d
+  No ar: https://gama3d.com.br/
 - Qualifix — sistema de produção para indústria de estamparia e injeção plástica, com programação
   em tempo real, painéis, OEE e a reunião da diretoria na TV.
   Case: https://www.gustavobernardi.com/projetos/qualifix

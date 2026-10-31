@@ -225,8 +225,9 @@ if (!projeto) {
   throw createError({ statusCode: 404, statusMessage: 'Projeto não encontrado', fatal: true })
 }
 
-// sistema nao e pagina: os titulos das secoes acompanham o tipo do projeto
-const artigo = projeto.categoria.toLowerCase().includes('sistema') ? 'o sistema' : 'a página'
+// sistema e loja nao sao pagina: os titulos das secoes acompanham o tipo do projeto
+const ARTIGOS = { Sistema: 'o sistema', 'E-commerce': 'a loja' }
+const artigo = ARTIGOS[projeto.categoria] || 'a página'
 
 // quando existe pagina de servico para o nicho deste case, o fecho leva para
 // ela em vez de devolver para a listagem
@@ -260,7 +261,11 @@ const canonica = urlCanonica(`/projetos/${projeto.slug}`)
 // o title mira o serviço, não o nome do cliente: é "landing page para psicologia
 // clínica" que alguém digita na busca, o nome próprio só quem já conhece
 const TITULO = projeto.titulo
-const DESCRICAO = `${projeto.resumo} Veja as decisões por trás do site de ${projeto.nome}, feito do zero por ${SITE_NOME}.`
+// a loja partiu de um tema base de Shopify, então "do zero" não vale para ela
+const DESCRICAO =
+  projeto.categoria === 'E-commerce'
+    ? `${projeto.resumo} Veja as decisões por trás da loja virtual da ${projeto.nome}, feita por ${SITE_NOME}.`
+    : `${projeto.resumo} Veja as decisões por trás do site de ${projeto.nome}, feito do zero por ${SITE_NOME}.`
 
 useHead({
   title: TITULO,

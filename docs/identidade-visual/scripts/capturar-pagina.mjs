@@ -75,6 +75,17 @@ async function capturar(rotulo, viewport, ua) {
   })
   await esperar(800)
 
+  // o que é fixo embaixo (barra de abas do celular, botão de WhatsApp) cairia no
+  // meio da página costurada, em cima da primeira fatia. Some desde o começo;
+  // só o menu de cima fica na primeira fatia
+  await p.evaluate((altura) => {
+    for (const el of document.querySelectorAll('body *')) {
+      if (getComputedStyle(el).position === 'fixed' && el.getBoundingClientRect().top > altura / 2) {
+        el.style.visibility = 'hidden'
+      }
+    }
+  }, viewport.height)
+
   total = await p.evaluate(() => document.documentElement.scrollHeight)
   const vista = viewport.height
   const n = Math.ceil(total / vista)

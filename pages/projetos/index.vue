@@ -116,11 +116,12 @@ const linkWhatsapp =
 
 // ordem fixa: começa pelo serviço mais procurado e termina no mais específico.
 // categoria que não estiver aqui entra no fim, sem sumir da página
-const ORDEM = ['Landing page', 'Site institucional', 'Sistema']
+const ORDEM = ['Landing page', 'Site institucional', 'Sistema', 'E-commerce']
 const PLURAL = {
   'Landing page': 'Landing pages',
   'Site institucional': 'Sites institucionais',
   Sistema: 'Sistemas',
+  'E-commerce': 'Lojas virtuais',
 }
 
 const grupos = computed(() => {
