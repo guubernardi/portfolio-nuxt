@@ -12,6 +12,7 @@
           :key="link.id"
           class="nav__link"
           :class="{ 'nav__link--ativo': estaAtivo(link) }"
+          :aria-current="estaAtivo(link) ? 'page' : undefined"
           v-bind="link.rota ? { to: link.rota } : { href: `/#${link.ancora}` }"
           @click="aoClicar($event, link)"
         >
@@ -46,6 +47,7 @@
               :key="link.id"
               class="menu-mobile__link"
               :class="{ 'menu-mobile__link--ativo': estaAtivo(link) }"
+              :aria-current="estaAtivo(link) ? 'page' : undefined"
               v-bind="link.rota ? { to: link.rota } : { href: `/#${link.ancora}` }"
               @click="aoClicar($event, link)"
             >
@@ -184,9 +186,11 @@ onBeforeUnmount(() => {
   align-items: center
   gap: 24px
   width: 100%
-  max-width: 1600px
+  // 1600 de conteúdo + 60 de cada lado, a mesma margem das seções: com padding
+  // lateral zero, entre 1100 e 1600px o logo e o CTA encostavam na borda da tela
+  max-width: 1720px
   margin: 0 auto
-  padding: 14px 0px
+  padding: 14px 60px
   color: var(--cor-branco)
   // a geometria fica constante e só o transform anima. animar top/padding/max-width
   // forçava reflow a cada quadro e re-rasterizava os backdrop-filter de dentro —
@@ -195,18 +199,34 @@ onBeforeUnmount(() => {
   transition: transform 0.4s ease
   will-change: transform
 
-  // a barra em si não tem fundo: quem carrega o vidro é o pill do menu e o CTA
+  // A barra não tem fundo: são ilhas flutuantes (logo, pill do menu e CTA).
+  // Rolando, o logo e o hambúrguer passavam soltos por cima do texto das seções,
+  // então eles ganham o mesmo vidro do pill. No topo da página continuam sem
+  // caixa, como o hero pede. Faixa de borda a borda foi testada e descartada:
+  // tirava a cara de menu flutuante.
   &--rolado
     transform: translateY(0)
 
   &__logo
     display: flex
     justify-self: start
+    padding: 7px
+    border: 1px solid transparent
+    border-radius: 14px
     cursor: pointer
+    transition: background 0.4s ease, border-color 0.4s ease
 
     :deep(svg)
       width: 34px
       height: 34px
+
+  // o mesmo vidro do pill do menu
+  &--rolado &__logo,
+  &--rolado .hamburger
+    border-color: rgba(125, 155, 255, 0.18)
+    background: rgba(30, 46, 115, 0.4)
+    backdrop-filter: blur(12px)
+    -webkit-backdrop-filter: blur(12px)
 
   &__menu
     display: flex
@@ -247,15 +267,10 @@ onBeforeUnmount(() => {
       :deep(svg)
         opacity: 1
 
-    // a página atual fica acesa, com borda para o estado se ler mesmo em quem
-    // não distingue bem a diferença de fundo
+    // página atual: só o rótulo muda de cor, sem caixa (o mesmo azul do menu do
+    // celular). Quem usa leitor de tela recebe o estado pelo aria-current
     &--ativo
-      border: 1px solid rgba(140, 165, 255, 0.34)
-      background: rgba(125, 155, 255, 0.16)
-      font-family: var(--semibold)
-      color: var(--cor-branco)
-      // compensa a borda para o item não empurrar os vizinhos
-      padding: 10px 17px
+      color: #8aa6f0
 
       :deep(svg)
         opacity: 1
@@ -287,11 +302,14 @@ onBeforeUnmount(() => {
   flex-direction: column
   justify-content: center
   gap: 5px
-  padding: 8px
-  background: none
-  border: none
+  padding: 12px 10px
+  // borda e fundo transparentes no topo; rolando, ganha o vidro do pill (ver .nav--rolado)
+  border: 1px solid transparent
+  border-radius: 12px
+  background: transparent
   cursor: pointer
   z-index: 101
+  transition: background 0.4s ease, border-color 0.4s ease
 
   span
     display: block
