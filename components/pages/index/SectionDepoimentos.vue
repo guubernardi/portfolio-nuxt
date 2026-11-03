@@ -179,7 +179,7 @@ const depoimentos = [
     site: 'https://clinicabrennadamasceno.com.br/',
     instagram: 'https://www.instagram.com/clinicabrennadamasceno',
     texto:
-      'Superou minhas expectativas, antes eu tinha um site amador com sérios erros de design que eu fiz a mão, meu melhor investimento foi contratar você, com certeza vou te indicar para conhecidos meus',
+      'Superou minhas expectativas. Antes, eu tinha um site amador, feito por mim mesma, com sérios erros de design. Contratar você foi o meu melhor investimento, e com certeza vou te indicar para os meus conhecidos.',
   },
   {
     // sem cargo informado: a linha de baixo mostra só a loja
@@ -191,7 +191,7 @@ const depoimentos = [
     texto:
       // o hífen de "e‑commerce" aqui é o inseparável (U+2011), não o do teclado:
       // com o comum, a palavra quebrava no meio da linha ("e-" / "commerce")
-      'Surreal meu e‑commerce, que trabalho incrível o seu, irmão, parabéns, meu e‑commerce virou referência do ramo 3D',
+      'Meu e‑commerce ficou surreal. Que trabalho incrível, parabéns! A loja virou referência no ramo 3D.',
   },
   {
     // profissional liberal, sem nome de empresa: o link do site fica na profissão
@@ -203,7 +203,7 @@ const depoimentos = [
     instagram: 'https://www.instagram.com/jamillyferreira.psico',
     rotuloInstagram: 'Instagram da Jamilly Ferreira',
     texto:
-      'Eu não tinha a mínima ideia do que eu queria, você veio com o design totalmente pronto e personalizado para mim, além do link de bio personalizado, ficou muito top',
+      'Eu não tinha a menor ideia do que queria, e você chegou com um design pronto e totalmente personalizado para mim, além de um link de bio também personalizado. O resultado ficou excelente.',
   },
   {
     nome: 'Guilherme Pessin',
@@ -212,7 +212,7 @@ const depoimentos = [
     site: 'https://www.citytoysbrinquedos.com/',
     instagram: 'https://www.instagram.com/city_toysbrinquedos',
     texto:
-      'De verdade, você sabe que eu me amarrei no site, meu pai também gostou muito, sendo bem sincero, superou legal as expectativas, até porque foi algo criado praticamente sem referência alguma, já que nesse ramo é difícil encontrar algo parecido, tanto que até pessoas do ramo vieram falar sobre o site, ficou super autoexplicativo, a parte do monte seu combo, ficou fácil de entender e bem intuitiva, a questão de entrar em contato, que eu tanto te perturbei, ficou bem legal também, você conseguiu colocar de um jeito que não ficou feio nem repetitivo, então, tá de parabéns, viu, ficou muito bom mesmo',
+      'Sendo bem sincero, o site superou as expectativas. Eu adorei, e meu pai também gostou muito. Ele foi criado praticamente sem referência, porque nesse ramo é difícil encontrar algo parecido, e até pessoas do setor vieram comentar sobre ele. Ficou muito autoexplicativo: o “Monte seu combo” é fácil de entender e intuitivo, e o contato, em que eu tanto insisti, ficou ótimo, sem ficar feio nem repetitivo. Está de parabéns, o resultado ficou excelente.',
   },
 ]
 
