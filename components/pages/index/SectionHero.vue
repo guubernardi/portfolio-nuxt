@@ -444,6 +444,20 @@ onBeforeUnmount(() => {
   .acao
     width: 100%
 
+// Celular e tablet: a luz sem filter: blur. O desfoque de 70px no núcleo e os de
+// 50px e 18px nos feixes eram, somados, a parte mais cara da home em memória
+// (medido no WebKit: ~110MB só deles), e o Safari do iPhone derrubava a aba. Os
+// gradientes radiais já terminam em transparente, então a luz continua difusa.
+// O will-change também sai: lá ele só serve ao parallax do mouse
+@media (hover: none) and (pointer: coarse)
+  .luz
+    will-change: auto
+
+  .luz__nucleo,
+  .luz__feixe::after,
+  .luz__feixe::before
+    filter: none
+
 // ===== entrada do conteúdo, em CSS =====
 // Esta coreografia era uma timeline GSAP disparada no onMounted. O efeito era o
 // mesmo, mas o hero ficava invisível até o bundle baixar e hidratar: no celular

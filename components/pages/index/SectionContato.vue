@@ -163,6 +163,14 @@ onBeforeUnmount(() => {
       height: 15px
       transition: transform 0.4s ease
 
+// Celular e tablet: o brilho sem filter: blur. Aqui ele cobre quase a seção
+// inteira, e no WebKit desfocar essa área custava ~270MB ao chegar no fim da
+// home, o bastante pra derrubar a aba do Safari no iPhone. O gradiente radial já
+// termina em transparente, então o brilho continua difuso
+@media (hover: none) and (pointer: coarse)
+  .contato::before
+    filter: none
+
 @media (max-width: 820px)
   .contato
     padding: 90px 20px 100px

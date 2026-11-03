@@ -269,4 +269,11 @@ useHead({
   font-family: var(--light)
   font-size: 12.5px
   color: rgba(255, 255, 255, 0.28)
+
+// Celular e tablet: o brilho sem filter: blur, que é caro em memória no Safari
+// do iPhone (a mesma causa que derrubava a home). O gradiente radial já termina
+// em transparente, então o brilho continua difuso
+@media (hover: none) and (pointer: coarse)
+  .bio__nucleo
+    filter: none
 </style>

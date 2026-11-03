@@ -1,0 +1,16 @@
+// Celular e tablet (tela de toque, sem mouse): sem vidro desfocado.
+//
+// Cada backdrop-filter obriga o navegador a guardar e desfocar uma cópia do que
+// está atrás do elemento. Somados aos brilhos da home, eles estouravam a memória
+// da aba no Safari do iPhone ("Um problema ocorreu repetidamente"). Os fundos
+// desses elementos já são translúcidos sobre seções escuras, então sem o
+// desfoque a leitura continua a mesma.
+//
+// Regra global de propósito: vidro novo que entrar no site já nasce coberto,
+// sem depender de alguém lembrar de repetir o media query no componente.
+@media (hover: none) and (pointer: coarse)
+  *,
+  *::before,
+  *::after
+    backdrop-filter: none !important
+    -webkit-backdrop-filter: none !important
