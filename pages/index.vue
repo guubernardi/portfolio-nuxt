@@ -8,6 +8,7 @@
     <SectionProjetos/>
     <DivisorCurva corTopo="#061c3e" cor="#051a39" />
     <SectionDiferenciais/>
+    <SectionSobre/>
     <SectionDepoimentos/>
     <SectionFaq/>
     <SectionContato/>
@@ -21,6 +22,7 @@ import SectionServicos from '../components/pages/index/SectionServicos.vue'
 import SectionProcesso from '../components/pages/index/SectionProcesso.vue'
 import SectionProjetos from '../components/pages/index/SectionProjetos.vue'
 import SectionDiferenciais from '../components/pages/index/SectionDiferenciais.vue'
+import SectionSobre from '../components/pages/index/SectionSobre.vue'
 import SectionDepoimentos from '../components/pages/index/SectionDepoimentos.vue'
 import SectionFaq from '../components/pages/index/SectionFaq.vue'
 import SectionContato from '../components/pages/index/SectionContato.vue'

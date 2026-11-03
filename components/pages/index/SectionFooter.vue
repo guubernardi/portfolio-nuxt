@@ -78,6 +78,7 @@ const links = [
   { rotulo: 'Serviços', alvo: '.servicos' },
   { rotulo: 'Como trabalhamos', alvo: '.processo' },
   { rotulo: 'Projetos', alvo: '.projetos' },
+  { rotulo: 'Sobre mim', alvo: '.sobre' },
   { rotulo: 'Dúvidas', alvo: '.faq' },
   { rotulo: 'Contato', alvo: '.contato' },
 ]
