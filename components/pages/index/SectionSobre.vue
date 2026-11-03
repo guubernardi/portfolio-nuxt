@@ -508,6 +508,20 @@ $azul-eletrico: #07B1E8
       min-height: 0
       padding: 0 40px 80px
 
+  // Celular e tablet: o pôster era a parte mais pesada da página e derrubava a
+  // aba do Safari no iPhone por falta de memória. Cada linha de letreiro tinha
+  // 4000px+ de largura animando sem parar (na tela 3x vira uma textura de
+  // ~12000px na GPU), e cada faísca era mais uma camada animada. Aqui o
+  // letreiro fica parado e com metade do texto, e só 8 faíscas sobem
+  .palco__fantasma-linha
+    animation: none
+
+    span + span
+      display: none
+
+  .palco__faiscas span:nth-child(n + 9)
+    display: none
+
   .palco
     position: relative
     height: clamp(460px, 62vw, 680px)
@@ -547,6 +561,8 @@ $azul-eletrico: #07B1E8
     &__nome
       top: 9%
       font-size: 19vw
+      // o halo de 120px cobria um retângulo enorme pra pouca diferença visível
+      text-shadow: 0 0 14px rgba($ciano, 0.5), 0 0 36px rgba($azul-eletrico, 0.45)
 
     &__fantasma-linha
       font-size: 26vw

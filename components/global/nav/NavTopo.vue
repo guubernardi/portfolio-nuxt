@@ -439,6 +439,21 @@ onBeforeUnmount(() => {
   .hamburger
     display: flex
 
+  // Sem vidro no celular: backdrop-filter em elemento fixo é redesenhado a cada
+  // quadro da rolagem e, somado ao resto da página, estourava a memória do
+  // Safari no iPhone ("Um problema ocorreu repetidamente"). Fundo quase opaco
+  // dá a mesma leitura sem custo
+  .nav--rolado .nav__logo,
+  .nav--rolado .hamburger
+    background: rgba(14, 24, 66, 0.88)
+    backdrop-filter: none
+    -webkit-backdrop-filter: none
+
+  // o fundo já é 97% opaco: o desfoque por trás não aparecia, só custava
+  .menu-mobile
+    backdrop-filter: none
+    -webkit-backdrop-filter: none
+
 // entrada da barra em CSS, como o resto do hero: nao depende do bundle carregar
 @media (prefers-reduced-motion: no-preference)
   .nav__logo,
