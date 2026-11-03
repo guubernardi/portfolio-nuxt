@@ -38,6 +38,8 @@
 </template>
 
 <script setup>
+import { useId } from 'vue'
+
 defineProps({
   // cor da seção de baixo (preenchimento abaixo da curva)
   cor: { type: String, default: 'var(--cor-escuro-1)' },
@@ -46,9 +48,10 @@ defineProps({
 })
 
 // ids de gradiente/filtro precisam ser únicos: dois divisores na mesma página
-// compartilhariam a definição e um sobrescreveria o outro
-let contador = 0
-const uid = `divisor-${++contador}-${Math.random().toString(36).slice(2, 7)}`
+// compartilhariam a definição e um sobrescreveria o outro. useId() gera o mesmo
+// id no servidor e no navegador; com Math.random() eles nunca batiam e o Vue
+// acusava hidratação divergente em todo carregamento
+const uid = `divisor-${useId()}`
 
 const curva = 'M0,80 C 400,12 1040,12 1440,80'
 const area = `${curva} L1440,110 L0,110 Z`
