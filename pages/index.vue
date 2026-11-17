@@ -1,33 +1,36 @@
 <template>
   <div id="tela">
-    <SectionHero/>
-    <DivisorCurva corTopo="var(--cor-escuro-1)" cor="#000000" />
-    <SectionServicos/>
-    <SectionProcesso/>
-    <DivisorCurva corTopo="#010912" cor="#010912" />
-    <SectionProjetos/>
-    <DivisorCurva corTopo="#061c3e" cor="#051a39" />
-    <SectionDiferenciais/>
-    <SectionSobre/>
-    <SectionDepoimentos/>
-    <SectionFaq/>
-    <SectionContato/>
-    <SectionFooter/>
+    <HomeHero />
+    <HomeFaixa />
+    <HomeQuemFaz />
+    <HomeServicos />
+    <DivisorArco :topo="GELO" :base="ABISMO" />
+    <HomeProjetos />
+    <DivisorArco :topo="ABISMO" :base="MARINHO" />
+    <HomeProcesso />
+    <DivisorArco :topo="MARINHO" :base="GELO" />
+    <HomeDepoimentos />
+    <HomeFaq />
+    <DivisorArco :topo="GELO" :base="MARINHO" />
+    <HomeChamada />
+    <DivisorArco :topo="MARINHO" :base="ABISMO" />
+    <HomeRodape />
   </div>
 </template>
 
 <script setup>
-import SectionHero from '../components/pages/index/SectionHero.vue';
-import SectionServicos from '../components/pages/index/SectionServicos.vue'
-import SectionProcesso from '../components/pages/index/SectionProcesso.vue'
-import SectionProjetos from '../components/pages/index/SectionProjetos.vue'
-import SectionDiferenciais from '../components/pages/index/SectionDiferenciais.vue'
-import SectionSobre from '../components/pages/index/SectionSobre.vue'
-import SectionDepoimentos from '../components/pages/index/SectionDepoimentos.vue'
-import SectionFaq from '../components/pages/index/SectionFaq.vue'
-import SectionContato from '../components/pages/index/SectionContato.vue'
-import SectionFooter from '../components/pages/index/SectionFooter.vue'
-import DivisorCurva from '../components/global/elementos/DivisorCurva.vue'
+// Home V2 (Figma "Home V2 · paleta Insta"): as seções moram em components/pages/home
+import HomeHero from '../components/pages/home/HomeHero.vue'
+import HomeFaixa from '../components/pages/home/HomeFaixa.vue'
+import HomeQuemFaz from '../components/pages/home/HomeQuemFaz.vue'
+import HomeServicos from '../components/pages/home/HomeServicos.vue'
+import HomeProjetos from '../components/pages/home/HomeProjetos.vue'
+import HomeProcesso from '../components/pages/home/HomeProcesso.vue'
+import HomeDepoimentos from '../components/pages/home/HomeDepoimentos.vue'
+import HomeFaq from '../components/pages/home/HomeFaq.vue'
+import HomeChamada from '../components/pages/home/HomeChamada.vue'
+import HomeRodape from '../components/pages/home/HomeRodape.vue'
+import DivisorArco from '../components/global/elementos/DivisorArco.vue'
 import {
   SITE_URL,
   SITE_NOME,
@@ -36,6 +39,11 @@ import {
   ID_ORGANIZACAO,
   ID_SITE
 } from '~/helpers/site'
+
+// cores das emendas entre seções (mesmos valores dos tokens da paleta)
+const GELO = '#F3F7F9'
+const ABISMO = '#020715'
+const MARINHO = '#021228'
 
 definePageMeta({
   layout: 'web'

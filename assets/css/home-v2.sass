@@ -1,0 +1,170 @@
+// Peças repetidas da Home V2 (botões, rótulo, título gigante, grade de fundo).
+// Ficam globais porque aparecem em quase toda seção; o que é de uma seção só
+// mora no próprio componente.
+
+// grade de 96px do Figma, desenhada com dois gradientes em vez de dezenas de
+// divs: é uma camada só, barata até no Safari do iPhone
+=grade($cor)
+  background-image: linear-gradient(to right, $cor 1px, transparent 1px), linear-gradient(to bottom, $cor 1px, transparent 1px)
+  background-size: 96px 96px
+  background-position: -1px -1px
+
+.v2-grade-clara
+  +grade(rgba(10, 78, 112, 0.07))
+
+.v2-grade-escura
+  +grade(rgba(243, 247, 249, 0.07))
+
+// largura útil das seções: 1312 de conteúdo + 64 de cada lado, como no Figma
+.v2-conteudo
+  position: relative
+  width: 100%
+  max-width: 1440px
+  margin: 0 auto
+  padding: 0 64px
+
+  @media (max-width: 760px)
+    padding: 0 20px
+
+.v2-rotulo
+  margin: 0 0 20px
+  font-family: var(--figtree)
+  font-weight: 700
+  font-size: 14px
+  letter-spacing: 0.18em
+  text-transform: uppercase
+  color: var(--petroleo)
+
+  &--escuro
+    color: var(--azul-eletrico)
+
+.v2-titulo
+  margin: 0
+  font-family: var(--figtree)
+  font-weight: 900
+  font-size: clamp(40px, 5.3vw, 76px)
+  line-height: 0.92
+  letter-spacing: -0.03em
+  text-transform: uppercase
+  color: var(--abismo)
+
+  &--claro
+    color: #fff
+
+  // a segunda linha do título, sempre na cor de destaque da seção
+  em
+    display: block
+    font-style: normal
+    color: var(--azul-eletrico)
+
+  &--claro em
+    color: var(--ciano)
+
+// ===== botões =====
+// todos em pílula, com a mesma altura de 50px que o Figma usa
+.v2-botao
+  display: inline-flex
+  align-items: center
+  justify-content: center
+  gap: 10px
+  min-height: 50px
+  padding: 0 24px
+  border: 1px solid transparent
+  border-radius: 999px
+  font-family: var(--figtree)
+  font-weight: 600
+  font-size: 15px
+  line-height: 1
+  white-space: nowrap
+  text-decoration: none
+  cursor: pointer
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease
+
+  svg
+    display: block
+    width: 20px
+    height: 20px
+    flex-shrink: 0
+
+  &:focus-visible
+    outline: 2px solid var(--ciano)
+    outline-offset: 3px
+
+  // fundo claro + bolinha escura com a seta (o "Solicitar orçamento")
+  &--claro
+    padding: 6px 6px 6px 24px
+    gap: 14px
+    background: #fff
+    color: var(--abismo)
+
+  &--escuro
+    padding: 6px 6px 6px 24px
+    gap: 14px
+    background: var(--abismo)
+    color: #fff
+
+  &--ciano
+    padding: 0 24px 0 20px
+    background: var(--ciano)
+    color: var(--abismo)
+
+    &:hover
+      background: #4fe3f0
+
+  &--contorno
+    border-color: #fff
+    color: #fff
+
+    &:hover
+      background: rgba(255, 255, 255, 0.1)
+
+  &--contorno-suave
+    padding: 6px 6px 6px 24px
+    gap: 14px
+    border-color: rgba(255, 255, 255, 0.35)
+    color: #fff
+
+  &:hover .v2-botao__bolinha
+    transform: translate(2px, -2px)
+
+  &__bolinha
+    display: flex
+    align-items: center
+    justify-content: center
+    width: 36px
+    height: 36px
+    border-radius: 50%
+    flex-shrink: 0
+    transition: transform 0.3s ease
+
+    // a seta-direita girada 45° vira o ↗ do Figma
+    svg
+      width: 16px
+      height: 16px
+      transform: rotate(-45deg)
+
+  &--claro &__bolinha
+    background: var(--abismo)
+    color: #fff
+
+  &--escuro &__bolinha
+    background: var(--azul-eletrico)
+    color: #fff
+
+  &--contorno-suave &__bolinha
+    background: #fff
+    color: var(--abismo)
+
+// ciano com a bolinha escura e a seta (o "Ver no ar" do case)
+.v2-botao--ciano-seta
+  padding: 6px 6px 6px 24px
+  gap: 14px
+  background: var(--ciano)
+  color: var(--abismo)
+
+  &:hover
+    background: #4fe3f0
+
+  .v2-botao__bolinha
+    background: var(--abismo)
+    color: #fff

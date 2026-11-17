@@ -81,8 +81,17 @@ useHead({
   link: [
     { rel: 'canonical', href: canonica },
 
-    // as duas fontes do hero, que é o LCP da home. Sem preload o browser só as
-    // descobre depois de baixar e interpretar o CSS, e o título entra tarde.
+    // Figtree variável: é dela o título do topo da Home V2, o LCP da home. Sem
+    // preload o browser só a descobre depois de baixar e interpretar o CSS.
+    {
+      rel: 'preload',
+      as: 'font',
+      type: 'font/woff2',
+      href: '/fonts/figtree-variavel-latin.woff2',
+      crossorigin: 'anonymous'
+    },
+
+    // as duas fontes das páginas que ainda estão no visual antigo
     {
       rel: 'preload',
       as: 'font',

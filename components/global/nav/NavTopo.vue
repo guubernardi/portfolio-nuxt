@@ -1,7 +1,7 @@
 <template>
   <Teleport to="body">
     <nav class="nav" :class="{ 'nav--rolado': rolado }">
-      <a class="nav__logo" href="/" aria-label="Ir para o início" @click="aoClicar($event, 'inicio')">
+      <a class="nav__logo" href="/" aria-label="Ir para o início" @click="aoClicar($event, { ancora: 'inicio' })">
         <Svgs nome="logo" />
       </a>
 
@@ -16,7 +16,6 @@
           v-bind="link.rota ? { to: link.rota } : { href: `/#${link.ancora}` }"
           @click="aoClicar($event, link)"
         >
-          <SvgIcone :nome="link.icone" />
           {{ link.rotulo }}
         </component>
       </div>
@@ -107,7 +106,8 @@ const links = [
   { id: 'inicio', rotulo: 'Início', icone: 'casa', ancora: 'inicio' },
   { id: 'servicos', rotulo: 'Serviços', icone: 'engrenagem', rota: '/servicos' },
   { id: 'projetos', rotulo: 'Projetos', icone: 'projetos', rota: '/projetos' },
-  { id: 'contato', rotulo: 'Contatos', icone: 'telefone', ancora: 'contato' },
+  { id: 'sobre', rotulo: 'Sobre', icone: 'usuario', ancora: 'sobre' },
+  { id: 'contato', rotulo: 'Contato', icone: 'telefone', rota: '/contato' },
 ]
 
 // Serviços fica aceso nas doze páginas de serviço, não só na /servicos: quem
@@ -220,80 +220,77 @@ onBeforeUnmount(() => {
       width: 34px
       height: 34px
 
-  // o mesmo vidro do pill do menu
+  // Visual da Home V2: pílulas soltas com borda. Rolando, a barra passa por
+  // cima de seções claras (gelo), onde o vidro translúcido deixava o texto
+  // branco ilegível; então logo, menu, CTA e hambúrguer ganham fundo marinho
+  // quase opaco. Sem desfoque: no iPhone ele custava memória (ver
+  // aparelho-de-toque.sass) e com o fundo a 92% nem faria diferença.
   &--rolado &__logo,
-  &--rolado .hamburger
-    border-color: rgba(125, 155, 255, 0.18)
-    background: rgba(30, 46, 115, 0.4)
-    backdrop-filter: blur(12px)
-    -webkit-backdrop-filter: blur(12px)
+  &--rolado .hamburger,
+  &--rolado &__menu,
+  &--rolado &__cta
+    border-color: rgba(243, 247, 249, 0.14)
+    background: rgba(2, 18, 40, 0.92)
+    box-shadow: 0 10px 30px rgba(2, 7, 21, 0.25)
 
   &__menu
     display: flex
     justify-self: center
     align-items: center
-    gap: 6px
-    padding: 12px 22px
-    border: 1px solid rgba(125, 155, 255, 0.18)
-    border-radius: 16px
-    background: rgba(30, 46, 115, 0.4)
-    backdrop-filter: blur(12px)
-    -webkit-backdrop-filter: blur(12px)
+    gap: 8px
+    padding: 6px
+    border: 1px solid transparent
+    border-radius: 999px
+    transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease
 
   &__link
     display: inline-flex
     align-items: center
-    gap: 9px
-    padding: 11px 18px
-    border-radius: 10px
-    font-family: var(--light)
-    font-size: 15px
-    color: rgba(255, 255, 255, 0.8)
+    padding: 7px 14px
+    border: 1px solid rgba(255, 255, 255, 0.6)
+    border-radius: 999px
+    font-family: var(--figtree)
+    font-weight: 600
+    font-size: 13px
+    color: #fff
+    text-decoration: none
     cursor: pointer
-    transition: background 0.4s ease, color 0.4s ease
-
-    // o ícone herda color do link, então acompanha o hover sozinho
-    :deep(svg)
-      width: 15px
-      height: 15px
-      flex-shrink: 0
-      opacity: 0.75
-      transition: opacity 0.4s ease
+    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease
 
     &:hover
-      background: rgba(125, 155, 255, 0.16)
-      color: var(--cor-branco)
+      background: rgba(255, 255, 255, 0.12)
 
-      :deep(svg)
-        opacity: 1
+    &:focus-visible
+      outline: 2px solid var(--ciano)
+      outline-offset: 2px
 
-    // página atual: só o rótulo muda de cor, sem caixa (o mesmo azul do menu do
-    // celular). Quem usa leitor de tela recebe o estado pelo aria-current
-    &--ativo
-      color: #8aa6f0
-
-      :deep(svg)
-        opacity: 1
+    // página atual: pílula branca com o texto em petróleo. Leitor de tela
+    // recebe o estado pelo aria-current
+    &--ativo,
+    &--ativo:hover
+      border-color: #fff
+      background: #fff
+      color: var(--petroleo)
 
   &__cta
     grid-column: 3
     justify-self: end
-    padding: 13px 26px
-    border: 1px solid rgba(140, 165, 255, 0.28)
-    border-radius: 12px
-    font-family: var(--semibold)
+    padding: 14px 24px
+    border: 1px solid #fff
+    border-radius: 999px
+    font-family: var(--figtree)
+    font-weight: 600
     font-size: 14px
-    color: var(--cor-branco)
+    line-height: 1
+    color: #fff
     text-decoration: none
     white-space: nowrap
-    background: rgba(40, 55, 150, 0.45)
-    backdrop-filter: blur(14px)
-    -webkit-backdrop-filter: blur(14px)
-    // hover mexe só no fundo: sem sombra
-    transition: background 0.4s ease
+    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease
 
     &:hover
-      background: rgba(58, 74, 190, 0.6)
+      border-color: #fff
+      background: #fff
+      color: var(--abismo)
 
 .hamburger
   display: none
@@ -421,8 +418,7 @@ onBeforeUnmount(() => {
     padding: 12px 16px
 
   .nav__link
-    padding: 9px 14px
-    font-size: 14px
+    padding: 7px 12px
 
 @media (max-width: 900px)
   .nav

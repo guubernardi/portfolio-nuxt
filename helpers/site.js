@@ -70,3 +70,9 @@ export function urlCanonica(caminho = '/') {
   if (caminho === '/') return `${SITE_URL}/`
   return SITE_URL + caminho.replace(/\/+$/, '')
 }
+
+// Link do WhatsApp com a mensagem já escrita. Cada botão passa a sua frase, pra
+// a conversa já chegar dizendo de onde a pessoa veio.
+export function linkWhatsapp(mensagem = 'Olá! Vim pelo site e gostaria de um orçamento para um projeto.') {
+  return `https://wa.me/${TELEFONE.replace('+', '')}?text=${encodeURIComponent(mensagem)}`
+}
