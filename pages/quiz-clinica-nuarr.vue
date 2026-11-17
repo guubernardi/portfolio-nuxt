@@ -65,7 +65,8 @@ import { TELEFONE } from '~/helpers/site'
 // pelo celular. Página privada: sem layout (a Nav do site não faz sentido
 // aqui), fora do sitemap e fora da busca. A identidade é a da clínica, não a
 // do Gustavo, por isso as cores vivem em tokens --nuarr-* na raiz da página.
-definePageMeta({ layout: false })
+// fontesAntigas: preload da light e da semibold em vez da variável (app.vue)
+definePageMeta({ layout: false, fontesAntigas: true })
 
 // ---- perguntas
 

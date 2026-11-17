@@ -34,6 +34,26 @@ const route = useRoute()
 // qualquer /?utm=... entram no índice como páginas diferentes disputando entre si
 const canonica = computed(() => urlCanonica(route.path))
 
+// Preload só das fontes que a página desenha logo de cara. As páginas V2 usam a
+// Figtree variável (é dela o título do topo, o LCP da home) e a semibold, que
+// está no menu do celular e é a reserva da variável na pilha --figtree. As que
+// ainda estão no visual antigo (bio, currículo, quiz) marcam fontesAntigas no
+// definePageMeta e usam a light e a semibold, sem a variável. Antes as três iam
+// em toda página: a light só aparece no menu do celular das V2, e o WebKit
+// avisava que ela e a semibold vinham no preload sem uso a tempo.
+const FONTE_VARIAVEL = '/fonts/figtree-variavel-latin.woff2'
+const FONTE_SEMIBOLD = '/fonts/figtree-semibold.woff2'
+const FONTE_LIGHT = '/fonts/figtree-light.woff2'
+
+useHead({
+  link: computed(() => {
+    const fontes = route.meta.fontesAntigas
+      ? [FONTE_LIGHT, FONTE_SEMIBOLD]
+      : [FONTE_VARIAVEL, FONTE_SEMIBOLD]
+    return fontes.map((href) => ({ rel: 'preload', as: 'font', type: 'font/woff2', href, crossorigin: 'anonymous' }))
+  })
+})
+
 const DESCRICAO =
   'Sites, e-commerces e sistemas sob medida, escritos do zero e sem template. Do protótipo ao deploy, com performance real e prazo combinado.'
 
@@ -80,32 +100,6 @@ useHead({
 
   link: [
     { rel: 'canonical', href: canonica },
-
-    // Figtree variável: é dela o título do topo da Home V2, o LCP da home. Sem
-    // preload o browser só a descobre depois de baixar e interpretar o CSS.
-    {
-      rel: 'preload',
-      as: 'font',
-      type: 'font/woff2',
-      href: '/fonts/figtree-variavel-latin.woff2',
-      crossorigin: 'anonymous'
-    },
-
-    // as duas fontes das páginas que ainda estão no visual antigo
-    {
-      rel: 'preload',
-      as: 'font',
-      type: 'font/woff',
-      href: '/fonts/figtree-semibold.woff',
-      crossorigin: 'anonymous'
-    },
-    {
-      rel: 'preload',
-      as: 'font',
-      type: 'font/woff',
-      href: '/fonts/figtree-light.woff',
-      crossorigin: 'anonymous'
-    },
 
     { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
     { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicons/favicon-32x32.png' },

@@ -2,6 +2,9 @@
 import { useHead } from 'nuxt/app';
 import SectionCurriculo from '../../components/pages/curriculo/SectionCurriculo.vue';
 
+// fontesAntigas: preload da light e da semibold em vez da variável (app.vue)
+definePageMeta({ fontesAntigas: true })
+
 useHead({
     title: 'Currículo',
     meta: [

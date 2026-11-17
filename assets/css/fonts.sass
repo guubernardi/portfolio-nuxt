@@ -1,23 +1,25 @@
+// .woff2 primeiro: é o mesmo arquivo reempacotado (mesmos glifos, conferido com
+// fontTools), 28% menor. O .woff fica de reserva para navegador sem woff2.
 @font-face
   font-family: 'belanosima-bold'
   font-weight: normal
   font-style: normal
   font-display: swap
-  src: url('/fonts/belanosima-bold.woff') format('woff')
+  src: url('/fonts/belanosima-bold.woff2') format('woff2'), url('/fonts/belanosima-bold.woff') format('woff')
 
 @font-face
   font-family: 'figtree-light'
   font-weight: normal
   font-style: normal
   font-display: swap
-  src: url('/fonts/figtree-light.woff') format('woff')
+  src: url('/fonts/figtree-light.woff2') format('woff2'), url('/fonts/figtree-light.woff') format('woff')
 
 @font-face
   font-family: 'figtree-semibold'
   font-weight: normal
   font-style: normal
   font-display: swap
-  src: url('/fonts/figtree-semibold.woff') format('woff')
+  src: url('/fonts/figtree-semibold.woff2') format('woff2'), url('/fonts/figtree-semibold.woff') format('woff')
 
 // Figtree variável (400 a 900) da Home V2. Um arquivo só cobre do Regular ao
 // Black; os dois .woff acima seguem servindo as páginas que ainda não migraram.

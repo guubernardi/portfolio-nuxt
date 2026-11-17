@@ -54,7 +54,9 @@
 import Svgs from '~/components/global/svgs/Svgs.vue'
 
 // sem layout: o `default` traz uma Nav que não faz sentido numa página de bio
-definePageMeta({ layout: false })
+// fontesAntigas: o app.vue faz preload da light e da semibold, que é o que
+// esta página usa, em vez da Figtree variável das páginas V2
+definePageMeta({ layout: false, fontesAntigas: true })
 
 const ano = new Date().getFullYear()
 
