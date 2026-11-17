@@ -4,7 +4,11 @@ import { defineNuxtConfig } from 'nuxt/config'
 export default defineNuxtConfig({
   devtools: { enabled: false },
   ssr: true,
-  debug: true,
+  // debug só no `nuxt dev`. Ligado no build, ele põe o plugin debug-hooks no
+  // cliente e um debugger nos hooks do servidor: cada hook de cada visita vira
+  // console.time no navegador (dezenas de avisos "Timer already exists" no
+  // console) e log a cada request na Vercel
+  debug: process.env.NODE_ENV !== 'production',
   css: ['~/assets/css/index.sass'],
   // pasta dos SVGs da @edusites/icons, um arquivo por ícone. O "exports" da lib
   // só libera o pacote inteiro; o helpers/icones.js importa daqui só os usados
