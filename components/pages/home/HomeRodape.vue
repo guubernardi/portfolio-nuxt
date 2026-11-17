@@ -3,7 +3,7 @@
     <div class="v2-conteudo">
       <div class="rodape__topo">
         <div class="rodape__marca">
-          <span class="rodape__logo"><Svgs nome="logo" /></span>
+          <span class="rodape__logo"><SvgsLogo /></span>
           <p>Sites, e-commerces e sistemas<br />sob medida, escritos do zero.</p>
         </div>
 

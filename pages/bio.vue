@@ -7,7 +7,7 @@
 
     <div class="bio__conteudo">
       <div class="bio__logo">
-        <Svgs nome="logo" />
+        <SvgsLogo />
       </div>
 
       <h1 class="bio__nome">Gustavo Bernardi</h1>
@@ -33,7 +33,7 @@
           :class="{ 'link--primario': link.primario }"
         >
           <span class="link__icone">
-            <Svgs v-if="link.svgs" :nome="link.icone" />
+            <SvgsWhatsapp v-if="link.svgs" />
             <SvgIcone v-else :nome="link.icone" />
           </span>
 
@@ -51,7 +51,10 @@
 </template>
 
 <script setup>
-import Svgs from '~/components/global/svgs/Svgs.vue'
+// o logo e o WhatsApp separados do Svgs.vue, que tem 57 desenhos e 98 KB:
+// ver o comentário em components/global/svgs/Logo.vue
+import SvgsLogo from '~/components/global/svgs/Logo.vue'
+import SvgsWhatsapp from '~/components/global/svgs/Whatsapp.vue'
 
 // sem layout: o `default` traz uma Nav que não faz sentido numa página de bio
 // fontesAntigas: o app.vue faz preload da light e da semibold, que é o que
@@ -68,6 +71,8 @@ const links = [
     rotulo: 'Solicitar orçamento',
     url: linkWhatsapp,
     icone: 'whatsapp',
+    // svgs: o WhatsApp de contorno de components/global/svgs/Whatsapp.vue, e não
+    // o preenchido da lib de ícones
     svgs: true,
     externo: true,
     primario: true,

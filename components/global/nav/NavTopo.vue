@@ -2,7 +2,7 @@
   <Teleport to="body">
     <nav class="nav" :class="{ 'nav--rolado': rolado }">
       <a class="nav__logo" href="/" aria-label="Ir para o início" @click="aoClicar($event, { ancora: 'inicio' })">
-        <Svgs nome="logo" />
+        <SvgsLogo />
       </a>
 
       <div class="nav__menu">
@@ -86,7 +86,8 @@ import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import { NuxtLink } from '#components'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import Svgs from '~/components/global/svgs/Svgs.vue'
+// só o logo, e não o Svgs.vue inteiro: ver o comentário em svgs/Logo.vue
+import SvgsLogo from '~/components/global/svgs/Logo.vue'
 import { useScrollTo } from '~/composables/useScrollTo'
 import { TELEFONE } from '~/helpers/site'
 import { SERVICOS } from '~/helpers/servicos'
