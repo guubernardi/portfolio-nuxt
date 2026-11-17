@@ -1,29 +1,14 @@
 <template>
-  <main class="case-pagina">
-    <div class="luz" aria-hidden="true">
-      <span class="luz__nucleo"></span>
-      <span class="luz__feixe"></span>
-    </div>
-
-    <NavTopo />
-
-    <div class="voltar-caixa">
-      <NuxtLink to="/projetos" class="voltar">
-        <span class="voltar__circulo" aria-hidden="true">
-          <SvgIcone nome="seta-direita" />
-        </span>
-        Projetos
-      </NuxtLink>
-    </div>
-
-    <section class="abertura">
-      <div class="abertura__texto">
-        <span class="abertura__etiqueta">
-          <b>{{ projeto.nome }}</b>
-          <span aria-hidden="true">·</span>
-          {{ projeto.demonstracao ? 'Nutrição' : 'Case' }}
-        </span>
-
+  <main id="tela" ref="raiz" class="pagina-case">
+    <V2Topo
+      :linha1="nomeLinha1"
+      :linha2="nomeLinha2"
+      :texto="projeto.resumo"
+      tamanho="medio"
+      :trilha="[{ rotulo: 'Projetos', para: '/projetos' }, { rotulo: projeto.nome }]"
+    >
+      <template #antes-do-titulo>
+        <span class="categoria">{{ projeto.categoria }}</span>
         <!-- Projeto de demonstração precisa dizer que é, e em cima, não numa
              nota de rodapé. Passar demo por trabalho contratado desmonta na
              primeira pergunta, e é o portfólio inteiro que perde. -->
@@ -31,189 +16,186 @@
           Este eu fiz por conta própria, para ter um exemplo do nicho no portfólio. Não foi
           trabalho contratado, e os dados da página são fictícios.
         </p>
+      </template>
 
-        <h1 class="abertura__titulo">{{ projeto.nome }}</h1>
-        <p class="abertura__resumo">{{ projeto.resumo }}</p>
+      <template #acoes>
+        <a class="v2-botao v2-botao--ciano-seta" :href="projeto.site" target="_blank" rel="noopener">
+          Ver no ar
+          <span class="v2-botao__bolinha"><SvgIcone nome="seta-direita" /></span>
+        </a>
+        <a class="v2-botao v2-botao--contorno" :href="linkWhatsapp" target="_blank" rel="noopener">
+          Quero algo assim
+        </a>
+      </template>
 
-        <div class="abertura__acoes">
-          <a class="acao acao--primaria" :href="projeto.site" target="_blank" rel="noopener">
-            Ver no ar
-            <SvgIcone nome="mundo" />
-          </a>
-          <a class="acao acao--secundaria" :href="linkWhatsapp" target="_blank" rel="noopener">
-            Quero algo assim
-          </a>
+      <!-- ficha ao lado do título: os dados objetivos ficam legíveis de relance -->
+      <template #lado>
+        <aside class="ficha" aria-label="Dados do projeto">
+          <div v-for="linha in projeto.ficha" :key="linha.rotulo" class="ficha__linha">
+            <span class="ficha__rotulo">{{ linha.rotulo }}</span>
+            <span class="ficha__valor">{{ linha.valor }}</span>
+          </div>
+        </aside>
+      </template>
+    </V2Topo>
+
+    <DivisorArco :topo="MARINHO" :base="GELO" />
+
+    <!-- print principal e os números medidos -->
+    <section class="vitrine v2-grade-clara" aria-label="O projeto">
+      <div class="v2-conteudo">
+        <div class="vitrine__print">
+          <img
+            :src="projeto.imagem"
+            :alt="`${projeto.nome} no computador e no celular`"
+            :width="projeto.largura"
+            :height="projeto.altura"
+            fetchpriority="high"
+          />
+        </div>
+
+        <ul v-if="projeto.numeros?.length" class="numeros">
+          <li v-for="n in projeto.numeros" :key="n.rotulo" class="numero">
+            <span class="numero__valor">{{ n.valor }}<i v-if="n.unidade">{{ n.unidade }}</i></span>
+            <span class="numero__rotulo">{{ n.rotulo }}</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 01 contexto -->
+    <section class="bloco bloco--claro v2-grade-clara">
+      <div class="v2-conteudo">
+        <header class="bloco__cabecalho">
+          <p class="v2-rotulo"><b>01</b> O contexto</p>
+          <h2 class="v2-titulo">Qual era o problema <em>antes {{ artigoContraido }} existir.</em></h2>
+        </header>
+        <div class="contexto">
+          <p v-for="trecho in contexto" :key="trecho" class="contexto__coluna">{{ trecho }}</p>
         </div>
       </div>
-
-      <!-- ficha ao lado do título: os dados objetivos do projeto ficam legíveis
-           de relance, sem competir com o texto -->
-      <aside class="ficha" aria-label="Dados do projeto">
-        <div v-for="linha in projeto.ficha" :key="linha.rotulo" class="ficha__linha">
-          <span class="ficha__rotulo">{{ linha.rotulo }}</span>
-          <span class="ficha__valor">{{ linha.valor }}</span>
-        </div>
-      </aside>
     </section>
 
-    <section class="bloco">
-      <span class="bloco__rotulo"><b>01</b> O contexto</span>
-      <h2 class="bloco__titulo">
-        Qual era o problema<br />
-        <span class="bloco__titulo--leve">antes {{ artigo }} existir.</span>
-      </h2>
-      <p class="bloco__texto">{{ projeto.contexto }}</p>
+    <!-- 02 interface: sem capturas, a seção inteira sai -->
+    <template v-if="projeto.galeria?.length">
+      <DivisorArco :topo="GELO" :base="ABISMO" />
+      <section class="bloco bloco--escuro v2-grade-escura">
+        <div class="v2-conteudo">
+          <header class="bloco__cabecalho">
+            <p class="v2-rotulo v2-rotulo--escuro"><b>02</b> A interface</p>
+            <h2 class="v2-titulo v2-titulo--claro">Cada tela, <em>no detalhe.</em></h2>
+          </header>
 
-      <ul class="numeros">
-        <li v-for="n in projeto.numeros" :key="n.rotulo" class="numero">
-          <span class="numero__valor">
-            {{ n.valor }}<i v-if="n.unidade">{{ n.unidade }}</i>
-          </span>
-          <span class="numero__rotulo">{{ n.rotulo }}</span>
-        </li>
-      </ul>
-    </section>
-
-    <!-- sem capturas, a seção inteira sai: título sobre galeria vazia é pior
-         que não ter a seção -->
-    <section v-if="projeto.galeria?.length" class="bloco">
-      <span class="bloco__rotulo"><b>02</b> A interface</span>
-      <h2 class="bloco__titulo">
-        Cada tela, <span class="bloco__titulo--leve">no detalhe.</span>
-      </h2>
-
-      <div class="galeria">
-        <figure
-          v-for="tela in projeto.galeria"
-          :key="tela.src"
-          class="tela"
-          :class="`tela--${tela.tipo}`"
-        >
-          <!-- moldura desenhada em CSS: nao carrega imagem de mockup -->
-          <div class="aparelho" :style="{ '--percorrer': percorrer(tela) }">
-            <div class="aparelho__corpo">
-              <span v-if="tela.tipo === 'iphone'" class="aparelho__ilha" aria-hidden="true"></span>
-              <div class="tela__janela" tabindex="0">
-                <img
-                  :src="tela.src"
-                  :alt="tela.alt"
-                  :width="tela.largura"
-                  :height="tela.altura"
-                  loading="lazy"
-                  decoding="async"
-                />
+          <div class="galeria">
+            <figure v-for="tela in projeto.galeria" :key="tela.src" class="tela" :class="`tela--${tela.tipo}`">
+              <!-- moldura desenhada em CSS: não carrega imagem de mockup -->
+              <div class="aparelho" :style="{ '--percorrer': percorrer(tela) }">
+                <div v-if="tela.tipo === 'mac'" class="aparelho__barra" aria-hidden="true">
+                  <i /><i /><i />
+                  <span>{{ dominioDoSite }}</span>
+                </div>
+                <span v-else class="aparelho__ilha" aria-hidden="true" />
+                <div class="tela__janela" tabindex="0" :aria-label="tela.alt">
+                  <img :src="tela.src" :alt="tela.alt" :width="tela.largura" :height="tela.altura" loading="lazy" decoding="async" />
+                </div>
               </div>
-            </div>
-            <span v-if="tela.tipo === 'mac'" class="aparelho__base" aria-hidden="true"></span>
+              <figcaption>{{ tela.rotulo }}</figcaption>
+            </figure>
           </div>
 
-          <figcaption>{{ tela.rotulo }}</figcaption>
-        </figure>
-      </div>
-
-      <a class="galeria__link" :href="projeto.site" target="_blank" rel="noopener">
-        {{ dominioDoSite }}
-        <SvgIcone nome="seta-direita" />
-      </a>
-    </section>
-
-    <section class="bloco">
-      <span class="bloco__rotulo"><b>03</b> O que foi feito</span>
-      <h2 class="bloco__titulo">
-        As decisões que<br />
-        <span class="bloco__titulo--leve">sustentam {{ artigo }}.</span>
-      </h2>
-
-      <ol class="decisoes">
-        <li v-for="(decisao, i) in projeto.decisoes" :key="decisao.titulo" class="decisao">
-          <span class="decisao__numero">{{ String(i + 1).padStart(2, '0') }}</span>
-          <h3 class="decisao__titulo">{{ decisao.titulo }}</h3>
-          <p class="decisao__texto">{{ decisao.texto }}</p>
-        </li>
-      </ol>
-    </section>
-
-    <section class="bloco">
-      <span class="bloco__rotulo"><b>04</b> A entrega</span>
-      <h2 class="bloco__titulo">
-        O que ficou <span class="bloco__titulo--leve">pronto.</span>
-      </h2>
-
-      <ul class="lista">
-        <li v-for="item in projeto.entregas" :key="item">
-          <SvgIcone nome="check" cor="#46e08a" :tamanho="20" />
-          {{ item }}
-        </li>
-      </ul>
-    </section>
-
-    <section class="fecho">
-      <h2 class="fecho__titulo">
-        Seu projeto pode<br />
-        <span class="fecho__titulo--leve">ser o próximo.</span>
-      </h2>
-      <p class="fecho__texto">
-        Manda uma mensagem contando o que você precisa. Sem formulário longo e sem compromisso.
-      </p>
-      <div class="fecho__acoes">
-        <a class="acao acao--primaria" :href="linkWhatsapp" target="_blank" rel="noopener">
-          Chamar no WhatsApp
-          <SvgIcone nome="whatsapp" />
-        </a>
-        <NuxtLink v-if="paginaDoServico" :to="paginaDoServico" class="acao acao--secundaria">
-          Quero um site assim
-        </NuxtLink>
-        <NuxtLink v-else to="/projetos" class="acao acao--secundaria">Ver todos os projetos</NuxtLink>
-      </div>
-    </section>
-
-    <section v-if="outros.length" class="bloco bloco--outros">
-      <h2 class="bloco__titulo bloco__titulo--menor">Veja outros projetos</h2>
-
-      <ul class="outros">
-        <li v-for="outro in outros" :key="outro.id" class="outro">
-          <a
-            class="outro__area"
-            :href="destinoDoProjeto(outro)"
-            :target="outro.slug ? null : '_blank'"
-            :rel="outro.slug ? null : 'noopener'"
-          >
-            <img
-              :src="outro.imagem"
-              :alt="`${outro.nome}, ${outro.categoria.toLowerCase()} para ${outro.setor.toLowerCase()}`"
-              :width="outro.largura"
-              :height="outro.altura"
-              loading="lazy"
-              decoding="async"
-            />
-            <span class="outro__nome">{{ outro.nome }}</span>
-            <span class="outro__tag" :class="{ 'outro__tag--proprio': outro.demonstracao }">
-              {{ outro.demonstracao ? 'Nutrição' : outro.categoria }}
-            </span>
+          <a class="galeria__link" :href="projeto.site" target="_blank" rel="noopener">
+            Abrir {{ dominioDoSite }}
+            <SvgIcone nome="seta-direita" />
           </a>
-        </li>
-      </ul>
+        </div>
+      </section>
+      <DivisorArco :topo="ABISMO" :base="MARINHO" />
+    </template>
+    <DivisorArco v-else :topo="GELO" :base="MARINHO" />
+
+    <!-- 03 decisões -->
+    <section class="bloco bloco--marinho">
+      <div class="v2-conteudo">
+        <header class="bloco__cabecalho">
+          <p class="v2-rotulo v2-rotulo--escuro"><b>{{ projeto.galeria?.length ? '03' : '02' }}</b> O que foi feito</p>
+          <h2 class="v2-titulo v2-titulo--claro">As decisões que <em>sustentam {{ artigo }}.</em></h2>
+        </header>
+
+        <ol class="decisoes">
+          <li v-for="(decisao, i) in projeto.decisoes" :key="decisao.titulo" class="decisao">
+            <span class="decisao__numero">{{ String(i + 1).padStart(2, '0') }}</span>
+            <h3 class="decisao__titulo">{{ decisao.titulo }}</h3>
+            <p class="decisao__texto">{{ decisao.texto }}</p>
+          </li>
+        </ol>
+      </div>
     </section>
 
-    <footer class="rodape">
-      <NuxtLink to="/" class="rodape__marca">
-        <Svgs nome="logo" />
-        Gustavo Bernardi
-      </NuxtLink>
-      <span class="rodape__copy">© {{ ano }} Todos os direitos reservados.</span>
-    </footer>
+    <DivisorArco :topo="MARINHO" :base="GELO" />
+
+    <!-- 04 entrega e outros projetos -->
+    <section class="bloco bloco--claro v2-grade-clara">
+      <div class="v2-conteudo">
+        <header class="bloco__cabecalho">
+          <p class="v2-rotulo"><b>{{ projeto.galeria?.length ? '04' : '03' }}</b> A entrega</p>
+          <h2 class="v2-titulo">Tudo o que <em>ficou pronto.</em></h2>
+        </header>
+
+        <ul class="entregas">
+          <li v-for="item in projeto.entregas" :key="item">
+            <span class="entregas__check" aria-hidden="true"><SvgIcone nome="check" /></span>
+            {{ item }}
+          </li>
+        </ul>
+
+        <div v-if="outros.length" class="outros">
+          <header class="bloco__cabecalho outros__cabecalho">
+            <div>
+              <p class="v2-rotulo">Veja outros projetos</p>
+              <h2 class="v2-titulo">Mais projetos <em>no ar.</em></h2>
+            </div>
+            <!-- o caminho de volta para a página do nicho, ou para a lista toda -->
+            <NuxtLink class="v2-botao v2-botao--escuro" :to="paginaDoServico || '/projetos'">
+              {{ paginaDoServico ? servicoDoNicho.titulo : 'Ver todos os projetos' }}
+              <span class="v2-botao__bolinha"><SvgIcone nome="seta-direita" /></span>
+            </NuxtLink>
+          </header>
+          <ul class="outros__grade">
+            <li v-for="outro in outros" :key="outro.id" class="outros__item">
+              <V2CardProjeto :projeto="outro" tom="claro" />
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <DivisorArco :topo="GELO" :base="MARINHO" />
+    <HomeChamada
+      ancora="orcamento"
+      linha1="Seu projeto pode"
+      linha2="ser o próximo."
+      :mensagem="`Olá! Vi o projeto da ${projeto.nome} no site e gostaria de um orçamento para algo parecido.`"
+    />
+    <DivisorArco :topo="MARINHO" :base="ABISMO" />
+    <HomeRodape />
   </main>
 </template>
 
 <script setup>
-import { computed } from 'vue'
-import Svgs from '~/components/global/svgs/Svgs.vue'
+import { ref, computed } from 'vue'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import V2Topo from '~/components/pages/v2/V2Topo.vue'
+import V2CardProjeto from '~/components/pages/v2/V2CardProjeto.vue'
+import DivisorArco from '~/components/global/elementos/DivisorArco.vue'
+import HomeChamada from '~/components/pages/home/HomeChamada.vue'
+import HomeRodape from '~/components/pages/home/HomeRodape.vue'
+import { useAnimacoes, entrar, parallax } from '~/composables/useAnimacoes'
 import { servicoDoSetor } from '~/helpers/servicos'
-import { PROJETOS, projetoPorSlug, destinoDoProjeto } from '~/helpers/projetos'
-import { SITE_URL, SITE_NOME, ID_ORGANIZACAO, ID_SITE, urlCanonica } from '~/helpers/site'
+import { PROJETOS, projetoPorSlug } from '~/helpers/projetos'
+import { SITE_URL, SITE_NOME, ID_ORGANIZACAO, ID_SITE, urlCanonica, linkWhatsapp as montarWhatsapp } from '~/helpers/site'
 
-// sem layout: o `default` traz uma Nav que não combina com a página de case,
-// que tem cabeçalho próprio e enxuto
+// sem layout: o `default` traz uma Nav antiga; o case usa o topo da V2
 definePageMeta({ layout: false })
 
 const route = useRoute()
@@ -225,29 +207,58 @@ if (!projeto) {
   throw createError({ statusCode: 404, statusMessage: 'Projeto não encontrado', fatal: true })
 }
 
-// sistema e loja nao sao pagina: os titulos das secoes acompanham o tipo do projeto
+const MARINHO = '#021228'
+const ABISMO = '#020715'
+const GELO = '#F3F7F9'
+
+// sistema e loja não são página: os títulos acompanham o tipo do projeto
 const ARTIGOS = { Sistema: 'o sistema', 'E-commerce': 'a loja' }
 const artigo = ARTIGOS[projeto.categoria] || 'a página'
+// "antes DA página existir", "antes DO sistema existir"
+const artigoContraido = { 'a página': 'da página', 'o sistema': 'do sistema', 'a loja': 'da loja' }[artigo]
 
-// quando existe pagina de servico para o nicho deste case, o fecho leva para
-// ela em vez de devolver para a listagem
-// o caminho de volta para a página do nicho. Quem chegou no case por busca de
-// projeto encontra aqui a página de quem vende o serviço, e é esse vai e volta
-// que junta as páginas num grupo sobre o mesmo assunto em vez de páginas soltas
+// o caminho de volta para a página do nicho: quem chegou no case por busca
+// encontra a página de quem vende o serviço, e esse vai e volta junta as
+// páginas num grupo sobre o mesmo assunto
 const servicoDoNicho = servicoDoSetor(projeto.setor)
 const paginaDoServico = servicoDoNicho ? `/${servicoDoNicho.slug}` : null
 
-const ano = new Date().getFullYear()
-const outros = PROJETOS.filter((p) => p.id !== projeto.id).slice(0, 3)
+// outros projetos: primeiro os do mesmo tipo, depois o resto
+const outros = [
+  ...PROJETOS.filter((p) => p.id !== projeto.id && p.categoria === projeto.categoria),
+  ...PROJETOS.filter((p) => p.id !== projeto.id && p.categoria !== projeto.categoria),
+].slice(0, 3)
 
-const linkWhatsapp =
-  'https://wa.me/5511966206588?text=' +
-  encodeURIComponent(
-    `Olá! Vi o projeto da ${projeto.nome} no site e gostaria de um orçamento para algo parecido.`
-  )
+const linkWhatsapp = montarWhatsapp(
+  `Olá! Vi o projeto da ${projeto.nome} no site e gostaria de um orçamento para algo parecido.`
+)
+
+// o nome no título vai em duas linhas: a primeira palavra e o resto
+const palavras = projeto.nome.split(' ')
+const nomeLinha1 = palavras.length > 1 ? palavras[0] : `${projeto.nome}.`
+const nomeLinha2 = palavras.length > 1 ? `${palavras.slice(1).join(' ')}.` : ''
+
+// o contexto vai em duas colunas, cortado na frase mais perto do meio
+const contexto = (() => {
+  const frases = projeto.contexto.match(/[^.!?]+[.!?]+/g) || [projeto.contexto]
+  if (frases.length < 2) return [projeto.contexto]
+  const meio = projeto.contexto.length / 2
+  let corte = 1
+  let soma = 0
+  let menorDistancia = Infinity
+  frases.forEach((frase, i) => {
+    soma += frase.length
+    const distancia = Math.abs(soma - meio)
+    if (distancia < menorDistancia && i < frases.length - 1) {
+      menorDistancia = distancia
+      corte = i + 1
+    }
+  })
+  return [frases.slice(0, corte).join('').trim(), frases.slice(corte).join('').trim()]
+})()
 
 // quanto da imagem falta percorrer, em % dela mesma: (altura - quadro) / altura.
-// o quadro tem a proporcao do aparelho, entao isso independe do tamanho da tela
+// o quadro tem a proporção do aparelho, então isso independe do tamanho da tela
 function percorrer(tela) {
   const proporcaoImagem = tela.altura / tela.largura
   const proporcaoQuadro = tela.tipo === 'mac' ? 10 / 16 : 852 / 393
@@ -255,6 +266,50 @@ function percorrer(tela) {
 }
 
 const dominioDoSite = computed(() => projeto.site.replace(/^https?:\/\//, '').replace(/\/$/, ''))
+
+const raiz = ref(null)
+
+useAnimacoes(raiz, ({ movimento, mesa }, el) => {
+  if (!movimento) return
+
+  // o print principal abre de dentro pra fora e a imagem assenta
+  const print = el.querySelector('.vitrine__print')
+  gsap.fromTo(print, { clipPath: 'inset(8% 8% 8% 8% round 28px)' }, {
+    clipPath: 'inset(0% 0% 0% 0% round 28px)', duration: 1.3, delay: 0.2, ease: 'power3.inOut', clearProps: 'clipPath',
+  })
+  const numeros = el.querySelector('.numeros')
+  if (numeros) entrar(numeros.children, numeros, { y: 50, stagger: 0.12, start: 'top 92%' })
+
+  el.querySelectorAll('.bloco__cabecalho').forEach((c) => entrar(c.querySelectorAll('.v2-rotulo, .v2-titulo, .v2-botao'), c, { y: 50, stagger: 0.12 }))
+  entrar(el.querySelectorAll('.contexto__coluna'), el.querySelector('.contexto'), { y: 40, stagger: 0.15 })
+
+  const galeria = el.querySelector('.galeria')
+  if (galeria) entrar(galeria.children, galeria, { y: 90, duration: 1.1, stagger: 0.2 })
+
+  // decisões: cartões caem tortos e assentam
+  el.querySelectorAll('.decisao').forEach((d, i) => {
+    gsap.from(d, {
+      y: 80, rotation: (i % 2 ? 1 : -1) * 10, autoAlpha: 0, duration: 0.9, delay: (i % 3) * 0.12, ease: 'back.out(1.3)',
+      scrollTrigger: { trigger: d, start: 'top 92%', once: true },
+    })
+  })
+
+  // entregas: cada item entra e o check gira
+  const entregas = el.querySelector('.entregas')
+  const gatilho = { trigger: entregas, start: 'top 85%', once: true }
+  gsap.from(entregas.querySelectorAll('li'), { x: -30, autoAlpha: 0, duration: 0.6, stagger: 0.08, ease: 'power3.out', scrollTrigger: gatilho })
+  gsap.from(entregas.querySelectorAll('.entregas__check'), { scale: 0, rotation: -120, duration: 0.6, stagger: 0.08, delay: 0.2, ease: 'back.out(2.5)', scrollTrigger: { ...gatilho } })
+
+  const itens = el.querySelectorAll('.outros__item')
+  if (itens.length) {
+    ScrollTrigger.batch(itens, {
+      once: true, start: 'top 88%',
+      onEnter: (lote) => gsap.from(lote, { y: 60, autoAlpha: 0, duration: 0.8, stagger: 0.12, ease: 'power3.out' }),
+    })
+  }
+
+  if (mesa) parallax(print.querySelector('img'), print, { yPercent: -3, scale: 1.08 })
+})
 
 const canonica = urlCanonica(`/projetos/${projeto.slug}`)
 
@@ -327,330 +382,176 @@ useHead({
 </script>
 
 <style scoped lang="sass">
-.case-pagina
-  position: relative
-  width: 100%
-  min-height: 100svh
-  overflow: hidden
-  color: var(--cor-branco)
-  // antes terminava em preto puro e a pagina virava um retangulo chapado do
-  // meio pra baixo; agora assenta num azul bem escuro, como as secoes da home
-  background: linear-gradient(180deg, #05142a 0%, #020a18 12%, #01060f 34%, #020814 62%, #04101f 100%)
+.pagina-case
+  background: var(--gelo)
 
-// mesma luz do hero da home, mais discreta: aqui ela ambienta, nao e o assunto
-.luz
-  position: absolute
-  inset: 0
-  z-index: 0
-  pointer-events: none
+.categoria
+  display: inline-block
+  margin-bottom: 18px
+  padding: 7px 14px
+  border-radius: 999px
+  background: #fff
+  font-family: var(--figtree)
+  font-weight: 700
+  font-size: 13px
+  color: var(--abismo)
 
-.luz__nucleo
-  position: absolute
-  top: -180px
-  left: 50%
-  width: min(1100px, 130vw)
-  height: 520px
-  transform: translateX(-50%)
-  background: radial-gradient(ellipse at center, rgba(60, 110, 220, 0.26) 0%, rgba(40, 90, 190, 0.1) 46%, transparent 72%)
-
-.luz__feixe
-  position: absolute
-  // valor fixo de proposito: em % a linha descia junto com o tamanho da pagina
-  // e cortava o resumo e a ficha
-  top: 100px
-  left: 50%
-  width: min(940px, 96vw)
-  height: 2px
-  transform: translateX(-50%)
-  background: linear-gradient(90deg, transparent 0%, rgba(160, 195, 255, 0.5) 24%, rgba(255, 255, 255, 0.9) 50%, rgba(160, 195, 255, 0.5) 76%, transparent 100%)
-  box-shadow: 0 0 28px 4px rgba(130, 175, 255, 0.4)
-
-.voltar-caixa
-  position: relative
-  z-index: 1
-  width: 100%
-  max-width: 1720px
-  margin: 0 auto
-  // folga da barra fixa, que mede ~86px com a margem dela
-  padding: 132px 60px 0 60px
-
-.voltar
-  display: inline-flex
-  align-items: center
-  gap: 14px
-  font-family: var(--light)
-  font-size: 14px
-  color: rgba(255, 255, 255, 0.55)
-  text-decoration: none
-  transition: color 0.4s ease
-
-  &__circulo
-    display: flex
-    align-items: center
-    justify-content: center
-    width: 46px
-    height: 46px
-    border: 1px solid rgba(255, 255, 255, 0.14)
-    border-radius: 50%
-    transition: border-color 0.4s ease, background 0.4s ease
-
-    // a seta da lib aponta pra direita e aqui o sentido e voltar
-    :deep(svg)
-      width: 14px
-      height: 14px
-      transform: rotate(180deg)
-
-  &:hover
-    color: var(--cor-branco)
-
-    .voltar__circulo
-      border-color: rgba(140, 165, 255, 0.4)
-      background: rgba(30, 46, 115, 0.4)
-
-.abertura
-  position: relative
-  z-index: 1
-  display: grid
-  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr)
-  align-items: start
-  gap: 60px
-  width: 100%
-  max-width: 1720px
-  margin: 0 auto
-  padding: 34px 60px 0 60px
-
-  &__etiqueta
-    display: inline-flex
-    align-items: center
-    gap: 9px
-    font-family: var(--light)
-    font-size: 12px
-    letter-spacing: 2.4px
-    text-transform: uppercase
-    color: rgba(255, 255, 255, 0.4)
-
-    b
-      font-family: var(--semibold)
-      font-style: italic
-      color: rgba(255, 255, 255, 0.78)
-
-  &__titulo
-    margin: 18px 0 0 0
-    font-family: var(--semibold)
-    font-size: clamp(40px, 6.4vw, 88px)
-    line-height: 1.02
-    letter-spacing: -0.03em
-
-  &__resumo
-    max-width: 620px
-    margin: 24px 0 0 0
-    font-family: var(--light)
-    font-size: clamp(16px, 1.4vw, 20px)
-    line-height: 1.62
-    color: rgba(255, 255, 255, 0.62)
-
-  &__acoes
-    display: flex
-    flex-wrap: wrap
-    gap: 14px
-    margin: 36px 0 0 0
-
-// fundo âmbar de propósito: é informação que corrige uma suposição, não um
-// detalhe decorativo
 .aviso-demo
-  max-width: 620px
-  margin: 20px 0 0 0
-  padding: 12px 16px
-  border: 1px solid rgba(240, 180, 90, 0.28)
-  border-radius: 10px
-  background: rgba(240, 180, 90, 0.09)
-  font-family: var(--light)
-  font-size: 14px
-  line-height: 1.6
-  color: rgba(245, 205, 150, 0.92)
-  display: none
+  max-width: 520px
+  margin: 0 0 22px
+  padding: 14px 18px
+  border: 1px solid rgba(26, 216, 233, 0.4)
+  border-radius: 14px
+  background: rgba(26, 216, 233, 0.1)
+  font-family: var(--figtree)
+  font-size: 15px
+  line-height: 1.5
+  color: #fff
 
+// ficha: bilhete branco torto ao lado do título
 .ficha
-  margin-top: 12px
-  border: 1px solid rgba(255, 255, 255, 0.09)
-  border-radius: 20px
-  background: rgba(255, 255, 255, 0.025)
+  display: flex
+  flex-direction: column
+  gap: 16px
+  padding: 28px 30px
+  border: 3px solid var(--abismo)
+  border-radius: 24px
+  background: #fff
+  box-shadow: 0 24px 50px rgba(2, 7, 21, 0.35)
+  font-family: var(--figtree)
+  color: var(--abismo)
+  transform: rotate(-3deg)
 
   &__linha
-    padding: 22px 26px 22px 26px
-    border-bottom: 1px solid rgba(255, 255, 255, 0.07)
-
-    &:last-child
-      border-bottom: none
+    display: flex
+    flex-direction: column
+    gap: 3px
 
   &__rotulo
-    display: block
-    font-family: var(--light)
+    font-weight: 700
     font-size: 11px
-    letter-spacing: 1.8px
+    letter-spacing: 0.16em
     text-transform: uppercase
-    color: rgba(255, 255, 255, 0.4)
+    color: var(--petroleo)
 
   &__valor
-    display: block
-    margin-top: 7px
-    font-family: var(--semibold)
+    font-weight: 600
     font-size: 16px
-    color: var(--cor-branco)
+    line-height: 1.35
 
-.acao
-  display: inline-flex
-  align-items: center
-  justify-content: center
-  gap: 12px
-  padding: 17px 34px
-  border: 1px solid transparent
-  border-radius: 12px
-  font-family: var(--semibold)
-  font-size: 15px
-  // trava a caixa de linha, igual a home: sem isso <a> e <NuxtLink> com icone
-  // calculam alturas diferentes com o mesmo padding
-  line-height: 1
-  text-decoration: none
-  cursor: pointer
-  transition: background 0.4s ease, border-color 0.4s ease
+// ===== vitrine =====
+.vitrine
+  padding: 40px 0 80px
+  background-color: var(--gelo)
 
-  :deep(svg)
-    width: 15px
-    height: 15px
+  &__print
+    overflow: hidden
+    border-radius: 28px
+    background: #fff
+    box-shadow: 0 30px 70px rgba(2, 18, 40, 0.14)
 
-  &--primaria
-    background: var(--cor-branco)
-    color: #050505
-
-    &:hover
-      background: rgba(255, 255, 255, 0.86)
-
-  &--secundaria
-    border-color: rgba(125, 155, 255, 0.2)
-    background: rgba(30, 46, 115, 0.38)
-    color: rgba(255, 255, 255, 0.88)
-
-    &:hover
-      background: rgba(125, 155, 255, 0.16)
-      border-color: rgba(140, 165, 255, 0.3)
-
-.bloco
-  position: relative
-  z-index: 1
-  width: 100%
-  max-width: 1720px
-  margin: 0 auto
-  padding: 120px 60px 0 60px
-
-  // brilho de fundo alternando o lado a cada secao: e o que quebra o preto
-  // continuo sem competir com o texto
-  &::before
-    content: ''
-    position: absolute
-    top: 4%
-    z-index: -1
-    width: min(820px, 78vw)
-    height: 620px
-    pointer-events: none
-    background: radial-gradient(ellipse at center, rgba(42, 84, 200, 0.16) 0%, rgba(26, 52, 132, 0.06) 44%, transparent 70%)
-
-  &:nth-of-type(odd)::before
-    left: -220px
-
-  &:nth-of-type(even)::before
-    right: -220px
-
-  &__rotulo
-    display: inline-flex
-    align-items: center
-    gap: 10px
-    margin-bottom: 18px
-    font-family: var(--light)
-    font-size: 12px
-    letter-spacing: 2.4px
-    text-transform: uppercase
-    color: rgba(255, 255, 255, 0.45)
-
-    b
-      font-family: var(--semibold)
-      font-style: italic
-      color: rgba(255, 255, 255, 0.75)
-
-  &__titulo
-    margin: 0
-    font-family: var(--semibold)
-    font-size: clamp(28px, 3.6vw, 48px)
-    line-height: 1.1
-    letter-spacing: -0.02em
-
-    &--leve
-      font-family: var(--light)
-      color: #8aa6f0
-
-    &--menor
-      font-size: clamp(24px, 2.6vw, 34px)
-
-  &__texto
-    max-width: 780px
-    margin: 26px 0 0 0
-    font-family: var(--light)
-    font-size: clamp(15px, 1.3vw, 18px)
-    line-height: 1.74
-    color: rgba(255, 255, 255, 0.6)
+    img
+      display: block
+      width: 100%
+      height: auto
 
 .numeros
   display: grid
-  grid-template-columns: repeat(3, 1fr)
-  gap: 22px
-  margin: 46px 0 0 0
+  grid-template-columns: repeat(3, minmax(0, 1fr))
+  gap: 20px
+  margin: 24px 0 0
   padding: 0
   list-style: none
 
 .numero
-  padding: 30px 28px 32px 28px
-  border: 1px solid rgba(255, 255, 255, 0.07)
-  border-radius: 20px
-  background: rgba(255, 255, 255, 0.025)
+  display: flex
+  flex-direction: column
+  gap: 8px
+  padding: 26px 28px
+  border: 1px solid rgba(2, 7, 21, 0.08)
+  border-radius: 22px
+  background: #fff
+  font-family: var(--figtree)
 
   &__valor
-    display: block
-    font-family: var(--semibold)
-    font-size: clamp(34px, 3.6vw, 48px)
+    font-weight: 900
+    font-size: clamp(38px, 3.6vw, 52px)
     line-height: 1
-    letter-spacing: -0.02em
-    color: var(--cor-branco)
+    letter-spacing: -0.03em
+    color: var(--petroleo)
 
     i
-      font-family: var(--light)
       font-style: normal
-      font-size: 0.42em
-      color: rgba(255, 255, 255, 0.42)
+      color: var(--azul-eletrico)
 
   &__rotulo
-    display: block
-    margin-top: 14px
-    font-family: var(--light)
-    font-size: 14px
-    line-height: 1.5
-    color: rgba(255, 255, 255, 0.55)
+    font-size: 15px
+    line-height: 1.4
+    color: var(--texto-apagado)
 
-.galeria
-  // altura unica para os dois aparelhos; a largura de cada um sai dela
-  --altura-quadro: 640px
+// ===== blocos =====
+.bloco
+  padding: 100px 0 120px
+
+  &--claro
+    background-color: var(--gelo)
+
+  &--escuro
+    background-color: var(--abismo)
+    color: #fff
+
+  &--marinho
+    color: #fff
+    background-color: var(--marinho)
+    background-image: radial-gradient(ellipse 60% 55% at 50% 50%, rgba(7, 177, 232, 0.26), rgba(7, 177, 232, 0) 100%), linear-gradient(to right, rgba(243, 247, 249, 0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(243, 247, 249, 0.08) 1px, transparent 1px)
+    background-size: 100% 100%, 96px 96px, 96px 96px
+    background-position: 0 0, -1px -1px, -1px -1px
+
+  &__cabecalho
+    margin-bottom: 56px
+
+    .v2-rotulo b
+      margin-right: 6px
+
+    .v2-titulo
+      font-size: clamp(36px, 4.6vw, 66px)
+
+.contexto
   display: grid
-  grid-template-columns: auto auto
-  justify-content: start
-  align-items: start
-  align-items: start
-  gap: 26px
-  margin: 44px 0 0 0
+  grid-template-columns: repeat(2, minmax(0, 1fr))
+  gap: 48px
+
+  &__coluna
+    margin: 0
+    font-family: var(--figtree)
+    font-size: 18px
+    line-height: 1.65
+    color: var(--abismo)
+
+    & + &
+      color: var(--texto-apagado)
+
+// ===== galeria =====
+.galeria
+  // altura única para os dois aparelhos; a largura de cada um sai dela
+  --altura-quadro: 520px
+  display: flex
+  flex-wrap: wrap
+  align-items: flex-end
+  gap: 40px
 
 .tela
   margin: 0
+  font-family: var(--figtree)
 
-  // altura igual nos dois quadros: a largura de cada um vem da proporcao do
-  // aparelho, entao o MacBook fica largo e o iPhone estreito, mas alinhados
+  figcaption
+    margin-top: 16px
+    font-weight: 700
+    font-size: 12px
+    letter-spacing: 0.16em
+    text-transform: uppercase
+    color: var(--texto-apagado-escuro)
+
   &__janela
     position: relative
     height: var(--altura-quadro)
@@ -660,117 +561,88 @@ useHead({
       display: block
       width: 100%
       height: auto
-      // percentual fixo de proposito: a imagem tem altura conhecida em relacao
-      // a largura, entao o quanto falta percorrer nao depende do tamanho da tela
-      animation: percorrer 26s ease-in-out infinite
-
-  figcaption
-    margin-top: 18px
-    font-family: var(--light)
-    font-size: 13px
-    color: rgba(255, 255, 255, 0.42)
 
 .aparelho
-  &__corpo
-    position: relative
+  position: relative
+  overflow: hidden
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5)
 
 .tela--mac
+  .aparelho
+    border: 1px solid rgba(255, 255, 255, 0.14)
+    border-radius: 16px
+    background: #1b1d24
+
   .tela__janela
     aspect-ratio: 16 / 10
-    width: auto
-    border-radius: 5px
 
-  .aparelho__corpo
-    padding: 12px 12px 12px 12px
-    border: 1px solid rgba(255, 255, 255, 0.14)
-    border-radius: 16px 16px 6px 6px
-    background: linear-gradient(180deg, #23262e 0%, #16181d 100%)
-    box-shadow: 0 26px 60px rgba(0, 0, 0, 0.5)
+  .aparelho__barra
+    display: flex
+    align-items: center
+    gap: 6px
+    padding: 10px 14px
+    font-size: 11px
+    color: rgba(255, 255, 255, 0.55)
 
-    &::before
-      content: ''
-      position: absolute
-      top: 5px
-      left: 50%
-      width: 4px
-      height: 4px
-      transform: translateX(-50%)
+    i
+      width: 9px
+      height: 9px
       border-radius: 50%
-      background: rgba(255, 255, 255, 0.22)
+      background: var(--petroleo)
 
-  .aparelho__base
-    position: relative
-    display: block
-    width: 118%
-    height: 15px
-    margin: 0 0 0 -9%
-    border-radius: 0 0 12px 12px
-    background: linear-gradient(180deg, #4a505c 0%, #363b45 55%, #22262e 100%)
-    clip-path: polygon(0 0, 100% 0, 97.5% 100%, 2.5% 100%)
+      &:nth-child(2)
+        background: var(--azul-eletrico)
 
-    &::after
-      content: ''
-      position: absolute
-      top: 0
-      left: 50%
-      width: 96px
-      height: 8px
-      transform: translateX(-50%)
-      border-radius: 0 0 8px 8px
-      background: rgba(0, 0, 0, 0.55)
+      &:nth-child(3)
+        background: var(--ciano)
+
+    span
+      margin-left: 12px
+      padding: 4px 12px
+      border-radius: 999px
+      background: rgba(255, 255, 255, 0.08)
 
 .tela--iphone
   .aparelho
-    display: flex
-    justify-content: center
+    padding: 10px
+    border: 1px solid rgba(255, 255, 255, 0.16)
+    border-radius: 44px
+    background: linear-gradient(160deg, #2b2f38 0%, #14161b 60%, #1d2027 100%)
 
   .tela__janela
     aspect-ratio: 393 / 852
-    width: auto
-    border-radius: 36px
-
-    img
-      animation-duration: 34s
-
-  .aparelho__corpo
-    padding: 11px 11px 11px 11px
-    border: 1px solid rgba(255, 255, 255, 0.16)
-    border-radius: 46px
-    background: linear-gradient(160deg, #2b2f38 0%, #14161b 60%, #1d2027 100%)
-    box-shadow: 0 26px 60px rgba(0, 0, 0, 0.5)
-
-    &::before,
-    &::after
-      content: ''
-      position: absolute
-      width: 2px
-      border-radius: 2px
-      background: rgba(255, 255, 255, 0.16)
-
-    &::before
-      top: 108px
-      left: -3px
-      height: 54px
-
-    &::after
-      top: 120px
-      right: -3px
-      height: 74px
+    border-radius: 34px
 
   .aparelho__ilha
     position: absolute
     top: 20px
     left: 50%
     z-index: 2
-    width: 74px
-    height: 20px
+    width: 70px
+    height: 19px
     transform: translateX(-50%)
     border-radius: 100px
     background: #0b0c0f
 
-// quanto falta percorrer: (altura da imagem - altura do quadro) / altura da
-// imagem. Com 1280x5984 num quadro 16:10 da 86.6%; no iPhone, 11385/360 num
-// quadro 393:852 da 93.1%. Pausa no topo e no fim para dar tempo de ler
+// A tela rola sozinha só no computador. No iPhone uma imagem de 14 mil px
+// animada vira uma camada enorme na GPU (a home já derrubou o Safari por
+// memória); lá a janela fica rolável com o dedo.
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)
+  .tela__janela img
+    animation: percorrer 26s ease-in-out infinite
+
+  .tela--iphone .tela__janela img
+    animation-duration: 34s
+
+  .tela__janela:hover img
+    animation-play-state: paused
+
+@media (hover: none)
+  .tela__janela
+    overflow-y: auto
+    -webkit-overflow-scrolling: touch
+
+// pausa no topo e no fim para dar tempo de ler
 @keyframes percorrer
   0%, 7%
     transform: translateY(0)
@@ -779,283 +651,157 @@ useHead({
   100%
     transform: translateY(0)
 
-@media (prefers-reduced-motion: reduce)
-  .tela__janela img
-    animation: none
-
 .galeria__link
   display: inline-flex
   align-items: center
-  gap: 9px
-  margin: 30px 0 0 0
-  font-family: var(--semibold)
-  font-size: 14px
-  color: #8aa6f0
+  gap: 8px
+  margin-top: 36px
+  font-family: var(--figtree)
+  font-weight: 600
+  font-size: 15px
+  color: var(--ciano)
   text-decoration: none
-  transition: color 0.4s ease
 
-  :deep(svg)
-    width: 13px
-    height: 13px
+  svg
+    width: 15px
+    height: 15px
+    transform: rotate(-45deg)
 
   &:hover
-    color: var(--cor-branco)
+    text-decoration: underline
 
+// ===== decisões =====
 .decisoes
   display: grid
-  grid-template-columns: repeat(2, 1fr)
-  gap: 22px
-  margin: 44px 0 0 0
+  grid-template-columns: repeat(3, minmax(0, 1fr))
+  gap: 32px 28px
+  margin: 0
   padding: 0
   list-style: none
 
 .decisao
-  padding: 30px 30px 32px 30px
-  border: 1px solid rgba(255, 255, 255, 0.07)
-  border-radius: 20px
-  background: rgba(255, 255, 255, 0.025)
+  display: flex
+  flex-direction: column
+  gap: 12px
+  padding: 26px 26px 28px
+  border: 3px solid var(--abismo)
+  border-radius: 22px
+  background: #fff
+  box-shadow: 0 18px 34px rgba(2, 7, 21, 0.3)
+  font-family: var(--figtree)
+  color: var(--abismo)
+
+  &:nth-child(3n + 1)
+    transform: rotate(-1.5deg)
+
+  &:nth-child(3n + 2)
+    transform: rotate(1.5deg)
+
+  &:nth-child(3n)
+    transform: rotate(-0.8deg)
 
   &__numero
-    font-family: var(--semibold)
-    font-style: italic
-    font-size: 13px
-    color: rgba(138, 166, 240, 0.75)
+    font-weight: 900
+    font-size: 30px
+    line-height: 1
+    color: var(--petroleo)
 
   &__titulo
-    margin: 12px 0 0 0
-    font-family: var(--semibold)
+    margin: 0
+    font-weight: 700
     font-size: 19px
-    line-height: 1.32
+    line-height: 1.25
 
   &__texto
-    margin: 12px 0 0 0
-    font-family: var(--light)
+    margin: 0
     font-size: 15px
-    line-height: 1.7
-    color: rgba(255, 255, 255, 0.58)
+    line-height: 1.55
+    color: var(--texto-apagado)
 
-.lista
+// ===== entrega =====
+.entregas
   display: grid
-  grid-template-columns: repeat(2, 1fr)
-  gap: 6px 46px
-  margin: 44px 0 0 0
+  grid-template-columns: repeat(2, minmax(0, 1fr))
+  gap: 22px 48px
+  margin: 0
   padding: 0
   list-style: none
+  font-family: var(--figtree)
 
   li
     display: flex
     align-items: flex-start
-    gap: 12px
-    padding: 14px 0 14px 0
-    font-family: var(--light)
-    font-size: 16px
-    line-height: 1.55
-    color: rgba(255, 255, 255, 0.72)
+    gap: 14px
+    font-size: 17px
+    line-height: 1.45
+    color: var(--abismo)
 
-    :deep(svg)
-      flex-shrink: 0
-      margin-top: 2px
-
-.fecho
-  position: relative
-  z-index: 1
-  width: 100%
-  max-width: 1720px
-  margin: 0 auto
-  padding: 130px 60px 0 60px
-  text-align: center
-
-  &::before
-    content: ''
-    position: absolute
-    top: 12%
-    left: 50%
-    z-index: -1
-    width: min(1100px, 92vw)
-    height: 560px
-    transform: translateX(-50%)
-    pointer-events: none
-    background: radial-gradient(ellipse at center, rgba(48, 92, 215, 0.17) 0%, rgba(28, 56, 140, 0.06) 46%, transparent 72%)
-
-  &__titulo
-    margin: 0
-    font-family: var(--semibold)
-    font-size: clamp(28px, 3.8vw, 50px)
-    line-height: 1.1
-    letter-spacing: -0.02em
-
-    &--leve
-      font-family: var(--light)
-      color: #8aa6f0
-
-  &__texto
-    max-width: 520px
-    margin: 20px auto 0 auto
-    font-family: var(--light)
-    font-size: 16px
-    line-height: 1.65
-    color: rgba(255, 255, 255, 0.55)
-
-  &__acoes
+  &__check
     display: flex
-    flex-wrap: wrap
     align-items: center
     justify-content: center
-    gap: 14px
-    margin: 34px 0 0 0
+    width: 30px
+    height: 30px
+    flex-shrink: 0
+    border: 2px solid var(--abismo)
+    border-radius: 50%
+    background: var(--ciano)
+    color: var(--abismo)
+
+    svg
+      width: 15px
+      height: 15px
 
 .outros
-  display: grid
-  grid-template-columns: repeat(3, 1fr)
-  gap: 22px
-  margin: 34px 0 0 0
-  padding: 0
-  list-style: none
+  margin-top: 120px
 
-.outro
-  &__area
-    display: block
-    padding: 14px 14px 20px 14px
-    border: 1px solid rgba(255, 255, 255, 0.07)
-    border-radius: 20px
-    background: rgba(255, 255, 255, 0.025)
-    text-decoration: none
-    transition: border-color 0.4s ease, background 0.4s ease
+  &__cabecalho
+    display: flex
+    flex-wrap: wrap
+    align-items: flex-end
+    justify-content: space-between
+    gap: 24px
 
-    &:hover
-      border-color: rgba(140, 165, 255, 0.28)
-      background: rgba(30, 46, 115, 0.3)
-
-    img
-      display: block
-      width: 100%
-      // sem height:auto o atributo height do HTML vence e o aspect-ratio nunca
-      // entra em acao: era por isso que o card do City Toys ficava mais alto
-      height: auto
-      aspect-ratio: 16 / 10
-      object-fit: cover
-      object-position: center
-      border-radius: 12px
-
-  &__nome
-    display: block
-    margin: 18px 0 0 4px
-    font-family: var(--semibold)
-    font-size: 17px
-    color: var(--cor-branco)
-
-  &__tag
-    display: block
-    margin: 6px 0 0 4px
-    font-family: var(--light)
-    font-size: 13px
-    color: rgba(255, 255, 255, 0.45)
-
-    &--proprio
-      border-color: rgba(240, 180, 90, 0.3)
-      background: rgba(240, 180, 90, 0.1)
-      color: rgba(245, 205, 150, 0.9)
-
-.rodape
-  position: relative
-  z-index: 1
-  display: flex
-  flex-wrap: wrap
-  align-items: center
-  justify-content: space-between
-  gap: 18px
-  width: 100%
-  max-width: 1720px
-  margin: 120px auto 0 auto
-  padding: 34px 60px 44px 60px
-
-  &::before
-    content: ''
-    position: absolute
-    top: 0
-    left: 60px
-    right: 60px
-    height: 1px
-    background: rgba(255, 255, 255, 0.07)
-
-  &__marca
-    display: inline-flex
-    align-items: center
-    gap: 12px
-    font-family: var(--semibold)
-    font-size: 14px
-    color: rgba(255, 255, 255, 0.8)
-    text-decoration: none
-    transition: color 0.4s ease
-
-    :deep(svg)
-      width: 26px
-      height: 28px
-
-    &:hover
-      color: var(--cor-branco)
-
-  &__copy
-    font-family: var(--light)
-    font-size: 13px
-    color: rgba(255, 255, 255, 0.32)
-
-// mesmos pontos de quebra e mesmos respiros da home (60 / 32 / 20), para o
-// conteudo cair no mesmo eixo quando se troca de pagina
-@media (max-width: 1250px)
-  .voltar-caixa,
-  .abertura,
-  .bloco,
-  .fecho,
-  .rodape
-    padding-left: 32px
-    padding-right: 32px
-
-  .rodape::before
-    left: 32px
-    right: 32px
+  &__grade
+    display: grid
+    grid-template-columns: repeat(3, minmax(0, 1fr))
+    gap: 28px
+    margin: 0
+    padding: 0
+    list-style: none
 
 @media (max-width: 1000px)
-  .abertura
-    grid-template-columns: 1fr
-    gap: 40px
-    padding-top: 26px
+  .galeria
+    --altura-quadro: 420px
+
+  .decisoes, .outros__grade
+    grid-template-columns: repeat(2, minmax(0, 1fr))
 
   .ficha
-    margin-top: 0
+    transform: rotate(-1.5deg)
 
-  .numeros,
-  .decisoes,
-  .lista,
-  .outros
+@media (max-width: 760px)
+  .bloco
+    padding: 72px 0 90px
+
+  .numeros, .contexto, .decisoes, .entregas, .outros__grade
     grid-template-columns: 1fr
 
   .galeria
     --altura-quadro: 460px
-    grid-template-columns: auto
-    justify-content: center
-    gap: 44px
+    flex-direction: column
+    align-items: center
 
-  .bloco
-    padding-top: 90px
+  // no celular o MacBook não cabe na altura: ele encolhe pela largura
+  .tela--mac
+    width: 100%
 
-  .fecho
-    padding-top: 96px
+    .tela__janela
+      height: auto
 
-  .rodape
-    margin-top: 90px
+  .decisao
+    transform: none !important
 
-@media (max-width: 820px)
-  .voltar-caixa,
-  .abertura,
-  .bloco,
-  .fecho,
-  .rodape
-    padding-left: 20px
-    padding-right: 20px
-
-  .rodape::before
-    left: 20px
-    right: 20px
-
+  .outros
+    margin-top: 80px
 </style>
