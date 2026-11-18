@@ -298,6 +298,290 @@ export const PROJETOS = [
       'No ar com domínio próprio e preparado para ser encontrado no Google',
     ],
   },
+
+  {
+    id: 'instituto-terna',
+    slug: 'instituto-terna',
+    titulo: 'Site para instituto de psicologia perinatal',
+    nome: 'Instituto Terna',
+    categoria: 'Site institucional',
+    setor: 'Psicologia perinatal',
+    imagem: '/images/projetos/terna.webp',
+    largura: 1200,
+    altura: 800,
+    site: 'https://www.institutoterna.com.br/',
+
+    resumo:
+      'O site de um instituto que acompanha a família do desejo de ter um filho aos primeiros anos do bebê, e mostra por onde começar em cada fase.',
+
+    ficha: [
+      { rotulo: 'Tipo de projeto', valor: 'Site institucional' },
+      { rotulo: 'Segmento', valor: 'Psicologia perinatal e parentalidade' },
+      { rotulo: 'Formato', valor: 'Página principal com área de artigos' },
+      { rotulo: 'Atendimento', valor: 'Online, para qualquer cidade' },
+    ],
+
+    // contados no site publicado em 2026-11-17. O PageSpeed estava sem cota no
+    // dia, então nenhum número do Lighthouse entrou
+    numeros: [
+      { valor: '7', unidade: '', rotulo: 'Modalidades, uma para cada fase da jornada' },
+      { valor: '18', unidade: '', rotulo: 'Temas para indicar o caminho e a psicóloga' },
+      { valor: '8', unidade: '', rotulo: 'Artigos com página própria no Google' },
+    ],
+
+    // o celular passa da altura máxima do WebP (16383 px), por isso vai em JPG
+    galeria: [
+      {
+        src: '/images/projetos/terna-mac.webp',
+        largura: 1280,
+        altura: 12265,
+        tipo: 'mac',
+        rotulo: 'No computador',
+        alt: 'Site do Instituto Terna no computador, do topo ao rodapé',
+      },
+      {
+        src: '/images/projetos/terna-iphone.jpg',
+        largura: 360,
+        altura: 19260,
+        tipo: 'iphone',
+        rotulo: 'No celular',
+        alt: 'Mesmo site no celular, do topo ao rodapé',
+      },
+    ],
+
+    contexto:
+      'O Instituto Terna é a clínica online da psicóloga perinatal Clarissa Erthal, formada pela UFES e com mais de 1.200 atendimentos na área. A jornada que ela acompanha tem fases que pouco se parecem: a espera por um positivo, a FIV, a gestação, o medo do parto, o pós-parto, o luto de uma perda. Quem chega está vivendo uma delas e não quer atravessar as outras para achar a sua. Com a equipe crescendo para cinco psicólogas, o site também precisava responder a pergunta que vem logo depois: com quem eu começo.',
+
+    decisoes: [
+      {
+        titulo: 'Cada fase com a sua porta de entrada',
+        texto:
+          'Tentantes, gestação, pós-parto e luto perinatal aparecem logo depois da abertura. As sete modalidades seguem a ordem da jornada, da Jornada da Tentante à psicoterapia online, e cada uma tem o próprio botão, que abre o WhatsApp já dizendo qual foi escolhida.',
+      },
+      {
+        titulo: 'Com quem começar, respondido na própria página',
+        texto:
+          'A pessoa marca o que está vivendo entre 18 temas, divididos em antes do bebê, na gestação, depois do parto e a dois. A página indica a modalidade que mais combina, em quantos temas ela combina e quem da equipe pode acompanhar. A mensagem do WhatsApp sai com os temas marcados.',
+      },
+      {
+        titulo: 'A fundadora em destaque e a equipe ao lado',
+        texto:
+          'A Clarissa aparece com formação, pesquisa na UFES e o número de atendimentos. As outras quatro psicólogas vêm em retratos com abordagem e CRP, cada uma com mini-bio que abre na própria página e botão para agendar direto com ela.',
+      },
+      {
+        titulo: 'Avaliação psicológica com seção própria',
+        texto:
+          'Ovodoação, gestação de substituição, laqueadura e vasectomia pedem avaliação e, às vezes, um documento psicológico. Quem chega por essa necessidade tem uma seção só sua, com o que a avaliação inclui, em vez de garimpar no meio das modalidades de terapia.',
+      },
+      {
+        titulo: 'Artigos para quem ainda está pesquisando',
+        texto:
+          'A área de conteúdos reúne oito artigos da Clarissa, cada um com página própria, sobre baby blues, ansiedade na gestação e depressão perinatal. Quem ainda procura um nome para o que sente chega pelo Google e encontra o instituto antes de pensar em terapia.',
+      },
+      {
+        titulo: 'Avaliações reais, só com as iniciais',
+        texto:
+          'Os depoimentos são trechos de avaliações deixadas no Google, mostrados só com as iniciais de quem escreveu e com link para a fonte. No rodapé, um aviso deixa claro que o site não faz atendimento de urgência e indica o CVV e o SAMU.',
+      },
+    ],
+
+    entregas: [
+      'Layout desenhado no Figma e aprovado antes de virar site',
+      'Indicação de modalidade e de psicóloga pelos temas que a pessoa marca',
+      'Retratos e mini-bios da equipe, com agendamento direto no WhatsApp',
+      'Área de conteúdos com os artigos da Clarissa',
+      'Seção de avaliação psicológica em saúde reprodutiva',
+      'No ar com domínio próprio e preparado para ser encontrado no Google',
+    ],
+  },
+
+  {
+    id: 'nuarr',
+    slug: 'nuarr',
+    titulo: 'Landing page com triagem para clínica de psicologia',
+    nome: 'Nuárr',
+    categoria: 'Landing page',
+    setor: 'Psicoterapia online',
+    imagem: '/images/projetos/nuarr.webp',
+    largura: 1200,
+    altura: 800,
+    site: 'https://nuarr.com.br/',
+
+    resumo:
+      'A página de uma clínica online que troca o "não sei por onde começar" por um questionário de dois minutos e uma primeira conversa de vinte.',
+
+    ficha: [
+      { rotulo: 'Tipo de projeto', valor: 'Landing page' },
+      { rotulo: 'Segmento', valor: 'Psicoterapia, casais e avaliação psicológica' },
+      { rotulo: 'Formato', valor: 'Página única com questionário de triagem' },
+      { rotulo: 'Atendimento', valor: 'Online, por vídeo' },
+    ],
+
+    // contados no site publicado e no questionário em 2026-11-17
+    numeros: [
+      { valor: '11', unidade: '', rotulo: 'Perguntas no questionário de triagem' },
+      { valor: '6', unidade: '', rotulo: 'Temas em que a pessoa se reconhece' },
+      { valor: '20', unidade: ' min', rotulo: 'Primeira conversa, antes de começar' },
+    ],
+
+    galeria: [
+      {
+        src: '/images/projetos/nuarr-mac.webp',
+        largura: 1280,
+        altura: 12522,
+        tipo: 'mac',
+        rotulo: 'No computador',
+        alt: 'Site da Nuárr Clínica de Psicologia no computador, do topo ao rodapé',
+      },
+      {
+        src: '/images/projetos/nuarr-iphone.jpg',
+        largura: 360,
+        altura: 16600,
+        tipo: 'iphone',
+        rotulo: 'No celular',
+        alt: 'Mesmo site no celular, do topo ao rodapé',
+      },
+    ],
+
+    contexto:
+      'A Nuárr é a clínica online fundada pela psicóloga Sabrina Rabelo, com psicoterapia individual, terapia de casal, avaliação psicológica, neuropsicologia e psiquiatria. O nome vem do hebraico nuach: repouso, o lugar onde se descansa e de onde se recomeça. Quem pensa em fazer terapia costuma travar antes da primeira mensagem, com medo de não saber o que falar ou de o problema ser pequeno demais. E, do lado da clínica, cada conversa no WhatsApp começava do zero, com as mesmas perguntas de sempre.',
+
+    decisoes: [
+      {
+        titulo: 'O nome virou o conceito da página',
+        texto:
+          'A abertura diz "Um lugar para voltar a si", e as imagens são cenas em 3D de arcos e esferas nos tons de linho e rosé da marca, em vez de foto de consultório. O significado de nuach ganhou um bloco próprio, porque é ele que explica o que a clínica quer ser.',
+      },
+      {
+        titulo: 'Uma triagem antes da primeira mensagem',
+        texto:
+          'O questionário "Conte mais sobre você" tem onze perguntas e leva dois minutos: o que trouxe a pessoa até ali, o que ela sente, se já fez terapia, qual abordagem prefere e quais dias tem livres. As respostas caem numa planilha da clínica, e se o envio falhar a pessoa manda pelo WhatsApp. A conversa começa sabendo com quem fala.',
+      },
+      {
+        titulo: 'As dúvidas de quem trava, ditas em voz alta',
+        texto:
+          'A seção "E se...?" espalha oito pensamentos em volta de um cérebro de argila: será que é frescura, e se eu chorar, meu problema é pequeno demais. Logo abaixo vem a resposta: quase todo mundo chega assim, e por isso o primeiro passo é pequeno.',
+      },
+      {
+        titulo: 'O caminho mostrado nas telas que a pessoa vai ver',
+        texto:
+          'Escolher o horário pelo WhatsApp, uma primeira conversa de 20 minutos por vídeo e as sessões semanais de 50 minutos. Cada passo aparece na tela de celular que a pessoa vai usar de verdade, da conversa com os horários ao lembrete do dia da sessão.',
+      },
+      {
+        titulo: 'A fundadora como responsável técnica',
+        texto:
+          'A Sabrina aparece com o nome completo, o CRP, a formação e o título de fundadora e responsável técnica, como ela pediu, para se apresentar como líder da clínica. As abordagens da equipe ficam listadas, e a primeira conversa decide qual faz sentido.',
+      },
+      {
+        titulo: 'Dinheiro respondido sem rodeio',
+        texto:
+          'Pix ou cartão em até 4x, nota fiscal em todas as sessões e documento para pedir reembolso ao plano aparecem junto dos atendimentos. É a pergunta que a pessoa tem vergonha de fazer e que, sem resposta, decide que ela não marca.',
+      },
+    ],
+
+    entregas: [
+      'Logo e layout desenhados no Figma e aprovados antes de virar site',
+      'Questionário de triagem com as respostas numa planilha da clínica',
+      'Botão de WhatsApp com mensagem pronta em cada seção',
+      'Página de links para a bio do Instagram',
+      'Perfil no Google Meu Negócio e e-mail com o domínio da clínica',
+      'No ar com domínio próprio e preparado para ser encontrado no Google',
+    ],
+  },
+
+  {
+    id: 'jd-clinica',
+    slug: 'jd-clinica-de-psicologia',
+    titulo: 'Landing page para tráfego pago',
+    nome: 'JD Clínica de Psicologia',
+    categoria: 'Landing page',
+    setor: 'Terapia online para mulheres com ansiedade',
+    imagem: '/images/projetos/jd.webp',
+    largura: 1200,
+    altura: 800,
+    site: 'https://jdclinicapsi.com.br/',
+
+    resumo:
+      'Uma página feita para receber anúncio: fala com a mulher ansiosa nas palavras dela e entrega o primeiro "oi" já escrito.',
+
+    ficha: [
+      { rotulo: 'Tipo de projeto', valor: 'Landing page' },
+      { rotulo: 'Segmento', valor: 'Psicologia, ansiedade em mulheres' },
+      { rotulo: 'Formato', valor: 'Página única para anúncios' },
+      { rotulo: 'Atendimento', valor: 'Online, para todo o Brasil' },
+    ],
+
+    // contados no site publicado em 2026-11-17
+    numeros: [
+      { valor: '8', unidade: '', rotulo: 'Frases para marcar o que tem pesado' },
+      { valor: '4', unidade: '', rotulo: 'Situações para ver o ciclo da ansiedade' },
+      { valor: '9', unidade: '', rotulo: 'Dúvidas respondidas antes do contato' },
+    ],
+
+    galeria: [
+      {
+        src: '/images/projetos/jd-mac.webp',
+        largura: 1280,
+        altura: 9571,
+        tipo: 'mac',
+        rotulo: 'No computador',
+        alt: 'Site da JD Clínica de Psicologia no computador, do topo ao rodapé',
+      },
+      {
+        src: '/images/projetos/jd-iphone.webp',
+        largura: 360,
+        altura: 12791,
+        tipo: 'iphone',
+        rotulo: 'No celular',
+        alt: 'Mesmo site no celular, do topo ao rodapé',
+      },
+    ],
+
+    contexto:
+      'A psicóloga Juliana Diniz trabalha há mais de oito anos, três deles na Assistência Social, e criou a JD para cuidar de mulheres com ansiedade, online e com Terapia Cognitivo-Comportamental, ao lado da psicóloga Eliane Eufrazio. A página nasceu para ser o destino dos anúncios. Quem chega por anúncio não estava procurando terapia: foi interrompida no meio do feed e decide em poucos segundos se fica. Ela pediu confiança e acolhimento, e a página não podia falar em valores nem prometer resultado, como pede o conselho de psicologia.',
+
+    decisoes: [
+      {
+        titulo: '"respira" antes de qualquer argumento',
+        texto:
+          'A primeira tela tem a palavra respira em tamanho gigante, as duas psicólogas na frente dela e um recado da Juliana em forma de mensagem. Logo abaixo, uma faixa traz os CRPs ativos, o sigilo, o atendimento online e os oito anos de psicologia. Quem vem do anúncio decide ali, e a confiança precisa estar ali.',
+      },
+      {
+        titulo: 'Um diário no lugar de uma lista de sintomas',
+        texto:
+          'Oito frases em primeira pessoa, escritas numa folha de caderno: a cabeça não desliga à noite, todo mundo depende de mim. A pessoa marca o que parece com ela, ninguém vê, e o botão leva as frases marcadas para a mensagem do WhatsApp.',
+      },
+      {
+        titulo: 'Quando a ansiedade passa do limite',
+        texto:
+          'Uma seção escura separa a ansiedade do dia a dia da que merece cuidado: o dado da OMS de que 9,3% dos brasileiros vivem com ansiedade e uma onda que começa calma e vai ficando serrilhada, com os sinais no corpo, nos pensamentos e na rotina.',
+      },
+      {
+        titulo: 'A TCC explicada com a ansiedade dela',
+        texto:
+          'A pessoa escolhe uma situação, como mensagem sem resposta ou domingo à noite, e o caderno desenha o ciclo daquele momento: o que ela pensa, o que sente, onde aparece no corpo e o que faz. Ver o ciclo é o primeiro passo da terapia, e a página dá esse passo antes da primeira sessão.',
+      },
+      {
+        titulo: 'A fundadora na frente e a parceira ao lado',
+        texto:
+          'A Juliana é a protagonista: escreve uma carta assinada, aparece na frente na foto da equipe e responde as dúvidas pessoalmente. Os depoimentos são mensagens que pacientes mandaram para ela, compartilhadas com autorização e sem nome.',
+      },
+      {
+        titulo: 'O primeiro oi já sai escrito',
+        texto:
+          'No fim, a pessoa escolhe por onde quer começar e a mensagem aparece escrita à mão no caderno, para ela revisar e mandar. Cada botão de WhatsApp sai identificado pela seção de onde veio, pronto para contar como conversão nos anúncios da Meta e do Google.',
+      },
+    ],
+
+    entregas: [
+      'Layout desenhado no Figma e aprovado antes de virar site',
+      'Textos escritos junto com a cliente, sem valores e sem promessa de resultado',
+      'Frases marcáveis e ciclo da ansiedade que mudam conforme a pessoa escolhe',
+      'Mensagem de WhatsApp pronta, que a pessoa revisa antes de enviar',
+      'Cliques no WhatsApp preparados para medir conversão nos anúncios',
+      'No ar com domínio próprio, registrado no nome da cliente',
+    ],
+  },
   {
     id: 'citytoys',
     slug: 'city-toys',

@@ -68,7 +68,7 @@ const ABISMO = '#020715'
 
 // ordem do Figma: um de cada tipo primeiro, depois o resto. Projeto novo que
 // não estiver aqui entra no fim, sem sumir da página
-const ORDEM = ['clinica-brenna-damasceno', 'gama-3d', 'qualifix', 'city-toys', 'jamilly-ferreira', 'conecta-contabil', 'toyz', 'astro', 'patas-felizes', 'nathalia-psi', 'laura-nutricionista', 'conectados']
+const ORDEM = ['clinica-brenna-damasceno', 'gama-3d', 'qualifix', 'instituto-terna', 'city-toys', 'nuarr', 'jamilly-ferreira', 'conecta-contabil', 'toyz', 'jd-clinica-de-psicologia', 'astro', 'patas-felizes', 'nathalia-psi', 'laura-nutricionista', 'conectados']
 const ordenados = [...projetos].sort((a, b) => {
   const pa = ORDEM.indexOf(a.slug)
   const pb = ORDEM.indexOf(b.slug)
