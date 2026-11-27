@@ -37,7 +37,7 @@ const canonica = computed(() => urlCanonica(route.path))
 // Preload só das fontes que a página desenha logo de cara. As páginas V2 usam a
 // Figtree variável (é dela o título do topo, o LCP da home) e a semibold, que
 // está no menu do celular e é a reserva da variável na pilha --figtree. As que
-// ainda estão no visual antigo (bio, currículo, quiz) marcam fontesAntigas no
+// ainda estão no visual antigo (currículo e quiz) marcam fontesAntigas no
 // definePageMeta e usam a light e a semibold, sem a variável. Antes as três iam
 // em toda página: a light só aparece no menu do celular das V2, e o WebKit
 // avisava que ela e a semibold vinham no preload sem uso a tempo.
